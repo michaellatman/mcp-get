@@ -1,1 +1,90 @@
-[]
+[
+  {
+    "name": "@modelcontextprotocol/server-brave-search",
+    "description": "MCP server for Brave Search API integration",
+    "vendor": "Anthropic, PBC (https://anthropic.com)",
+    "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/brave-search",
+    "homepage": "https://modelcontextprotocol.io",
+    "license": "MIT"
+  },
+  {
+    "name": "@modelcontextprotocol/server-everything",
+    "description": "MCP server that exercises all the features of the MCP protocol",
+    "vendor": "Anthropic, PBC (https://anthropic.com)",
+    "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/everything",
+    "homepage": "https://modelcontextprotocol.io",
+    "license": "MIT"
+  },
+  {
+    "name": "@modelcontextprotocol/server-filesystem",
+    "description": "MCP server for filesystem access",
+    "vendor": "Anthropic, PBC (https://anthropic.com)",
+    "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/filesystem",
+    "homepage": "https://modelcontextprotocol.io",
+    "license": "MIT"
+  },
+  {
+    "name": "@modelcontextprotocol/server-gdrive",
+    "description": "MCP server for interacting with Google Drive",
+    "vendor": "Anthropic, PBC (https://anthropic.com)",
+    "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/gdrive",
+    "homepage": "https://modelcontextprotocol.io",
+    "license": "MIT"
+  },
+  {
+    "name": "@modelcontextprotocol/server-github",
+    "description": "MCP server for using the GitHub API",
+    "vendor": "Anthropic, PBC (https://anthropic.com)",
+    "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/github",
+    "homepage": "https://modelcontextprotocol.io",
+    "license": "MIT"
+  },
+  {
+    "name": "@modelcontextprotocol/server-gitlab",
+    "description": "MCP server for using the GitLab API",
+    "vendor": "GitLab, PBC (https://gitlab.com)",
+    "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/gitlab",
+    "homepage": "https://modelcontextprotocol.io",
+    "license": "MIT"
+  },
+  {
+    "name": "@modelcontextprotocol/server-google-maps",
+    "description": "MCP server for using the Google Maps API",
+    "vendor": "Anthropic, PBC (https://anthropic.com)",
+    "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/google-maps",
+    "homepage": "https://modelcontextprotocol.io",
+    "license": "MIT"
+  },
+  {
+    "name": "@modelcontextprotocol/server-memory",
+    "description": "MCP server for enabling memory for Claude through a knowledge graph",
+    "vendor": "Anthropic, PBC (https://anthropic.com)",
+    "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/memory",
+    "homepage": "https://modelcontextprotocol.io",
+    "license": "MIT"
+  },
+  {
+    "name": "@modelcontextprotocol/server-postgres",
+    "description": "MCP server for interacting with PostgreSQL databases",
+    "vendor": "Anthropic, PBC (https://anthropic.com)",
+    "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/postgres",
+    "homepage": "https://modelcontextprotocol.io",
+    "license": "MIT"
+  },
+  {
+    "name": "@modelcontextprotocol/server-puppeteer",
+    "description": "MCP server for browser automation using Puppeteer",
+    "vendor": "Anthropic, PBC (https://anthropic.com)",
+    "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/puppeteer",
+    "homepage": "https://modelcontextprotocol.io",
+    "license": "MIT"
+  },
+  {
+    "name": "@modelcontextprotocol/server-slack",
+    "description": "MCP server for interacting with Slack",
+    "vendor": "Anthropic, PBC (https://anthropic.com)",
+    "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/slack",
+    "homepage": "https://modelcontextprotocol.io",
+    "license": "MIT"
+  }
+]
