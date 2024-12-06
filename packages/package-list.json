@@ -297,13 +297,13 @@
     "runtime": "node"
   },
   {
-  "name": "mongo-mcp",
-  "description": "A Model Context Protocol (MCP) server that enables LLMs to interact directly with MongoDB databases.",
-  "vendor": "Alex Andru (https://andru.codes)",
-  "sourceUrl": "https://github.com/QuantGeekDev/mongo-mcp",
-  "homepage": "https://github.com/QuantGeekDev/mongo-mcp",
-  "license": "MIT",
-  "runtime": "node"
-}
+    "name": "mongo-mcp",
+    "description": "A Model Context Protocol (MCP) server that enables LLMs to interact directly with MongoDB databases.",
+    "vendor": "Alex Andru (https://andru.codes)",
+    "sourceUrl": "https://github.com/QuantGeekDev/mongo-mcp",
+    "homepage": "https://github.com/QuantGeekDev/mongo-mcp",
+    "license": "MIT",
+    "runtime": "node"
+  }
   
 ]
