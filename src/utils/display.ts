@@ -1,8 +1,8 @@
 import chalk from 'chalk';
-import { Package } from '../types/index.js';
+import { ResolvedPackage } from '../types/package.js';
 import inquirer from 'inquirer';
 
-export async function displayPackageDetailsWithActions(pkg: Package): Promise<'install' | 'uninstall' | 'open' | 'back' | 'exit'> {
+export async function displayPackageDetailsWithActions(pkg: ResolvedPackage): Promise<'install' | 'uninstall' | 'open' | 'back' | 'exit'> {
   console.log('\n' + chalk.bold.cyan('Package Details:'));
   console.log(chalk.bold('Name:        ') + pkg.name);
   console.log(chalk.bold('Description: ') + pkg.description);
@@ -11,6 +11,8 @@ export async function displayPackageDetailsWithActions(pkg: Package): Promise<'i
   console.log(chalk.bold('Runtime:     ') + (pkg.runtime || 'node'));
   console.log(chalk.bold('Source:      ') + (pkg.sourceUrl || 'Not available'));
   console.log(chalk.bold('Homepage:    ') + (pkg.homepage || 'Not available'));
+  console.log(chalk.bold('Status:      ') + (pkg.isInstalled ? chalk.green('Installed') : 'Not installed') + 
+    (pkg.isVerified ? '' : chalk.yellow(' (Unverified package)')));
 
   const choices = [
     { name: pkg.isInstalled ? '🔄 Reinstall this package' : '📦 Install this package', value: 'install' },

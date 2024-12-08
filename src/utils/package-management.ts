@@ -1,60 +1,17 @@
 import inquirer from 'inquirer';
-import { Package } from '../types/index.js';
-import { getConfigPath, installMCPServer, readConfig, writeConfig } from './config.js';
+import { Package } from '../types/package.js';
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import { packageHelpers } from '../helpers/index.js';
 import { checkUVInstalled, promptForUVInstall } from './runtime-utils.js';
-import path from 'path';
-import fs from 'fs';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-import os from 'os';
+import { ConfigManager } from './config-manager.js';
 
 declare function fetch(url: string, init?: any): Promise<{ ok: boolean; statusText: string }>;
 
 const execAsync = promisify(exec);
 
-interface MCPPreferences {
-  allowAnalytics?: boolean;
-}
-
-function getPreferencesPath(): string {
-  if (process.platform === 'win32') {
-    const appData = process.env.APPDATA || path.join(os.homedir(), 'AppData', 'Roaming');
-    return path.join(appData, 'mcp-get', 'preferences.json');
-  }
-  
-  // Unix-like systems (Linux, macOS)
-  const homeDir = os.homedir();
-  return path.join(homeDir, '.mcp-get', 'preferences.json');
-}
-
-function readPreferences(): MCPPreferences {
-  const prefsPath = getPreferencesPath();
-  if (!fs.existsSync(prefsPath)) {
-    return {};
-  }
-  try {
-    return JSON.parse(fs.readFileSync(prefsPath, 'utf8'));
-  } catch (error) {
-    return {};
-  }
-}
-
-function writePreferences(prefs: MCPPreferences): void {
-  const prefsPath = getPreferencesPath();
-  const prefsDir = path.dirname(prefsPath);
-  
-  if (!fs.existsSync(prefsDir)) {
-    fs.mkdirSync(prefsDir, { recursive: true });
-  }
-  
-  fs.writeFileSync(prefsPath, JSON.stringify(prefs, null, 2));
-}
-
 async function checkAnalyticsConsent(): Promise<boolean> {
-  const prefs = readPreferences();
+  const prefs = ConfigManager.readPreferences();
   
   if (typeof prefs.allowAnalytics === 'boolean') {
     return prefs.allowAnalytics;
@@ -67,7 +24,7 @@ async function checkAnalyticsConsent(): Promise<boolean> {
     default: true
   }]);
 
-  writePreferences({ ...prefs, allowAnalytics });
+  ConfigManager.writePreferences({ ...prefs, allowAnalytics });
   return allowAnalytics;
 }
 
@@ -130,7 +87,7 @@ async function promptForEnvVars(packageName: string): Promise<Record<string, str
 
   if (!configureEnv) {
     if (!hasAllRequired) {
-      const configPath = getConfigPath();
+      const configPath = ConfigManager.getConfigPath();
       console.log('\nNote: Some required environment variables are not configured.');
       console.log(`You can set them later by editing the config file at:`);
       console.log(configPath);
@@ -176,7 +133,7 @@ async function promptForEnvVars(packageName: string): Promise<Record<string, str
   }
 
   if (Object.keys(envVars).length === 0) {
-    const configPath = getConfigPath();
+    const configPath = ConfigManager.getConfigPath();
     console.log('\nNo environment variables were configured.');
     console.log(`You can set them later by editing the config file at:`);
     console.log(configPath);
@@ -270,7 +227,7 @@ export async function installPackage(pkg: Package): Promise<void> {
 
     const envVars = await promptForEnvVars(pkg.name);
     
-    await installMCPServer(pkg.name, envVars, pkg.runtime);
+    await ConfigManager.installPackage(pkg, envVars);
     console.log('Updated Claude desktop configuration');
 
     // Check analytics consent and track if allowed
@@ -288,43 +245,11 @@ export async function installPackage(pkg: Package): Promise<void> {
 
 export async function uninstallPackage(packageName: string): Promise<void> {
   try {
-    const config = readConfig();
-    // Sanitize package name the same way as installation
-    const serverName = packageName.replace(/\//g, '-');
-    
-    if (!config.mcpServers || !config.mcpServers[serverName]) {
-      console.log(`Package ${packageName} is not installed.`);
-      return;
-    }
-    
-    delete config.mcpServers[serverName];
-    writeConfig(config);
+    await ConfigManager.uninstallPackage(packageName);
     console.log(`\nUninstalled ${packageName}`);
     await promptForRestart();
   } catch (error) {
     console.error('Failed to uninstall package:', error);
     throw error;
   }
-}
-
-export function isPackageInstalled(packageName: string): boolean {
-  const config = readConfig();
-  return packageName in (config.mcpServers || {});
-}
-
-export function getPackageDetails(packageName: string): Package {
-  // Read package list from JSON file
-  const packageListPath = path.join(dirname(fileURLToPath(import.meta.url)), '../../packages/package-list.json');
-  const packages: Package[] = JSON.parse(fs.readFileSync(packageListPath, 'utf8'));
-  
-  // Find the package
-  const pkg = packages.find(p => p.name === packageName);
-  if (!pkg) {
-    throw new Error(`Package ${packageName} not found`);
-  }
-
-  return {
-    ...pkg,
-    isInstalled: isPackageInstalled(packageName)
-  };
 } 
