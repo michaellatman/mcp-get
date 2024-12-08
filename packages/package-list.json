@@ -297,6 +297,16 @@
     "runtime": "node"
   },
   {
+
+    "name": "mongo-mcp",
+    "description": "A Model Context Protocol (MCP) server that enables LLMs to interact directly with MongoDB databases.",
+    "vendor": "Alex Andru (https://andru.codes)",
+    "sourceUrl": "https://github.com/QuantGeekDev/mongo-mcp",
+    "homepage": "https://github.com/QuantGeekDev/mongo-mcp",
+    "license": "MIT",
+    "runtime": "node"
+  }
+  
     "name": "docker-mcp",
     "description": "A powerful Model Context Protocol (MCP) server for Docker operations, enabling seamless container and compose stack management through Claude AI",
     "vendor": "QuantGeekDev & md-archive",
@@ -313,5 +323,5 @@
     "homepage": "https://github.com/kiliczsh/mcp-mongo-server",
     "license": "MIT",
     "runtime": "node"
-  }
+   }
 ]
