@@ -1,5 +1,6 @@
 import * as os from 'os';
 import * as path from 'path';
+import '@jest/globals';
 
 // Mock os.platform() to control testing environment
 jest.mock('os', () => ({
