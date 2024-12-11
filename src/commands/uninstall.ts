@@ -4,7 +4,6 @@ import { resolvePackage } from '../utils/package-resolver.js';
 import { uninstallPackage } from '../utils/package-management.js';
 
 export async function uninstall(packageName?: string): Promise<void> {
-    console.error("!");
   try {
     // If no package name provided, show error
     if (!packageName) {
@@ -14,7 +13,7 @@ export async function uninstall(packageName?: string): Promise<void> {
     }
 
     // Resolve the package
-    const pkg = resolvePackage(packageName);
+    const pkg = await resolvePackage(packageName);
     if (!pkg) {
       console.log(chalk.yellow(`Package ${packageName} not found.`));
       return;

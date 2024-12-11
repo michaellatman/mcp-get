@@ -5,6 +5,7 @@ import { ZedAdapter } from '../clients/zed-adapter.js';
 import { ContinueAdapter } from '../clients/continue-adapter.js';
 import { FirebaseAdapter } from '../clients/firebase-adapter.js';
 import { Preferences } from './preferences.js';
+import { Package } from '../types/package.js';
 
 export class ConfigManager {
     private clients: Map<ClientType, ClientAdapter>;
@@ -56,7 +57,7 @@ export class ConfigManager {
         return installed;
     }
 
-    async configureClients(config: { mcpServers: Record<string, ServerConfig> }, selectedClients?: ClientType[]): Promise<void> {
+    async configureClients(config: ServerConfig, selectedClients?: ClientType[]): Promise<void> {
         const clients = selectedClients || await this.selectClients();
         const installed = await this.getInstalledClients();
         const validClients = clients.filter(client => installed.includes(client));
@@ -65,18 +66,12 @@ export class ConfigManager {
             throw new Error('No valid clients found for configuration');
         }
 
-        if (!config?.mcpServers) {
-            throw new Error('Invalid configuration: mcpServers is required');
-        }
-
         await Promise.all(
             validClients.map(async (clientType) => {
                 const adapter = this.clients.get(clientType);
                 if (adapter) {
-                    for (const [_, serverConfig] of Object.entries(config.mcpServers)) {
-                        if (await adapter.validateConfig(serverConfig)) {
-                            await adapter.writeConfig(serverConfig);
-                        }
+                    if (await adapter.validateConfig(config)) {
+                        await adapter.writeConfig(config);
                     }
                 }
             })
@@ -91,12 +86,51 @@ export class ConfigManager {
         return adapter;
     }
 
-    static async readConfig(): Promise<any> {
+    static async readConfig(): Promise<{ mcpServers: Record<string, ServerConfig> }> {
         const configManager = new ConfigManager();
         const config = await configManager.preferences.readConfig();
         return {
             mcpServers: config.mcpServers || {}
         };
+    }
+
+    static async readPreferences(): Promise<any> {
+        const configManager = new ConfigManager();
+        return configManager.preferences.readConfig();
+    }
+
+    static async writePreferences(prefs: any): Promise<void> {
+        const configManager = new ConfigManager();
+        await configManager.preferences.writeConfig(prefs);
+    }
+
+    static getConfigPath(): string {
+        const configManager = new ConfigManager();
+        return configManager.preferences.getConfigPath();
+    }
+
+    static async installPackage(pkg: Package): Promise<void> {
+        const configManager = new ConfigManager();
+        const config = await configManager.preferences.readConfig();
+        config.mcpServers = config.mcpServers || {};
+        config.mcpServers[pkg.name] = {
+            name: pkg.name,
+            runtime: pkg.runtime,
+            command: `mcp-${pkg.name}`,
+            args: [],
+            env: {},
+            transport: 'stdio'
+        };
+        await configManager.preferences.writeConfig(config);
+    }
+
+    static async uninstallPackage(pkg: Package): Promise<void> {
+        const configManager = new ConfigManager();
+        const config = await configManager.preferences.readConfig();
+        if (config.mcpServers) {
+            delete config.mcpServers[pkg.name];
+            await configManager.preferences.writeConfig(config);
+        }
     }
 
     static async isPackageInstalled(packageName: string): Promise<boolean> {

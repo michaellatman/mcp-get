@@ -12,7 +12,7 @@ inquirer.registerPrompt('autocomplete', AutocompletePrompt);
 
 export async function list() {
   try {
-    const packages = resolvePackages();
+    const packages = await resolvePackages();
     printPackageListHeader(packages.length);
 
     const prompt = createPackagePrompt(packages, { showInstallStatus: true });

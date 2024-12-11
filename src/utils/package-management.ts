@@ -11,9 +11,9 @@ declare function fetch(url: string, init?: any): Promise<{ ok: boolean; statusTe
 const execAsync = promisify(exec);
 
 async function checkAnalyticsConsent(): Promise<boolean> {
-  const prefs = ConfigManager.readPreferences();
-  
-  if (typeof prefs.allowAnalytics === 'boolean') {
+  const prefs = await ConfigManager.readPreferences();
+
+  if (typeof prefs?.allowAnalytics === 'boolean') {
     return prefs.allowAnalytics;
   }
 
@@ -24,7 +24,7 @@ async function checkAnalyticsConsent(): Promise<boolean> {
     default: true
   }]);
 
-  ConfigManager.writePreferences({ ...prefs, allowAnalytics });
+  await ConfigManager.writePreferences({ ...prefs, allowAnalytics });
   return allowAnalytics;
 }
 
@@ -50,10 +50,9 @@ async function promptForEnvVars(packageName: string): Promise<Record<string, str
     return undefined;
   }
 
-  // Check if all required variables exist in environment
   const existingEnvVars: Record<string, string> = {};
   let hasAllRequired = true;
-  
+
   for (const [key, value] of Object.entries(helpers.requiredEnvVars)) {
     const existingValue = process.env[key];
     if (existingValue) {
@@ -79,7 +78,7 @@ async function promptForEnvVars(packageName: string): Promise<Record<string, str
   const { configureEnv } = await inquirer.prompt<{ configureEnv: boolean }>([{
     type: 'confirm',
     name: 'configureEnv',
-    message: hasAllRequired 
+    message: hasAllRequired
       ? 'Would you like to manually configure environment variables for this package?'
       : 'Some required environment variables are missing. Would you like to configure them now?',
     default: !hasAllRequired
@@ -96,10 +95,10 @@ async function promptForEnvVars(packageName: string): Promise<Record<string, str
   }
 
   const envVars: Record<string, string> = {};
-  
+
   for (const [key, value] of Object.entries(helpers.requiredEnvVars)) {
     const existingEnvVar = process.env[key];
-    
+
     if (existingEnvVar) {
       const { reuseExisting } = await inquirer.prompt<{ reuseExisting: boolean }>([{
         type: 'confirm',
@@ -158,13 +157,11 @@ async function isClaudeRunning(): Promise<boolean> {
     }
     return false;
   } catch (error) {
-    // If the command fails, assume Claude is not running
     return false;
   }
 }
 
 async function promptForRestart(): Promise<boolean> {
-  // Check if Claude is running first
   const claudeRunning = await isClaudeRunning();
   if (!claudeRunning) {
     return false;
@@ -178,7 +175,7 @@ async function promptForRestart(): Promise<boolean> {
       default: true
     }
   ]);
-  
+
   if (shouldRestart) {
     console.log('Restarting Claude desktop app...');
     try {
@@ -191,10 +188,8 @@ async function promptForRestart(): Promise<boolean> {
         await execAsync('pkill -f "claude" && claude');
       }
 
-      // Wait a moment for the app to close before reopening
       await new Promise(resolve => setTimeout(resolve, 2000));
 
-      // Reopen the app
       if (platform === 'win32') {
         await execAsync('start "" "Claude.exe"');
       } else if (platform === 'darwin') {
@@ -208,13 +203,12 @@ async function promptForRestart(): Promise<boolean> {
       console.error('Failed to restart Claude desktop app:', error);
     }
   }
-  
+
   return shouldRestart;
 }
 
 export async function installPackage(pkg: Package): Promise<void> {
   try {
-    // Check for UV if it's a Python package
     if (pkg.runtime === 'python') {
       const hasUV = await checkUVInstalled();
       if (!hasUV) {
@@ -226,11 +220,10 @@ export async function installPackage(pkg: Package): Promise<void> {
     }
 
     const envVars = await promptForEnvVars(pkg.name);
-    
-    await ConfigManager.installPackage(pkg, envVars);
+
+    await ConfigManager.installPackage(pkg);
     console.log('Updated Claude desktop configuration');
 
-    // Check analytics consent and track if allowed
     const analyticsAllowed = await checkAnalyticsConsent();
     if (analyticsAllowed) {
       await trackInstallation(pkg.name);
@@ -245,7 +238,18 @@ export async function installPackage(pkg: Package): Promise<void> {
 
 export async function uninstallPackage(packageName: string): Promise<void> {
   try {
-    await ConfigManager.uninstallPackage(packageName);
+    const pkg: Package = {
+      name: packageName,
+      description: '',
+      vendor: '',
+      sourceUrl: '',
+      homepage: '',
+      license: '',
+      runtime: 'node',
+      supportedClients: ['claude', 'zed', 'continue', 'firebase'],
+      supportedTransports: ['stdio', 'sse', 'websocket']
+    };
+    await ConfigManager.uninstallPackage(pkg);
     console.log(`\nUninstalled ${packageName}`);
     await promptForRestart();
   } catch (error) {

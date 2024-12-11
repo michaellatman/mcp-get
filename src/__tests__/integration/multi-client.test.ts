@@ -53,14 +53,8 @@ describe('Multi-client Integration', () => {
   });
 
   it('should write configurations to all clients', async () => {
-    const config = {
-      mcpServers: {
-        'test-server': testServerConfig
-      }
-    };
-
     const clients: ClientType[] = ['claude', 'zed', 'continue', 'firebase'];
-    await configManager.configureClients(config, clients);
+    await configManager.configureClients(testServerConfig, clients);
 
     // Each client should have writeConfig called once
     const mockClaudeAdapter = configManager.getClientAdapter('claude');
@@ -74,14 +68,8 @@ describe('Multi-client Integration', () => {
   });
 
   it('should maintain separate configurations for each client', async () => {
-    const config = {
-      mcpServers: {
-        'test-server': testServerConfig
-      }
-    };
-
     const clients: ClientType[] = ['claude', 'zed', 'continue', 'firebase'];
-    await configManager.configureClients(config, clients);
+    await configManager.configureClients(testServerConfig, clients);
 
     // Each client should have its own configuration structure
     const mockClaudeAdapter = configManager.getClientAdapter('claude');

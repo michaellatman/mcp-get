@@ -11,10 +11,10 @@ inquirer.registerPrompt('autocomplete', AutocompletePrompt);
 
 export async function listInstalledPackages(): Promise<void> {
   // Get all packages with their resolved status
-  const allPackages = resolvePackages();
-  
+  const allPackages = await resolvePackages();
+
   // Filter for only installed packages
-  const installedPackages = allPackages.filter(pkg => pkg.isInstalled);
+  const installedPackages = allPackages.filter((pkg: ResolvedPackage) => pkg.isInstalled);
 
   if (installedPackages.length === 0) {
     console.log(chalk.yellow('\nNo MCP servers are currently installed.'));

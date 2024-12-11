@@ -159,4 +159,19 @@ export class Preferences {
       return { mcpServers: {} };
     }
   }
+
+  async writeConfig(config: any): Promise<void> {
+    try {
+      await this.ensureConfigDir();
+      const data = JSON.stringify(config, null, 2);
+      await writeFile(this.preferencesFile, data, 'utf-8');
+    } catch (error) {
+      console.error('Error writing config:', error);
+      throw error;
+    }
+  }
+
+  getConfigPath(): string {
+    return this.preferencesFile;
+  }
 }

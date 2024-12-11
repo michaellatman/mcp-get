@@ -5,18 +5,18 @@ import fs from 'fs';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
-export function isPackageInstalled(packageName: string): boolean {
-    return ConfigManager.isPackageInstalled(packageName);
+export async function isPackageInstalled(packageName: string): Promise<boolean> {
+    return await ConfigManager.isPackageInstalled(packageName);
 }
 
-export function resolvePackages(): ResolvedPackage[] {
+export async function resolvePackages(): Promise<ResolvedPackage[]> {
     try {
         // Read package list from JSON file
         const packageListPath = path.join(dirname(fileURLToPath(import.meta.url)), '../../packages/package-list.json');
         const packages: Package[] = JSON.parse(fs.readFileSync(packageListPath, 'utf8'));
 
         // Get installed packages from config
-        const config = ConfigManager.readConfig();
+        const config = await ConfigManager.readConfig();
         const installedServers = config.mcpServers || {};
         const installedPackageNames = Object.keys(installedServers);
 
@@ -86,7 +86,7 @@ export function resolvePackages(): ResolvedPackage[] {
     }
 }
 
-export function resolvePackage(packageName: string): ResolvedPackage | null {
+export async function resolvePackage(packageName: string): Promise<ResolvedPackage | null> {
     try {
         // Read package list from JSON file
         const packageListPath = path.join(dirname(fileURLToPath(import.meta.url)), '../../packages/package-list.json');
@@ -98,7 +98,7 @@ export function resolvePackage(packageName: string): ResolvedPackage | null {
 
         if (!pkg) {
             // Check if it's an installed package
-            const config = ConfigManager.readConfig();
+            const config = await ConfigManager.readConfig();
             const serverName = packageName.replace(/\//g, '-');
             const installedServer = config.mcpServers?.[serverName];
 
@@ -121,7 +121,7 @@ export function resolvePackage(packageName: string): ResolvedPackage | null {
         }
 
         // Check installation status
-        const isInstalled = isPackageInstalled(packageName);
+        const isInstalled = await isPackageInstalled(packageName);
 
         return {
             ...pkg,

@@ -1,4 +1,4 @@
-import { Package } from '../types/package.js';
+import { Package, ResolvedPackage } from '../types/package.js';
 import { installPackage as installPkg } from '../utils/package-management.js';
 import inquirer from 'inquirer';
 import chalk from 'chalk';
@@ -80,11 +80,11 @@ async function promptForClientSelection(availableClients: ClientType[]): Promise
 }
 
 export async function installPackage(pkg: Package): Promise<void> {
-  const configManager = new ConfigManager();
-  const availableClients = await configManager.getInstalledClients();
-
   try {
-    const selectedClients = await promptForClientSelection(availableClients);
+    const configManager = new ConfigManager();
+    const selectedClients = await configManager.selectClients();
+
+    // Create server configuration
     const serverConfig = packageToServerConfig(pkg);
 
     // Validate configuration before installation
@@ -99,14 +99,15 @@ export async function installPackage(pkg: Package): Promise<void> {
 
     console.log(chalk.green(`Successfully configured MCP server for ${selectedClients.join(', ')}`));
   } catch (error) {
-    console.error(chalk.red('Failed to install package:'), error instanceof Error ? error.message : error);
+    console.error(chalk.red('Failed to install package:'));
+    console.error(chalk.red(error instanceof Error ? error.message : String(error)));
     process.exit(1);
   }
 }
 
 export async function install(packageName: string): Promise<void> {
-  const packages = resolvePackages();
-  const pkg = packages.find(p => p.name === packageName);
+  const packages = await resolvePackages();
+  const pkg = packages.find((p: ResolvedPackage) => p.name === packageName);
 
   if (!pkg) {
     console.warn(chalk.yellow(`Package ${packageName} not found in the curated list.`));
@@ -122,7 +123,6 @@ export async function install(packageName: string): Promise<void> {
 
     if (proceedWithInstall) {
       console.log(chalk.cyan(`Proceeding with installation of ${packageName}...`));
-
       const runtime = await promptForRuntime();
       const unknownPkg = createUnknownPackage(packageName, runtime);
       await installPackage(unknownPkg);

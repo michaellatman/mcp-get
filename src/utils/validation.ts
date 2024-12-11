@@ -9,12 +9,12 @@ interface ValidationResult {
 
 type TransportMethod = 'stdio' | 'sse' | 'websocket';
 
-const CLIENT_TRANSPORT_SUPPORT: Record<ClientType, TransportMethod[]> = {
-  claude: ['stdio', 'sse', 'websocket'],
-  zed: ['stdio'],
-  continue: ['stdio', 'sse', 'websocket'],
-  firebase: ['stdio', 'sse']
-} as const;
+const CLIENT_TRANSPORT_SUPPORT = {
+  claude: ['stdio', 'sse', 'websocket'] as TransportMethod[],
+  zed: ['stdio'] as TransportMethod[],
+  continue: ['stdio', 'sse', 'websocket'] as TransportMethod[],
+  firebase: ['stdio', 'sse'] as TransportMethod[]
+};
 
 /**
  * Validates client compatibility with server configuration

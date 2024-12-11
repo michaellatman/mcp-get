@@ -98,12 +98,6 @@ describe('ConfigManager', () => {
       transport: 'stdio'
     };
 
-    const validConfig = {
-      mcpServers: {
-        'test-server': testServerConfig
-      }
-    };
-
     it('should configure specified clients', async () => {
       const clients: ClientType[] = ['claude', 'zed'];
 
@@ -111,7 +105,7 @@ describe('ConfigManager', () => {
       const mockZedAdapter = configManager.getClientAdapter('zed');
       jest.spyOn(mockZedAdapter, 'isInstalled').mockResolvedValue(true);
 
-      await configManager.configureClients(validConfig, clients);
+      await configManager.configureClients(testServerConfig, clients);
 
       const mockClaudeAdapter = configManager.getClientAdapter('claude');
       expect(jest.spyOn(mockClaudeAdapter, 'writeConfig')).toHaveBeenCalledWith(testServerConfig);
@@ -120,7 +114,7 @@ describe('ConfigManager', () => {
 
     it('should skip invalid clients', async () => {
       const clients: ClientType[] = ['invalid' as ClientType];
-      await expect(configManager.configureClients(validConfig, clients))
+      await expect(configManager.configureClients(testServerConfig, clients))
         .rejects.toThrow('No valid clients found for configuration');
     });
   });
