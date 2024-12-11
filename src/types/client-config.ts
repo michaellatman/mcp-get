@@ -5,12 +5,7 @@
 /**
  * Supported MCP client types
  */
-export enum ClientType {
-  CLAUDE = 'claude',
-  ZED = 'zed',
-  CONTINUE = 'continue',
-  FIREBASE = 'firebase'
-}
+export type ClientType = 'claude' | 'zed' | 'continue' | 'firebase';
 
 /**
  * Server configuration interface
