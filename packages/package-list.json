@@ -7,7 +7,7 @@
     "homepage": "https://modelcontextprotocol.io",
     "license": "MIT",
     "runtime": "node"
-  },
+},
   {
     "name": "@modelcontextprotocol/server-everything",
     "description": "MCP server that exercises all the features of the MCP protocol",
