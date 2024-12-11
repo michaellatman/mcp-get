@@ -6,7 +6,9 @@
     "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/brave-search",
     "homepage": "https://modelcontextprotocol.io",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@modelcontextprotocol/server-everything",
@@ -15,7 +17,9 @@
     "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/everything",
     "homepage": "https://modelcontextprotocol.io",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio", "sse", "websocket"]
   },
   {
     "name": "@modelcontextprotocol/server-filesystem",
@@ -24,7 +28,9 @@
     "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/filesystem",
     "homepage": "https://modelcontextprotocol.io",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@modelcontextprotocol/server-gdrive",
@@ -33,7 +39,9 @@
     "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/gdrive",
     "homepage": "https://modelcontextprotocol.io",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@modelcontextprotocol/server-github",
@@ -42,7 +50,9 @@
     "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/github",
     "homepage": "https://modelcontextprotocol.io",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@modelcontextprotocol/server-gitlab",
@@ -51,7 +61,9 @@
     "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/gitlab",
     "homepage": "https://modelcontextprotocol.io",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@modelcontextprotocol/server-google-maps",
@@ -60,7 +72,9 @@
     "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/google-maps",
     "homepage": "https://modelcontextprotocol.io",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@modelcontextprotocol/server-memory",
@@ -69,7 +83,9 @@
     "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/memory",
     "homepage": "https://modelcontextprotocol.io",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@modelcontextprotocol/server-postgres",
@@ -78,7 +94,9 @@
     "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/postgres",
     "homepage": "https://modelcontextprotocol.io",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@modelcontextprotocol/server-puppeteer",
@@ -87,7 +105,9 @@
     "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/puppeteer",
     "homepage": "https://modelcontextprotocol.io",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@modelcontextprotocol/server-slack",
@@ -96,7 +116,9 @@
     "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/slack",
     "homepage": "https://modelcontextprotocol.io",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@cloudflare/mcp-server-cloudflare",
@@ -105,7 +127,9 @@
     "sourceUrl": "https://github.com/cloudflare/mcp-server-cloudflare",
     "homepage": "https://github.com/cloudflare/mcp-server-cloudflare",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@raygun.io/mcp-server-raygun",
@@ -114,7 +138,9 @@
     "sourceUrl": "https://github.com/MindscapeHQ/mcp-server-raygun",
     "homepage": "https://raygun.com",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@kimtaeyoon83/mcp-server-youtube-transcript",
@@ -123,7 +149,9 @@
     "sourceUrl": "https://github.com/kimtaeyoon83/mcp-server-youtube-transcript",
     "homepage": "https://github.com/kimtaeyoon83/mcp-server-youtube-transcript",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@kagi/mcp-server-kagi",
@@ -132,7 +160,9 @@
     "sourceUrl": "https://github.com/ac3xx/mcp-servers-kagi",
     "homepage": "https://github.com/ac3xx/mcp-servers-kagi",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@exa/mcp-server",
@@ -141,7 +171,9 @@
     "sourceUrl": "https://github.com/exa-labs/exa-mcp-server",
     "homepage": "https://exa.ai",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@search1api/mcp-server",
@@ -150,7 +182,9 @@
     "sourceUrl": "https://github.com/fatwang2/search1api-mcp",
     "homepage": "https://github.com/fatwang2/search1api-mcp",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@calclavia/mcp-obsidian",
@@ -159,7 +193,9 @@
     "sourceUrl": "https://github.com/calclavia/mcp-obsidian",
     "homepage": "https://github.com/calclavia/mcp-obsidian",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@anaisbetts/mcp-youtube",
@@ -168,7 +204,9 @@
     "sourceUrl": "https://github.com/anaisbetts/mcp-youtube",
     "homepage": "https://github.com/anaisbetts/mcp-youtube",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@modelcontextprotocol/server-everart",
@@ -177,7 +215,9 @@
     "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/everart",
     "homepage": "https://modelcontextprotocol.io",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@modelcontextprotocol/server-sequential-thinking",
@@ -186,7 +226,9 @@
     "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/sequentialthinking",
     "homepage": "https://modelcontextprotocol.io",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "mcp-server-fetch",
@@ -195,7 +237,9 @@
     "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/fetch",
     "homepage": "https://github.com/modelcontextprotocol/servers",
     "license": "MIT",
-    "runtime": "python"
+    "runtime": "python",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "mcp-server-git",
@@ -204,7 +248,9 @@
     "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/git",
     "homepage": "https://github.com/modelcontextprotocol/servers",
     "license": "MIT",
-    "runtime": "python"
+    "runtime": "python",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "mcp-server-sentry",
@@ -213,7 +259,9 @@
     "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/sentry",
     "homepage": "https://github.com/modelcontextprotocol/servers",
     "license": "MIT",
-    "runtime": "python"
+    "runtime": "python",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "mcp-server-sqlite",
@@ -222,7 +270,9 @@
     "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/sqlite",
     "homepage": "https://github.com/modelcontextprotocol/servers",
     "license": "MIT",
-    "runtime": "python"
+    "runtime": "python",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "mcp-server-time",
@@ -231,7 +281,9 @@
     "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/time",
     "homepage": "https://github.com/modelcontextprotocol/servers",
     "license": "MIT",
-    "runtime": "python"
+    "runtime": "python",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "mcp-tinybird",
@@ -240,7 +292,9 @@
     "sourceUrl": "https://github.com/tinybirdco/mcp-tinybird/tree/main/src/mcp-tinybird",
     "homepage": "https://github.com/tinybirdco/mcp-tinybird",
     "license": "Apache 2.0",
-    "runtime": "python"
+    "runtime": "python",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@automatalabs/mcp-server-playwright",
@@ -249,7 +303,9 @@
     "sourceUrl": "https://github.com/Automata-Labs-team/MCP-Server-Playwright/tree/main",
     "homepage": "https://github.com/Automata-Labs-team/MCP-Server-Playwright",
     "runtime": "node",
-    "license": "MIT"
+    "license": "MIT",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@mcp-get-community/server-llm-txt",
@@ -258,7 +314,9 @@
     "sourceUrl": "https://github.com/mcp-get/community-servers/blob/main/src/server-llm-txt",
     "homepage": "https://github.com/mcp-get/community-servers#readme",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@executeautomation/playwright-mcp-server",
@@ -267,7 +325,9 @@
     "sourceUrl": "https://github.com/executeautomation/mcp-playwright/tree/main/src",
     "homepage": "https://github.com/executeautomation/mcp-playwright",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@mcp-get-community/server-curl",
@@ -276,7 +336,9 @@
     "sourceUrl": "https://github.com/mcp-get/community-servers/blob/main/src/server-curl",
     "homepage": "https://github.com/mcp-get-community/server-curl#readme",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@mcp-get-community/server-macos",
@@ -285,7 +347,9 @@
     "sourceUrl": "https://github.com/mcp-get/community-servers/blob/main/src/server-macos",
     "homepage": "https://github.com/mcp-get-community/server-macos#readme",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@modelcontextprotocol/server-aws-kb-retrieval",
@@ -294,7 +358,9 @@
     "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/aws-kb-retrieval-server",
     "homepage": "https://modelcontextprotocol.io",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "docker-mcp",
@@ -303,7 +369,9 @@
     "sourceUrl": "https://github.com/QuantGeekDev/docker-mcp",
     "homepage": "https://github.com/QuantGeekDev/docker-mcp",
     "license": "MIT",
-    "runtime": "python"
+    "runtime": "python",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "mcp-mongo-server",
@@ -312,7 +380,9 @@
     "sourceUrl": "https://github.com/kiliczsh/mcp-mongo-server",
     "homepage": "https://github.com/kiliczsh/mcp-mongo-server",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@llmindset/mcp-hfspace",
@@ -321,7 +391,9 @@
     "sourceUrl": "https://github.com/evalstate/mcp-hfspace/",
     "homepage": "https://llmindset.co.uk/resources/hfspace-connector/",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "@strowk/mcp-k8s",
@@ -330,7 +402,9 @@
     "sourceUrl": "https://github.com/strowk/mcp-k8s-go",
     "homepage": "https://github.com/strowk/mcp-k8s-go",
     "license": "MIT",
-    "runtime": "node"
+    "runtime": "node",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   },
   {
     "name": "mcp-shell",
@@ -339,6 +413,8 @@
     "sourceUrl": "https://github.com/hdresearch/mcp-shell",
     "homepage": "https://github.com/hdresearch/mcp-shell",
     "license": "MIT",
-    "runtime": "node "
+    "runtime": "node ",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
   }
 ]
