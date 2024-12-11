@@ -1,22 +1,29 @@
+import { jest, beforeEach } from '@jest/globals';
 import * as os from 'os';
 import * as path from 'path';
-import '@jest/globals';
+import * as fs from 'fs';
 
 // Mock os.platform() to control testing environment
-jest.mock('os', () => ({
-  ...jest.requireActual('os'),
-  platform: jest.fn(),
-  homedir: jest.fn(),
-}));
+jest.mock('os', () => {
+  const actual = jest.requireActual('os') as typeof os;
+  return {
+    ...actual,
+    platform: jest.fn(),
+    homedir: jest.fn(),
+  };
+});
 
 // Mock fs operations
-jest.mock('fs', () => ({
-  ...jest.requireActual('fs'),
-  existsSync: jest.fn(),
-  readFileSync: jest.fn(),
-  writeFileSync: jest.fn(),
-  mkdirSync: jest.fn(),
-}));
+jest.mock('fs', () => {
+  const actual = jest.requireActual('fs') as typeof fs;
+  return {
+    ...actual,
+    existsSync: jest.fn(),
+    readFileSync: jest.fn(),
+    writeFileSync: jest.fn(),
+    mkdirSync: jest.fn(),
+  };
+});
 
 // Reset all mocks before each test
 beforeEach(() => {
