@@ -1,8 +1,9 @@
 {
   "name": "@michaellatman/mcp-get",
-  "version": "1.0.40",
+  "version": "1.0.42",
   "description": "A package manager for Model Context Protocol servers",
   "type": "module",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc && chmod +x dist/index.js",
     "start": "node dist/index.js",

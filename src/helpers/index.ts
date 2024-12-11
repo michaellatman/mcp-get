@@ -116,5 +116,13 @@ export const packageHelpers: PackageHelpers = {
         required: false,
       }
     }
+  },
+  'mcp-server-rememberizer': {
+    requiredEnvVars: {
+      REMEMBERIZER_API_TOKEN: {
+        description: 'API token for Rememberizer',
+        required: true
+      }
+    }
   }
 };

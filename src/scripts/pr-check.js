@@ -99,10 +99,9 @@ export function validateRequiredFields(pkg) {
   console.log('Validating URLs...');
   const urlFields = ['sourceUrl', 'homepage'];
   for (const field of urlFields) {
-    try {
-      new URL(pkg[field]);
-    } catch (error) {
-      throw new Error(`Package ${pkg.name} has invalid ${field} URL: ${pkg[field]}`);
+    const url = pkg[field];
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+      throw new Error(`Package ${pkg.name} has invalid ${field} URL: ${url} - must start with http:// or https://`);
     }
   }
 }
