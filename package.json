@@ -6,6 +6,16 @@
   "scripts": {
     "build": "tsc && chmod +x dist/index.js",
     "start": "node dist/index.js",
+<<<<<<< HEAD
+||||||| parent of 160669b (ci: add GitHub Actions workflow for running tests)
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+=======
+    "test": "jest --coverage",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+>>>>>>> 160669b (ci: add GitHub Actions workflow for running tests)
     "test:list": "node --loader ts-node/esm src/index.ts list",
     "test:install": "node --loader ts-node/esm src/index.ts install",
     "test:installed": "node --loader ts-node/esm src/index.ts installed",
