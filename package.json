@@ -1,6 +1,6 @@
 {
   "name": "@michaellatman/mcp-get",
-  "version": "1.0.42",
+  "version": "1.0.43",
   "description": "A package manager for Model Context Protocol servers",
   "type": "module",
   "main": "dist/index.js",

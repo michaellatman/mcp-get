@@ -93,6 +93,14 @@ export const packageHelpers: PackageHelpers = {
       }
     }
   },
+  'mcp-server-perplexity': {
+    requiredEnvVars: {
+      PERPLEXITY_API_KEY: {
+        description: 'API key for Perplexity API access',
+        required: true
+      }
+    }
+  },
   '@benborla29/mcp-server-mysql': {
     requiredEnvVars: {
       MYSQL_HOST: {

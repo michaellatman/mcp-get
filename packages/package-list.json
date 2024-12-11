@@ -242,6 +242,17 @@
     "supportedTransports": ["stdio"]
   },
   {
+    "name": "mcp-server-perplexity",
+    "description": "MCP Server for the Perplexity API",
+    "vendor": "tanigami",
+    "sourceUrl": "https://github.com/tanigami/mcp-server-perplexity",
+    "homepage": "https://github.com/tanigami/mcp-server-perplexity",
+    "license": "MIT",
+    "runtime": "python",
+    "supportedClients": ["claude", "zed", "continue", "firebase"],
+    "supportedTransports": ["stdio"]
+  },
+  {
     "name": "mcp-server-git",
     "description": "A Model Context Protocol server providing tools to read, search, and manipulate Git repositories programmatically via LLMs",
     "vendor": "Anthropic, PBC (https://anthropic.com)",
