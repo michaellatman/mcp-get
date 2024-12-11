@@ -10,10 +10,18 @@ import { handlePackageAction } from '../utils/package-actions.js';
 // Register the autocomplete prompt
 inquirer.registerPrompt('autocomplete', AutocompletePrompt);
 
-export async function list() {
+export async function list(nonInteractive = false) {
   try {
     const packages = await resolvePackages();
     printPackageListHeader(packages.length);
+
+    // In non-interactive mode, just list all packages
+    if (nonInteractive) {
+      packages.forEach(pkg => {
+        console.log(`${pkg.name} - ${pkg.description}`);
+      });
+      return;
+    }
 
     const prompt = createPackagePrompt(packages, { showInstallStatus: true });
     const answer = await inquirer.prompt<{ selectedPackage: ResolvedPackage }>([prompt]);
@@ -24,7 +32,7 @@ export async function list() {
 
     const action = await displayPackageDetailsWithActions(answer.selectedPackage);
     await handlePackageAction(answer.selectedPackage, action, {
-      onBack: list
+      onBack: () => list(nonInteractive)
     });
   } catch (error) {
     console.error(chalk.red('Error loading package list:'));

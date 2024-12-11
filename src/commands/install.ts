@@ -105,12 +105,17 @@ export async function installPackage(pkg: Package): Promise<void> {
   }
 }
 
-export async function install(packageName: string): Promise<void> {
+export async function install(packageName: string, nonInteractive = false): Promise<void> {
   const packages = await resolvePackages();
   const pkg = packages.find((p: ResolvedPackage) => p.name === packageName);
 
   if (!pkg) {
     console.warn(chalk.yellow(`Package ${packageName} not found in the curated list.`));
+
+    if (nonInteractive) {
+      console.log('Non-interactive mode: skipping unverified package installation');
+      process.exit(1);
+    }
 
     const { proceedWithInstall } = await inquirer.prompt<{ proceedWithInstall: boolean }>([
       {
