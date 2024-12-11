@@ -6,16 +6,9 @@
   "scripts": {
     "build": "tsc && chmod +x dist/index.js",
     "start": "node dist/index.js",
-<<<<<<< HEAD
-||||||| parent of 160669b (ci: add GitHub Actions workflow for running tests)
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-=======
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
->>>>>>> 160669b (ci: add GitHub Actions workflow for running tests)
     "test:list": "node --loader ts-node/esm src/index.ts list",
     "test:install": "node --loader ts-node/esm src/index.ts install",
     "test:installed": "node --loader ts-node/esm src/index.ts installed",
@@ -26,8 +19,6 @@
     "version:major": "npm version major",
     "publish:npm": "npm run build && npm publish --access public",
     "pr-check": "node src/scripts/pr-check.js",
-    "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --config jest.config.mjs --watch",
-    "test:coverage": "NODE_OPTIONS=--experimental-vm-modules jest --config jest.config.mjs --coverage",
     "prepare": "npm run build"
   },
   "bin": {
