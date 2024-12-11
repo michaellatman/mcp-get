@@ -23,6 +23,10 @@ export interface PackageHelper {
     };
     configureEnv?: (config: any) => Promise<void>;
     runtime?: 'node' | 'python';
+    customCommand?: {
+        command: string;
+        args?: string[];
+    }
 }
 
 export interface PackageHelpers {
