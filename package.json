@@ -9,11 +9,11 @@
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "test:list": "node --loader ts-node/esm src/index.ts list",
-    "test:install": "node --loader ts-node/esm src/index.ts install",
-    "test:installed": "node --loader ts-node/esm src/index.ts installed",
-    "extract": "node --loader ts-node/esm src/extractors/modelcontextprotocol-extractor.ts",
-    "test:uninstall": "node --loader ts-node/esm src/index.ts uninstall",
+    "test:list": "node src/index.ts list",
+    "test:install": "node src/index.ts install",
+    "test:installed": "node src/index.ts installed",
+    "extract": "node src/extractors/modelcontextprotocol-extractor.ts",
+    "test:uninstall": "node src/index.ts uninstall",
     "version:patch": "npm version patch",
     "version:minor": "npm version minor",
     "version:major": "npm version major",
@@ -54,10 +54,11 @@
     "packages",
     "LICENSE"
   ],
-  "type": "module",
+  "type": "commonjs",
   "exports": {
     ".": {
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
     }
   },
   "license": "MIT"
