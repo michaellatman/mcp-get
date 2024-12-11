@@ -94,8 +94,7 @@ describe('ConfigManager', () => {
       runtime: 'node',
       command: 'node',
       args: ['server.js'],
-      env: {},
-      transport: 'stdio'
+      env: {}
     };
 
     it('should configure specified clients', async () => {

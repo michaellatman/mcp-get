@@ -118,8 +118,7 @@ export class ConfigManager {
             runtime: pkg.runtime,
             command: `mcp-${pkg.name}`,
             args: [],
-            env: {},
-            transport: 'stdio'
+            env: {}
         };
         await configManager.preferences.writeConfig(config);
     }
