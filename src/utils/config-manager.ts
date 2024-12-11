@@ -24,13 +24,23 @@ export class ConfigManager {
     }
 
     async getInstalledClients(): Promise<ClientType[]> {
-        return this.preferences.detectInstalledClients();
+        const installed: ClientType[] = [];
+        for (const [clientType, adapter] of this.clients.entries()) {
+            if (await adapter.isInstalled()) {
+                installed.push(clientType);
+            }
+        }
+        return installed;
     }
 
     async selectClients(): Promise<ClientType[]> {
         const defaultClients = await this.preferences.getDefaultClients();
         if (defaultClients.length > 0) {
-            return defaultClients;
+            const installed = await this.getInstalledClients();
+            const validDefaults = defaultClients.filter(client => installed.includes(client));
+            if (validDefaults.length > 0) {
+                return validDefaults;
+            }
         }
 
         const installed = await this.getInstalledClients();
@@ -38,30 +48,39 @@ export class ConfigManager {
             throw new Error('No supported MCP clients found. Please install a supported client first.');
         }
 
-        // For single client, automatically select it
         if (installed.length === 1) {
             await this.preferences.setDefaultClients(installed);
             return installed;
         }
 
-        // Multiple clients - selection will be handled by the install command
         return installed;
     }
 
-    async configureClients(serverConfig: ServerConfig, selectedClients?: ClientType[]): Promise<void> {
+    async configureClients(config: { mcpServers: Record<string, ServerConfig> }, selectedClients?: ClientType[]): Promise<void> {
         const clients = selectedClients || await this.selectClients();
+        const installed = await this.getInstalledClients();
+        const validClients = clients.filter(client => installed.includes(client));
 
-        // Store selected clients as defaults for future installations
-        if (selectedClients) {
-            await this.preferences.setDefaultClients(selectedClients);
+        if (validClients.length === 0) {
+            throw new Error('No valid clients found for configuration');
         }
 
-        for (const clientType of clients) {
-            const adapter = this.clients.get(clientType);
-            if (adapter && await adapter.validateConfig(serverConfig)) {
-                await adapter.writeConfig(serverConfig);
-            }
+        if (!config?.mcpServers) {
+            throw new Error('Invalid configuration: mcpServers is required');
         }
+
+        await Promise.all(
+            validClients.map(async (clientType) => {
+                const adapter = this.clients.get(clientType);
+                if (adapter) {
+                    for (const [_, serverConfig] of Object.entries(config.mcpServers)) {
+                        if (await adapter.validateConfig(serverConfig)) {
+                            await adapter.writeConfig(serverConfig);
+                        }
+                    }
+                }
+            })
+        );
     }
 
     getClientAdapter(clientType: ClientType): ClientAdapter {
@@ -74,13 +93,15 @@ export class ConfigManager {
 
     static async readConfig(): Promise<any> {
         const configManager = new ConfigManager();
-        return await configManager.preferences.readConfig();
+        const config = await configManager.preferences.readConfig();
+        return {
+            mcpServers: config.mcpServers || {}
+        };
     }
 
     static async isPackageInstalled(packageName: string): Promise<boolean> {
-        const configManager = new ConfigManager();
-        const config = await configManager.preferences.readConfig();
+        const config = await this.readConfig();
         const serverName = packageName.replace(/\//g, '-');
-        return !!config.mcpServers?.[serverName];
+        return Object.prototype.hasOwnProperty.call(config.mcpServers, serverName);
     }
 } 

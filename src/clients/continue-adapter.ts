@@ -2,6 +2,7 @@ import { ClientAdapter } from './base-adapter.js';
 import { ServerConfig, ClientConfig } from '../types/client-config.js';
 import * as fs from 'fs/promises';
 import * as path from 'path';
+import * as os from 'os';
 import { glob } from 'glob';
 
 export class ContinueAdapter extends ClientAdapter {
@@ -16,13 +17,13 @@ export class ContinueAdapter extends ClientAdapter {
   async isInstalled(): Promise<boolean> {
     try {
       // Check for Continue VS Code extension
-      const vscodePath = this.resolvePath('.vscode/extensions/continue.continue-*');
+      const vscodePath = path.join(os.homedir(), '.vscode', 'extensions', 'continue.continue-*');
       const vscodeExists = await this.checkGlobPath(vscodePath);
 
       // Check for Continue JetBrains plugin
       const jetbrainsPath = process.platform === 'win32'
-        ? this.resolvePath('AppData/Roaming/JetBrains/*/plugins/continue')
-        : this.resolvePath('Library/Application Support/JetBrains/*/plugins/continue');
+        ? path.join(process.env.APPDATA || '', 'JetBrains', '*', 'plugins', 'continue')
+        : path.join(os.homedir(), 'Library', 'Application Support', 'JetBrains', '*', 'plugins', 'continue');
       const jetbrainsExists = await this.checkGlobPath(jetbrainsPath);
 
       return vscodeExists || jetbrainsExists;

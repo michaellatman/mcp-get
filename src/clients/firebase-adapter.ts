@@ -38,8 +38,8 @@ export class FirebaseAdapter extends ClientAdapter {
     try {
       execSync('firebase --version', { stdio: 'ignore' });
 
-      const rcPath = this.resolvePath('.firebaserc');
-      await fs.access(rcPath);
+      const configPath = path.join(process.cwd(), 'firebase.json');
+      await fs.access(configPath);
 
       return true;
     } catch (error) {

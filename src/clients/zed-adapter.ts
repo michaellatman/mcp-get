@@ -24,26 +24,27 @@ export class ZedAdapter extends ClientAdapter {
 
   private async getConfigPaths(): Promise<ZedConfigPaths> {
     const home = os.homedir();
-    const xdgConfig = process.env.XDG_CONFIG_HOME || path.join(home, '.config');
+    const platform = process.platform;
+    let settingsPath: string;
+    let extensionPath: string;
 
-    const settingsPath = process.platform === 'linux'
-      ? path.join(xdgConfig, 'zed', 'settings.json')
-      : path.join(home, '.config', 'zed', 'settings.json');
-
-    const paths: ZedConfigPaths = {
-      extension: this.resolvePath('.zed/extensions/mcp-server/extension.toml'),
-      settings: settingsPath
-    };
-
-    const projectSettings = path.join(process.cwd(), '.zed', 'settings.json');
-    try {
-      await fs.access(projectSettings);
-      paths.projectSettings = projectSettings;
-    } catch (err) {
-      // No project settings found, ignore
+    switch (platform) {
+      case 'win32':
+        const appData = process.env.APPDATA || '';
+        settingsPath = path.win32.join(appData, 'Zed', 'settings.json');
+        extensionPath = path.win32.join(appData, 'Zed', 'extensions', 'mcp', 'extension.toml');
+        break;
+      case 'darwin':
+        settingsPath = path.posix.join(home, 'Library', 'Application Support', 'Zed', 'settings.json');
+        extensionPath = path.posix.join(home, 'Library', 'Application Support', 'Zed', 'extensions', 'mcp', 'extension.toml');
+        break;
+      default: // linux
+        const xdgConfig = process.env.XDG_CONFIG_HOME || path.posix.join(home, '.config');
+        settingsPath = path.posix.join(xdgConfig, 'zed', 'settings.json');
+        extensionPath = path.posix.join(xdgConfig, 'zed', 'extensions', 'mcp', 'extension.toml');
     }
 
-    return paths;
+    return { settings: settingsPath, extension: extensionPath };
   }
 
   getConfigPath(): string {
@@ -85,46 +86,49 @@ export class ZedAdapter extends ClientAdapter {
     const paths = await this.getConfigPaths();
 
     const tomlConfig = {
-      context_server: {
-        command: config.command,
-        args: config.args || [],
-        env: config.env || {}
+      'context-servers': {
+        [config.name]: {
+          transport: config.transport || 'stdio',
+          command: config.command,
+          args: config.args || [],
+          env: config.env || {}
+        }
+      }
+    };
+
+    let existingSettings = { mcp: { servers: {} } };
+    try {
+      const content = await fs.readFile(paths.settings, 'utf-8');
+      const jsonContent = content.replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*\n/g, '').trim();
+      if (jsonContent) {
+        existingSettings = JSON.parse(jsonContent);
+      }
+    } catch (error) {
+      // File doesn't exist or is invalid, use empty config
+    }
+
+    const updatedSettings = {
+      ...existingSettings,
+      mcp: {
+        ...existingSettings.mcp,
+        servers: {
+          ...existingSettings.mcp?.servers,
+          [config.name]: {
+            transport: config.transport || 'stdio',
+            command: config.command,
+            args: config.args || [],
+            env: config.env || {},
+            runtime: config.runtime
+          }
+        }
       }
     };
 
     await fs.mkdir(path.dirname(paths.extension), { recursive: true });
+    await fs.mkdir(path.dirname(paths.settings), { recursive: true });
+
     await fs.writeFile(paths.extension, TOML.stringify(tomlConfig));
-
-    try {
-      let settings: ZedSettings = {};
-      try {
-        const settingsContent = await fs.readFile(paths.settings, 'utf8');
-        settings = await this.parseConfig(settingsContent, false) as ZedSettings;
-      } catch (err) {
-        // Ignore if settings file doesn't exist
-      }
-
-      settings.mcp = { ...settings.mcp, ...config };
-      await fs.mkdir(path.dirname(paths.settings), { recursive: true });
-      await fs.writeFile(paths.settings, JSON.stringify(settings, null, 2));
-
-      if (paths.projectSettings) {
-        let projectSettings: ZedSettings = {};
-        try {
-          const projectContent = await fs.readFile(paths.projectSettings, 'utf8');
-          projectSettings = await this.parseConfig(projectContent, false) as ZedSettings;
-        } catch (err) {
-          // Ignore if project settings file doesn't exist
-        }
-
-        projectSettings.mcp = { ...projectSettings.mcp, ...config };
-        await fs.mkdir(path.dirname(paths.projectSettings), { recursive: true });
-        await fs.writeFile(paths.projectSettings, JSON.stringify(projectSettings, null, 2));
-      }
-    } catch (err) {
-      const error = err as Error;
-      throw new Error(`Failed to update Zed settings: ${error.message}`);
-    }
+    await fs.writeFile(paths.settings, JSON.stringify(updatedSettings, null, 2));
   }
 
   async validateConfig(config: ServerConfig): Promise<boolean> {

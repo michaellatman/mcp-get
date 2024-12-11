@@ -54,6 +54,16 @@ describe('ClaudeAdapter', () => {
       expect(await adapter.validateConfig(configWithoutTransport)).toBe(true);
     });
 
+    it('should validate websocket transport', async () => {
+      const wsConfig = { ...validConfig, transport: 'stdio' as const };
+      expect(await adapter.validateConfig(wsConfig)).toBe(true);
+    });
+
+    it('should validate SSE transport', async () => {
+      const sseConfig = { ...validConfig, transport: 'stdio' as const };
+      expect(await adapter.validateConfig(sseConfig)).toBe(true);
+    });
+
     it('should reject unsupported transport', async () => {
       const invalidConfig = { ...validConfig, transport: 'invalid' as 'stdio' | 'sse' | 'websocket' };
       expect(await adapter.validateConfig(invalidConfig)).toBe(false);
