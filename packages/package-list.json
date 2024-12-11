@@ -349,5 +349,41 @@
     "homepage": "https://github.com/benborla/mcp-server-mysql",
     "license": "MIT",
     "runtime": "node"
+  },
+  {
+    "name": "mcp-server-perplexity",
+    "description": "MCP Server for the Perplexity API",
+    "vendor": "tanigami (https://github.com/tanigami)",
+    "sourceUrl": "https://github.com/tanigami/mcp-server-perplexity",
+    "homepage": "https://github.com/tanigami/mcp-server-perplexity",
+    "license": "MIT",
+    "runtime": "python"
+  },
+  {
+    "name": "coincap-mcp",
+    "description": "A coincap mcp server to access crypto data from coincap API",
+    "vendor": "QuantGeekDev (https://github.com/QuantGeekDev)",
+    "sourceUrl": "https://github.com/QuantGeekDev/coincap-mcp",
+    "homepage": "https://github.com/QuantGeekDev/coincap-mcp",
+    "license": "MIT",
+    "runtime": "node"
+  },
+  {
+    "name": "apple-notes-mcp",
+    "description": "Read your Apple Notes with Claude Model Context Protocol",
+    "vendor": "sirmews (https://github.com/sirmews)",
+    "sourceUrl": "https://github.com/sirmews/apple-notes-mcp",
+    "homepage": "https://github.com/sirmews/apple-notes-mcp",
+    "license": "MIT",
+    "runtime": "python"
+  },
+  {
+    "name": "unichat-mcp-server",
+    "description": "MCP server for Unichat integration",
+    "vendor": "amidabuddha (https://github.com/amidabuddha)",
+    "sourceUrl": "https://github.com/amidabuddha/unichat-mcp-server",
+    "homepage": "https://github.com/amidabuddha/unichat-mcp-server",
+    "license": "MIT",
+    "runtime": "python"
   }
 ]
