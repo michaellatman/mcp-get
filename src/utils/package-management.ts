@@ -226,8 +226,9 @@ export async function installPackage(pkg: Package): Promise<void> {
     }
 
     const envVars = await promptForEnvVars(pkg.name);
+    const customCommand = packageHelpers[pkg.name]?.customCommand;
     
-    await ConfigManager.installPackage(pkg, envVars);
+    await ConfigManager.installPackage(pkg, envVars, customCommand);
     console.log('Updated Claude desktop configuration');
 
     // Check analytics consent and track if allowed

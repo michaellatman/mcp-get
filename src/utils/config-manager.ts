@@ -103,7 +103,7 @@ export class ConfigManager {
         return serverName in (config.mcpServers || {});
     }
 
-    static async installPackage(pkg: Package, envVars?: Record<string, string>): Promise<void> {
+    static async installPackage(pkg: Package, envVars?: Record<string, string>, customCommand?: Record<string, any>): Promise<void> {
         const config = this.readConfig();
         const serverName = pkg.name.replace(/\//g, '-');
         
@@ -114,11 +114,21 @@ export class ConfigManager {
 
         // Add command and args based on runtime
         if (pkg.runtime === 'node') {
-            serverConfig.command = 'npx';
-            serverConfig.args = ['-y', pkg.name];
+            if (customCommand) {
+                serverConfig.command = customCommand.command;
+                serverConfig.args = customCommand.args || [];
+            } else {
+                serverConfig.command = 'npx';
+                serverConfig.args = ['-y', pkg.name];
+            }
         } else if (pkg.runtime === 'python') {
-            serverConfig.command = 'uvx';
-            serverConfig.args = [pkg.name];
+            if (customCommand) {
+                serverConfig.command = customCommand.command;
+                serverConfig.args = customCommand.args || [];
+            } else {
+                serverConfig.command = 'uvx';
+                serverConfig.args = [pkg.name];
+            }
         }
 
         config.mcpServers[serverName] = serverConfig;
