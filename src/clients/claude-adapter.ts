@@ -63,6 +63,6 @@ export class ClaudeAdapter extends ClientAdapter {
   }
 
   async validateConfig(config: ServerConfig): Promise<boolean> {
-    return true;
+    return !config.transport || ['stdio', 'sse'].includes(config.transport);
   }
 }

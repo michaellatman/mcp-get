@@ -72,14 +72,14 @@ export class ConfigManager {
         return adapter;
     }
 
-    static readConfig(): any {
+    static async readConfig(): Promise<any> {
         const configManager = new ConfigManager();
-        return configManager.preferences.readConfig();
+        return await configManager.preferences.readConfig();
     }
 
-    static isPackageInstalled(packageName: string): boolean {
+    static async isPackageInstalled(packageName: string): Promise<boolean> {
         const configManager = new ConfigManager();
-        const config = configManager.preferences.readConfig();
+        const config = await configManager.preferences.readConfig();
         const serverName = packageName.replace(/\//g, '-');
         return !!config.mcpServers?.[serverName];
     }

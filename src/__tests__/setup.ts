@@ -45,6 +45,7 @@ jest.mock('fs/promises', () => {
     mkdir: jest.fn().mockImplementation(async () => undefined) as jest.MockedFunction<typeof actual.mkdir>,
     writeFile: jest.fn().mockImplementation(async () => undefined) as jest.MockedFunction<typeof actual.writeFile>,
     readFile: jest.fn().mockImplementation(async () => '{}') as jest.MockedFunction<typeof actual.readFile>,
+    access: jest.fn().mockImplementation(async () => undefined) as jest.MockedFunction<typeof actual.access>,
   };
 });
 

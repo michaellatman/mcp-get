@@ -1,7 +1,6 @@
 import { homedir } from 'os';
 import { join } from 'path';
-import { existsSync } from 'fs';
-import { readFile, writeFile, mkdir } from 'fs/promises';
+import { access, readFile, writeFile, mkdir } from 'fs/promises';
 
 export type ClientType = 'claude' | 'zed' | 'continue' | 'firebase';
 
@@ -15,7 +14,9 @@ export class Preferences {
   }
 
   private async ensureConfigDir(): Promise<void> {
-    if (!existsSync(this.configDir)) {
+    try {
+      await access(this.configDir);
+    } catch {
       await mkdir(this.configDir, { recursive: true });
     }
   }
@@ -48,21 +49,31 @@ export class Preferences {
     return join(homedir(), '.config', 'firebase', 'genkit', 'config.json');
   }
 
+  private async checkFileExists(path: string): Promise<boolean> {
+    try {
+      await access(path);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
   async detectInstalledClients(): Promise<ClientType[]> {
     const installedClients: ClientType[] = [];
+    const checks = [
+      { path: this.getClaudeConfigPath(), type: 'claude' as ClientType },
+      { path: this.getZedConfigPath(), type: 'zed' as ClientType },
+      { path: this.getContinueConfigPath(), type: 'continue' as ClientType },
+      { path: this.getFirebaseConfigPath(), type: 'firebase' as ClientType }
+    ];
 
-    if (existsSync(this.getClaudeConfigPath())) {
-      installedClients.push('claude');
-    }
-    if (existsSync(this.getZedConfigPath())) {
-      installedClients.push('zed');
-    }
-    if (existsSync(this.getContinueConfigPath())) {
-      installedClients.push('continue');
-    }
-    if (existsSync(this.getFirebaseConfigPath())) {
-      installedClients.push('firebase');
-    }
+    await Promise.all(
+      checks.map(async ({ path, type }) => {
+        if (await this.checkFileExists(path)) {
+          installedClients.push(type);
+        }
+      })
+    );
 
     return installedClients;
   }
@@ -71,7 +82,8 @@ export class Preferences {
     try {
       await this.ensureConfigDir();
 
-      if (!existsSync(this.preferencesFile)) {
+      const hasPreferences = await this.checkFileExists(this.preferencesFile);
+      if (!hasPreferences) {
         const installedClients = await this.detectInstalledClients();
         if (installedClients.length > 0) {
           await this.setDefaultClients(installedClients);
@@ -135,7 +147,8 @@ export class Preferences {
     try {
       await this.ensureConfigDir();
 
-      if (!existsSync(this.preferencesFile)) {
+      const hasConfig = await this.checkFileExists(this.preferencesFile);
+      if (!hasConfig) {
         return { mcpServers: {} };
       }
 
