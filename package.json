@@ -16,6 +16,7 @@
     "test:setup": "bash scripts/setup-test-env.sh",
     "test:all": "npm run test:setup && npm run test:list && npm run test:install && npm run test:uninstall && npm run test:installed && npm run test:clients",
     "extract": "node --loader ts-node/esm src/extractors/modelcontextprotocol-extractor.ts",
+    "typecheck": "tsc --noEmit",
     "version:patch": "npm version patch",
     "version:minor": "npm version minor",
     "version:major": "npm version major",

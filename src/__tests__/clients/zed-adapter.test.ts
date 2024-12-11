@@ -12,21 +12,18 @@ interface TOMLConfig {
     [key: string]: {
       command: string;
       args: string[];
-      transport: string;
     };
   };
 }
 
 // Type definitions for JSON config
 interface JSONConfig {
-  mcp: {
-    servers: {
-      [key: string]: {
-        command: string;
-        args: string[];
-        transport: string;
-        runtime: string;
-        env: Record<string, string>;
+  context_servers: {
+    [key: string]: {
+      command: {
+        path: string;
+        args?: string[];
+        env?: Record<string, string>;
       };
     };
   };
@@ -149,20 +146,19 @@ args = ["server.js"]`;
       const settingsCall = writeFileMock.mock.calls.find(call => (call[0] as string).endsWith('settings.json'));
       expect(settingsCall).toBeDefined();
       if (!settingsCall) throw new Error('Settings file write not found');
-      const writtenConfig = JSON.parse(settingsCall[1] as string) as { mcp: { servers: Record<string, unknown> } };
-      expect(writtenConfig.mcp.servers).toBeDefined();
-      expect(writtenConfig.mcp.servers[config.name]).toBeDefined();
+      const writtenConfig = JSON.parse(settingsCall[1] as string) as JSONConfig;
+      expect(writtenConfig.context_servers).toBeDefined();
+      expect(writtenConfig.context_servers[config.name]).toBeDefined();
+      expect(writtenConfig.context_servers[config.name].command.path).toBe(config.command);
     });
 
     it('should merge with existing configurations', async () => {
       const existingConfig: JSONConfig = {
-        mcp: {
-          servers: {
-            'existing-server': {
-              command: 'python',
+        context_servers: {
+          'existing-server': {
+            command: {
+              path: 'python',
               args: ['server.py'],
-              transport: 'stdio',
-              runtime: 'python',
               env: {}
             }
           }
@@ -178,9 +174,10 @@ args = ["server.js"]`;
       const settingsCall = writeFileMock.mock.calls.find(call => (call[0] as string).endsWith('settings.json'));
       expect(settingsCall).toBeDefined();
       if (!settingsCall) throw new Error('Settings file write not found');
-      const writtenConfig = JSON.parse(settingsCall[1] as string) as { mcp: { servers: Record<string, unknown> } };
-      expect(writtenConfig.mcp.servers['existing-server']).toBeDefined();
-      expect(writtenConfig.mcp.servers[config.name]).toBeDefined();
+      const writtenConfig = JSON.parse(settingsCall[1] as string) as JSONConfig;
+      expect(writtenConfig.context_servers['existing-server']).toBeDefined();
+      expect(writtenConfig.context_servers[config.name]).toBeDefined();
+      expect(writtenConfig.context_servers[config.name].command.path).toBe(config.command);
     });
 
     it('should handle non-existent config file', async () => {
@@ -192,9 +189,10 @@ args = ["server.js"]`;
       const settingsCall = writeFileMock.mock.calls.find(call => (call[0] as string).endsWith('settings.json'));
       expect(settingsCall).toBeDefined();
       if (!settingsCall) throw new Error('Settings file write not found');
-      const writtenConfig = JSON.parse(settingsCall[1] as string) as { mcp: { servers: Record<string, unknown> } };
-      expect(writtenConfig).toHaveProperty('mcp.servers');
-      expect(writtenConfig.mcp.servers).toHaveProperty(config.name);
+      const writtenConfig = JSON.parse(settingsCall[1] as string) as JSONConfig;
+      expect(writtenConfig.context_servers).toBeDefined();
+      expect(writtenConfig.context_servers[config.name]).toBeDefined();
+      expect(writtenConfig.context_servers[config.name].command.path).toBe(config.command);
     });
 
     it('should write to correct paths on Linux', async () => {

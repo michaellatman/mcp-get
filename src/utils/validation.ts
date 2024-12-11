@@ -9,13 +9,6 @@ interface ValidationResult {
 
 type TransportMethod = 'stdio' | 'sse' | 'websocket';
 
-const CLIENT_TRANSPORT_SUPPORT = {
-  claude: ['stdio', 'sse', 'websocket'] as TransportMethod[],
-  zed: ['stdio'] as TransportMethod[],
-  continue: ['stdio', 'sse', 'websocket'] as TransportMethod[],
-  firebase: ['stdio', 'sse'] as TransportMethod[]
-};
-
 /**
  * Validates client compatibility with server configuration
  */
@@ -34,14 +27,29 @@ export async function validateClientCompatibility(
     return { isValid: false, errors };
   }
 
-  // Validate transport compatibility
+  // Validate transport compatibility based on client type
   const transport = serverConfig.transport || 'stdio';
-  const supportedTransports = CLIENT_TRANSPORT_SUPPORT[clientType];
+  let supportedMethods: TransportMethod[] = [];
 
-  if (!supportedTransports.includes(transport as TransportMethod)) {
+  switch (clientType) {
+    case 'zed':
+      supportedMethods = ['stdio'];
+      break;
+    case 'claude':
+      supportedMethods = ['stdio', 'sse'];
+      break;
+    case 'continue':
+      supportedMethods = ['stdio', 'sse', 'websocket'];
+      break;
+    case 'firebase':
+      supportedMethods = ['stdio', 'sse'];
+      break;
+  }
+
+  if (!supportedMethods.includes(transport as TransportMethod)) {
     errors.push(
       `Transport method '${transport}' is not supported by ${clientType}. ` +
-      `Supported methods: ${supportedTransports.join(', ')}`
+      `Supported methods: ${supportedMethods.join(', ')}`
     );
   }
 

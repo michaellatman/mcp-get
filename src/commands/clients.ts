@@ -1,5 +1,7 @@
 import chalk from 'chalk';
 import { Preferences } from '../utils/preferences.js';
+import { ConfigManager } from '../utils/config-manager.js';
+import { ClientType } from '../types/client-config.js';
 
 export async function listClients(): Promise<void> {
   try {
@@ -13,7 +15,11 @@ export async function listClients(): Promise<void> {
 
     console.log('\nInstalled MCP clients:');
     for (const client of installedClients) {
-      console.log(chalk.green(`- ${client}`));
+      const configManager = new ConfigManager();
+      const adapter = await configManager.getClientAdapter(client as ClientType);
+      const configPath = adapter.getConfigPath();
+      console.log(chalk.green(`- ${client}:`));
+      console.log(chalk.blue(`  Config: ${configPath}`));
     }
   } catch (error) {
     console.error(chalk.red('Error detecting installed clients:'));

@@ -99,25 +99,26 @@ export class ZedAdapter extends ClientAdapter {
   async isInstalled(): Promise<boolean> {
     try {
       const paths = this.getConfigPaths();
+      const configPath = paths.settings;
 
       // Check if settings.json exists
-      await fs.access(paths.settings);
+      await fs.access(configPath);
 
-      // For actual installations, also check for Zed binary
+      // For actual installations, check for Zed binary based on platform
       const platform = process.platform;
       const zedPath = platform === 'win32'
-        ? this.resolvePath('AppData/Local/Programs/Zed/Zed.exe')
+        ? path.join(process.env.LOCALAPPDATA || '', 'Programs', 'Zed', 'Zed.exe')
         : platform === 'darwin'
           ? '/Applications/Zed.app'
-          : this.resolvePath('.local/share/zed/Zed');
+          : path.join(os.homedir(), '.local', 'share', 'zed', 'Zed');
 
       try {
         await fs.access(zedPath);
+        return true;
       } catch {
-        // Binary not found, but settings exist - good enough for testing
+        // Binary not found, but config exists - consider installed for testing
+        return true;
       }
-
-      return true;
     } catch (err) {
       return false;
     }
@@ -126,7 +127,7 @@ export class ZedAdapter extends ClientAdapter {
   async writeConfig(config: ServerConfig): Promise<void> {
     const paths = this.getConfigPaths();
 
-    // Format according to official Zed documentation
+    // Write settings.json
     const updatedConfig = {
       context_servers: {
         [config.name]: {
@@ -164,11 +165,22 @@ export class ZedAdapter extends ClientAdapter {
       }
     } as ZedSettings;
 
+    // Ensure directories exist
     await fs.mkdir(path.dirname(paths.settings), { recursive: true });
+    await fs.mkdir(path.dirname(paths.extension), { recursive: true });
+
+    // Write both configuration files
     await fs.writeFile(paths.settings, JSON.stringify(mergedSettings, null, 2));
+
+    // Write extension.toml with proper TOML formatting
+    const extensionConfig = `[context-servers]
+[context-servers.${config.name}]
+command = "${config.command}"
+args = ${JSON.stringify(config.args || [])}`;
+    await fs.writeFile(paths.extension, extensionConfig);
   }
 
   async validateConfig(config: ServerConfig): Promise<boolean> {
-    return config.command !== undefined;
+    return config.transport === 'stdio';
   }
 }

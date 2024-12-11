@@ -71,8 +71,6 @@ export async function resolvePackages(): Promise<ResolvedPackage[]> {
                     homepage: '',
                     license: 'Unknown',
                     runtime: installedServer?.runtime || 'node',
-                    supportedClients: ['claude', 'zed', 'continue', 'firebase'],
-                    supportedTransports: ['stdio', 'sse', 'websocket'],
                     isInstalled: true,
                     isVerified: false
                 });
@@ -111,8 +109,6 @@ export async function resolvePackage(packageName: string): Promise<ResolvedPacka
                     homepage: '',
                     license: 'Unknown',
                     runtime: installedServer.runtime || 'node',
-                    supportedClients: ['claude', 'zed', 'continue', 'firebase'],
-                    supportedTransports: ['stdio', 'sse', 'websocket'],
                     isInstalled: true,
                     isVerified: false
                 };

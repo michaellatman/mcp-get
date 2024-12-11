@@ -224,7 +224,10 @@ async function promptForClientSelection(clients: ClientType[]): Promise<ClientTy
     type: 'list',
     name: 'selectedClient',
     message: 'Select which client to configure:',
-    choices: clients
+    choices: clients.map(client => ({
+      name: client.charAt(0).toUpperCase() + client.slice(1),
+      value: client
+    }))
   }]);
   return selectedClient;
 }
@@ -242,20 +245,23 @@ export async function installPackage(pkg: Package): Promise<void> {
     }
 
     const envVars = await promptForEnvVars(pkg.name);
-    const preferences = new Preferences();
-    const clients = await preferences.getOrSelectDefaultClients();
-    let selectedClient: ClientType;
+    const configManager = new ConfigManager();
+    const installedClients = await configManager.getInstalledClients();
 
-    if (clients.length > 1) {
-      selectedClient = await promptForClientSelection(clients);
-      await ConfigManager.installPackage(pkg, [selectedClient]);
-    } else if (clients.length === 1) {
-      selectedClient = clients[0];
-      await ConfigManager.installPackage(pkg, clients);
-    } else {
-      throw new Error('No MCP clients installed');
+    if (installedClients.length === 0) {
+      throw new Error('No MCP clients installed. Please install a supported client first.');
     }
-    console.log(`Updated ${pkg.name} configuration`);
+
+    let selectedClient: ClientType;
+    if (installedClients.length > 1) {
+      selectedClient = await promptForClientSelection(installedClients);
+    } else {
+      selectedClient = installedClients[0];
+      console.log(`Using ${selectedClient} as the only installed client.`);
+    }
+
+    await ConfigManager.installPackage(pkg, [selectedClient]);
+    console.log(`Updated ${selectedClient} configuration for ${pkg.name}`);
 
     const analyticsAllowed = await checkAnalyticsConsent();
     if (analyticsAllowed) {
@@ -271,6 +277,21 @@ export async function installPackage(pkg: Package): Promise<void> {
 
 export async function uninstallPackage(packageName: string): Promise<void> {
   try {
+    const configManager = new ConfigManager();
+    const installedClients = await configManager.getInstalledClients();
+
+    if (installedClients.length === 0) {
+      throw new Error('No MCP clients installed');
+    }
+
+    let selectedClient: ClientType;
+    if (installedClients.length > 1) {
+      selectedClient = await promptForClientSelection(installedClients);
+    } else {
+      selectedClient = installedClients[0];
+      console.log(`Using ${selectedClient} as the only installed client.`);
+    }
+
     const pkg: Package = {
       name: packageName,
       description: '',
@@ -281,24 +302,11 @@ export async function uninstallPackage(packageName: string): Promise<void> {
       runtime: 'node'
     };
 
-    const preferences = new Preferences();
-    const clients = await preferences.getOrSelectDefaultClients();
-    let selectedClient: ClientType;
-
-    if (clients.length > 1) {
-      selectedClient = await promptForClientSelection(clients);
-      await ConfigManager.uninstallPackage(pkg, [selectedClient]);
-    } else if (clients.length === 1) {
-      selectedClient = clients[0];
-      await ConfigManager.uninstallPackage(pkg, clients);
-    } else {
-      throw new Error('No MCP clients installed');
-    }
-
-    console.log(`\nUninstalled ${packageName}`);
+    await ConfigManager.uninstallPackage(pkg, [selectedClient]);
+    console.log(`\nUninstalled ${packageName} from ${selectedClient}`);
     await promptForRestart(selectedClient);
   } catch (error) {
     console.error('Failed to uninstall package:', error);
     throw error;
   }
-}   
+} 

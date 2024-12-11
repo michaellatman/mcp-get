@@ -35,9 +35,7 @@ function createUnknownPackage(packageName: string, runtime: 'node' | 'python'): 
     vendor: '',
     sourceUrl: '',
     homepage: '',
-    license: '',
-    supportedClients: ['claude', 'zed', 'continue', 'firebase'],
-    supportedTransports: ['stdio', 'sse', 'websocket']
+    license: ''
   };
 }
 
