@@ -5,6 +5,7 @@ import { promisify } from 'util';
 import { packageHelpers } from '../helpers/index.js';
 import { checkUVInstalled, promptForUVInstall } from './runtime-utils.js';
 import { ConfigManager } from './config-manager.js';
+import { ClientType } from '../types/client-config.js';
 
 declare function fetch(url: string, init?: any): Promise<{ ok: boolean; statusText: string }>;
 
@@ -207,6 +208,16 @@ async function promptForRestart(): Promise<boolean> {
   return shouldRestart;
 }
 
+async function promptForClientSelection(clients: ClientType[]): Promise<ClientType> {
+  const { selectedClient } = await inquirer.prompt<{ selectedClient: ClientType }>([{
+    type: 'list',
+    name: 'selectedClient',
+    message: 'Select which client to configure:',
+    choices: clients
+  }]);
+  return selectedClient;
+}
+
 export async function installPackage(pkg: Package): Promise<void> {
   try {
     if (pkg.runtime === 'python') {
@@ -220,9 +231,18 @@ export async function installPackage(pkg: Package): Promise<void> {
     }
 
     const envVars = await promptForEnvVars(pkg.name);
+    const configManager = new ConfigManager();
+    const clients = await configManager.getInstalledClients();
 
-    await ConfigManager.installPackage(pkg);
-    console.log('Updated Claude desktop configuration');
+    if (clients.length > 1) {
+      const selectedClient = await promptForClientSelection(clients as ClientType[]);
+      await ConfigManager.installPackage(pkg, [selectedClient]);
+    } else if (clients.length === 1) {
+      await ConfigManager.installPackage(pkg, clients);
+    } else {
+      throw new Error('No MCP clients installed');
+    }
+    console.log(`Updated ${pkg.name} configuration`);
 
     const analyticsAllowed = await checkAnalyticsConsent();
     if (analyticsAllowed) {
@@ -245,11 +265,21 @@ export async function uninstallPackage(packageName: string): Promise<void> {
       sourceUrl: '',
       homepage: '',
       license: '',
-      runtime: 'node',
-      supportedClients: ['claude', 'zed', 'continue', 'firebase'],
-      supportedTransports: ['stdio', 'sse', 'websocket']
+      runtime: 'node'
     };
-    await ConfigManager.uninstallPackage(pkg);
+
+    const configManager = new ConfigManager();
+    const clients = await configManager.getInstalledClients();
+
+    if (clients.length > 1) {
+      const selectedClient = await promptForClientSelection(clients);
+      await ConfigManager.uninstallPackage(pkg, [selectedClient as ClientType]);
+    } else if (clients.length === 1) {
+      await ConfigManager.uninstallPackage(pkg, clients);
+    } else {
+      throw new Error('No MCP clients installed');
+    }
+
     console.log(`\nUninstalled ${packageName}`);
     await promptForRestart();
   } catch (error) {

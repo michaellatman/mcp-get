@@ -6,8 +6,8 @@ export interface Package {
     sourceUrl: string;
     homepage: string;
     license: string;
-    supportedClients: ('claude' | 'zed' | 'continue' | 'firebase')[];
-    supportedTransports: ('stdio' | 'sse' | 'websocket')[];
+    supportedClients?: ('claude' | 'zed' | 'continue' | 'firebase')[];
+    supportedTransports?: ('stdio' | 'sse' | 'websocket')[];
 }
 
 export interface ResolvedPackage extends Package {

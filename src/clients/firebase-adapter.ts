@@ -1,3 +1,24 @@
+/**
+ * Firebase Genkit Adapter
+ * Source: Firebase implementation and configuration schema
+ *
+ * Example configuration:
+ * ```json
+ * {
+ *   "name": "my-server",
+ *   "serverProcess": {
+ *     "command": "/path/to/server",
+ *     "args": ["run"],
+ *     "env": {}
+ *   },
+ *   "transport": "stdio"
+ * }
+ * ```
+ * Support level: Partial (Prompts and Tools, partial Resources)
+ * Transports: stdio, sse
+ * Installation: Requires firebase CLI and firebase.json
+ * Configuration path: .firebase/mcp-config.json
+ */
 import { ClientAdapter } from './base-adapter.js';
 import { ServerConfig, ClientConfig } from '../types/client-config.js';
 import * as fs from 'fs/promises';

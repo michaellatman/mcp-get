@@ -1,3 +1,27 @@
+/**
+ * Zed Context Server Adapter
+ * Documentation: https://zed.dev/docs/assistant/context-servers
+ * Source: Official Zed documentation
+ *
+ * Example configuration (from official docs):
+ * ```json
+ * {
+ *   "context_servers": {
+ *     "my-server": {
+ *       "command": "/path/to/server",
+ *       "args": ["run"],
+ *       "env": {}
+ *     }
+ *   }
+ * }
+ * ```
+ * Note: transport and runtime fields are not required per official documentation
+ * Support level: Partial (Prompts only via slash commands)
+ * Configuration paths:
+ * - Windows: %AppData%\Zed\settings.json
+ * - macOS: ~/Library/Application Support/Zed/settings.json
+ * - Linux: ~/.config/zed/settings.json
+ */
 import { ClientAdapter } from './base-adapter.js';
 import { ServerConfig, ClientConfig } from '../types/client-config.js';
 import * as fs from 'fs/promises';

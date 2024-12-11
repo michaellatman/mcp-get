@@ -1,3 +1,25 @@
+/**
+ * Continue Adapter
+ * Documentation: https://docs.continue.dev
+ * Source: Continue official documentation and implementation
+ *
+ * Example configuration:
+ * ```json
+ * {
+ *   "experimental": {
+ *     "modelContextProtocolServer": {
+ *       "command": "/path/to/server",
+ *       "args": ["run"],
+ *       "transport": "stdio"
+ *     }
+ *   }
+ * }
+ * ```
+ * Support level: Full (Resources, Prompts, Tools) through experimental support
+ * Transports: stdio, sse, websocket
+ * Installation: VS Code extension or JetBrains plugin
+ * Configuration path: ~/.continue/config.json
+ */
 import { ClientAdapter } from './base-adapter.js';
 import { ServerConfig, ClientConfig } from '../types/client-config.js';
 import * as fs from 'fs/promises';

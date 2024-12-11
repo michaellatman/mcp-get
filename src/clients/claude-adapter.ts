@@ -1,3 +1,27 @@
+/**
+ * Claude Desktop Adapter
+ * Source: Internal implementation and configuration schema
+ *
+ * Example configuration:
+ * ```json
+ * {
+ *   "mcpServers": {
+ *     "my-server": {
+ *       "runtime": "node",
+ *       "command": "/path/to/server",
+ *       "args": ["run"],
+ *       "env": {}
+ *     }
+ *   }
+ * }
+ * ```
+ * Support level: Full (Resources, Prompts, Tools)
+ * Required fields: command, runtime
+ * Transports: stdio, sse
+ * Configuration paths:
+ * - Windows: %AppData%\Roaming\Claude\claude_desktop_config.json
+ * - macOS: ~/Library/Application Support/Claude/claude_desktop_config.json
+ */
 import { ClientAdapter } from './base-adapter.js';
 import { ServerConfig, ClientConfig } from '../types/client-config.js';
 import * as fs from 'fs/promises';

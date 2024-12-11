@@ -109,26 +109,32 @@ export class ConfigManager {
         return configManager.preferences.getConfigPath();
     }
 
-    static async installPackage(pkg: Package): Promise<void> {
+    static async installPackage(pkg: Package, selectedClients?: ClientType[]): Promise<void> {
         const configManager = new ConfigManager();
         const config = await configManager.preferences.readConfig();
         config.mcpServers = config.mcpServers || {};
-        config.mcpServers[pkg.name] = {
+        const serverConfig: ServerConfig = {
             name: pkg.name,
             runtime: pkg.runtime,
             command: `mcp-${pkg.name}`,
             args: [],
             env: {}
         };
+        await configManager.configureClients(serverConfig, selectedClients);
         await configManager.preferences.writeConfig(config);
     }
 
-    static async uninstallPackage(pkg: Package): Promise<void> {
+    static async uninstallPackage(pkg: Package, selectedClients?: ClientType[]): Promise<void> {
         const configManager = new ConfigManager();
         const config = await configManager.preferences.readConfig();
         if (config.mcpServers) {
             delete config.mcpServers[pkg.name];
             await configManager.preferences.writeConfig(config);
+            const clients = selectedClients || await configManager.getInstalledClients();
+            for (const clientType of clients) {
+                const adapter = configManager.getClientAdapter(clientType);
+                await adapter.writeConfig({ ...pkg, command: '' });
+            }
         }
     }
 
