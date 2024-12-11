@@ -1,14 +1,12 @@
 {
   "name": "@michaellatman/mcp-get",
-  "version": "1.0.38",
-  "description": "A NPX command to install and list packages",
-  "main": "dist/index.js",
+  "version": "1.0.40",
+  "description": "A package manager for Model Context Protocol servers",
+  "type": "module",
   "scripts": {
     "build": "tsc && chmod +x dist/index.js",
     "start": "node dist/index.js",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
+    "test": "jest --config jest.config.js --coverage",
     "test:list": "node --loader ts-node/esm src/index.ts list",
     "test:install": "node --loader ts-node/esm src/index.ts install",
     "test:installed": "node --loader ts-node/esm src/index.ts installed",
@@ -23,6 +21,9 @@
   },
   "bin": {
     "mcp-get": "dist/index.js"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   },
   "dependencies": {
     "@iarna/toml": "^2.2.5",
@@ -43,7 +44,7 @@
     "@types/inquirer": "^8.2.4",
     "@types/inquirer-autocomplete-prompt": "^3.0.3",
     "@types/jest": "^29.5.14",
-    "@types/node": "^14.18.63",
+    "@types/node": "^16.0.0",
     "jest": "^29.7.0",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.1"
@@ -55,7 +56,6 @@
     "packages",
     "LICENSE"
   ],
-  "type": "module",
   "exports": {
     ".": {
       "import": "./dist/index.js"
