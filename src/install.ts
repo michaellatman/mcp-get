@@ -49,7 +49,7 @@ export async function install(packageName: string): Promise<void> {
   const pkg = packageList.find(p => p.name === packageName);
   if (!pkg) {
     console.warn(chalk.yellow(`Package ${packageName} not found in the curated list.`));
-    
+
     const { proceedWithInstall } = await inquirer.prompt<{ proceedWithInstall: boolean }>([
       {
         type: 'confirm',
@@ -61,10 +61,10 @@ export async function install(packageName: string): Promise<void> {
 
     if (proceedWithInstall) {
       console.log(chalk.cyan(`Proceeding with installation of ${packageName}...`));
-      
+
       // Prompt for runtime for unverified packages
       const runtime = await promptForRuntime();
-      
+
       // Create a basic package object for unverified packages
       const unknownPkg = createUnknownPackage(packageName, runtime);
       await installPkg(unknownPkg);

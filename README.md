@@ -23,7 +23,17 @@ This tool helps you install and manage MCP servers that connect Claude to variou
 
 - Node.js (version 14 or higher) for Node.js-based MCP servers
 - Python (version 3.10 or higher) for Python-based MCP servers
-- Claude Desktop app (for local MCP server usage)
+- At least one supported MCP client installed:
+  - Claude Desktop app
+  - Zed editor
+  - Continue
+  - Firebase Genkit
+
+The tool automatically detects installed clients by checking their configuration files:
+- Claude Desktop: `~/Library/Application Support/Claude/claude_desktop_config.json` (MacOS/Linux) or `%AppData%\Claude\claude_desktop_config.json` (Windows)
+- Zed: `~/.config/zed/settings.json` (MacOS/Linux) or `%AppData%\Zed\settings.json` (Windows)
+- Continue: `~/.config/continue/config.json` (MacOS/Linux) or `%AppData%\Continue\config.json` (Windows)
+- Firebase: `~/.config/firebase/config.json` (MacOS/Linux) or `%AppData%\Firebase\config.json` (Windows)
 
 > **Note**: This tool has not been thoroughly tested on Windows systems yet. While it may work, you might encounter some issues. Contributions to improve Windows compatibility are welcome!
 
@@ -31,14 +41,20 @@ This tool helps you install and manage MCP servers that connect Claude to variou
 
 ### Install a Package
 
-```
+```bash
 npx @michaellatman/mcp-get@latest install @modelcontextprotocol/server-brave-search
 ```
+
+The tool will automatically detect your installed MCP clients. If multiple clients are installed, you'll be prompted to select which client(s) to configure. If only one client is installed, it will be selected automatically.
 
 Sample output:
 ```
 Installing @modelcontextprotocol/server-brave-search...
-Installation complete.
+Found installed clients: Claude Desktop, Zed
+? Select clients to configure (Space to select, Enter to confirm):
+❯ ◯ Claude Desktop
+  ◯ Zed
+Installation complete. Server configured for selected clients.
 ```
 
 ### List Packages
@@ -109,7 +125,7 @@ There are two ways to add your MCP server to the registry:
 
 If you want to maintain your own package:
 
-1. **Create Your MCP Server**: 
+1. **Create Your MCP Server**:
    - Develop your MCP server according to the [MCP protocol specifications](https://modelcontextprotocol.io)
    - Publish it as either an NPM package (installable via npm) or a Python package (installable via uvx)
 
@@ -138,7 +154,7 @@ If you want to maintain your own package:
 
 If you don't want to manage package deployment and distribution:
 
-1. **Fork Community Repository**: 
+1. **Fork Community Repository**:
    - Fork [mcp-get/community-servers](https://github.com/mcp-get/community-servers)
    - This repository follows the same structure as the official MCP servers
 
