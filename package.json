@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@iarna/toml": "^2.2.5",
+    "@octokit/rest": "^18.12.0",
     "@types/iarna__toml": "^2.0.5",
     "chalk": "^4.1.2",
     "cli-table3": "^0.6.5",

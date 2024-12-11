@@ -30,7 +30,7 @@ describe('ConfigManager', () => {
   describe('selectClients', () => {
     it('should return single client when only one installed', async () => {
       (fs.existsSync as jest.Mock)
-        .mockImplementation((path: string) => path.includes('claude'));
+        .mockImplementation((p: unknown) => typeof p === 'string' && p.includes('claude'));
 
       const selected = await configManager.selectClients();
       expect(selected).toHaveLength(1);

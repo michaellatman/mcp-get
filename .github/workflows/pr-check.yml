@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+permissions:
+  pull-requests: write
+  contents: read
+
 jobs:
   pr-check:
     runs-on: ubuntu-latest
@@ -12,21 +16,44 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '18'
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Configure pip for uvx
+        run: |
+          pip config set global.index-url https://uvx.org/pypi/simple/
+          pip config set global.trusted-host uvx.org
+
       - name: Install dependencies
         run: npm ci
 
       - name: Run PR check script
         run: npm run pr-check
+        env:
+          DEBUG: 'true'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+          GITHUB_PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
 
       - name: Provide feedback
+        if: always()
         run: |
-          COMMENT="PR check completed. Please review the results."
+          if [ ${{ job.status }} == 'success' ]; then
+            COMMENT="✅ PR validation passed successfully!"
+          else
+            COMMENT="❌ PR validation failed. Please check the workflow logs for details."
+          fi
           gh pr comment ${{ github.event.pull_request.number }} --body "$COMMENT"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

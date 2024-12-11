@@ -1,10 +1,10 @@
-import { ClientType, ServerConfig } from '../types/client-config';
-import { ClientAdapter } from '../clients/base-adapter';
-import { ClaudeAdapter } from '../clients/claude-adapter';
-import { ZedAdapter } from '../clients/zed-adapter';
-import { ContinueAdapter } from '../clients/continue-adapter';
-import { FirebaseAdapter } from '../clients/firebase-adapter';
-import { Preferences } from './preferences';
+import { ClientType, ServerConfig } from '../types/client-config.js';
+import { ClientAdapter } from '../clients/base-adapter.js';
+import { ClaudeAdapter } from '../clients/claude-adapter.js';
+import { ZedAdapter } from '../clients/zed-adapter.js';
+import { ContinueAdapter } from '../clients/continue-adapter.js';
+import { FirebaseAdapter } from '../clients/firebase-adapter.js';
+import { Preferences } from './preferences.js';
 
 export class ConfigManager {
     private clients: Map<ClientType, ClientAdapter>;
@@ -70,5 +70,17 @@ export class ConfigManager {
             throw new Error(`Client adapter not found for type: ${clientType}`);
         }
         return adapter;
+    }
+
+    static readConfig(): any {
+        const configManager = new ConfigManager();
+        return configManager.preferences.readConfig();
+    }
+
+    static isPackageInstalled(packageName: string): boolean {
+        const configManager = new ConfigManager();
+        const config = configManager.preferences.readConfig();
+        const serverName = packageName.replace(/\//g, '-');
+        return !!config.mcpServers?.[serverName];
     }
 } 

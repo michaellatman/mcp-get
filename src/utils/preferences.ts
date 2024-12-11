@@ -130,4 +130,20 @@ export class Preferences {
     // the caller should handle prompting the user for selection
     return [];
   }
+
+  async readConfig(): Promise<any> {
+    try {
+      await this.ensureConfigDir();
+
+      if (!existsSync(this.preferencesFile)) {
+        return { mcpServers: {} };
+      }
+
+      const data = await readFile(this.preferencesFile, 'utf-8');
+      return JSON.parse(data);
+    } catch (error) {
+      console.error('Error reading config:', error);
+      return { mcpServers: {} };
+    }
+  }
 }

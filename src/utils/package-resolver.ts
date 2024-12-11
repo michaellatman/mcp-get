@@ -14,7 +14,7 @@ export function resolvePackages(): ResolvedPackage[] {
         // Read package list from JSON file
         const packageListPath = path.join(dirname(fileURLToPath(import.meta.url)), '../../packages/package-list.json');
         const packages: Package[] = JSON.parse(fs.readFileSync(packageListPath, 'utf8'));
-        
+
         // Get installed packages from config
         const config = ConfigManager.readConfig();
         const installedServers = config.mcpServers || {};
@@ -33,7 +33,7 @@ export function resolvePackages(): ResolvedPackage[] {
 
         // Process installed packages
         const resolvedPackages = new Map<string, ResolvedPackage>();
-        
+
         // First add all packages from package list
         for (const pkg of packages) {
             resolvedPackages.set(pkg.name, {
@@ -49,10 +49,10 @@ export function resolvePackages(): ResolvedPackage[] {
             // Convert server name back to package name
             const packageName = serverName.replace(/-/g, '/');
             const installedServer = installedServers[serverName];
-            
+
             // Check if this package exists in our package list (either by original or sanitized name)
             const existingPkg = packageMap.get(packageName) || packageMap.get(serverName);
-            
+
             if (existingPkg) {
                 // Update existing package's installation status
                 resolvedPackages.set(existingPkg.name, {
@@ -71,6 +71,8 @@ export function resolvePackages(): ResolvedPackage[] {
                     homepage: '',
                     license: 'Unknown',
                     runtime: installedServer?.runtime || 'node',
+                    supportedClients: ['claude', 'zed', 'continue', 'firebase'],
+                    supportedTransports: ['stdio', 'sse', 'websocket'],
                     isInstalled: true,
                     isVerified: false
                 });
@@ -89,17 +91,17 @@ export function resolvePackage(packageName: string): ResolvedPackage | null {
         // Read package list from JSON file
         const packageListPath = path.join(dirname(fileURLToPath(import.meta.url)), '../../packages/package-list.json');
         const packages: Package[] = JSON.parse(fs.readFileSync(packageListPath, 'utf8'));
-        
+
         // Try to find the package in the verified list
         const sanitizedName = packageName.replace(/\//g, '-');
         const pkg = packages.find(p => p.name === packageName || p.name.replace(/\//g, '-') === sanitizedName);
-        
+
         if (!pkg) {
             // Check if it's an installed package
             const config = ConfigManager.readConfig();
             const serverName = packageName.replace(/\//g, '-');
             const installedServer = config.mcpServers?.[serverName];
-            
+
             if (installedServer) {
                 return {
                     name: packageName,
@@ -109,6 +111,8 @@ export function resolvePackage(packageName: string): ResolvedPackage | null {
                     homepage: '',
                     license: 'Unknown',
                     runtime: installedServer.runtime || 'node',
+                    supportedClients: ['claude', 'zed', 'continue', 'firebase'],
+                    supportedTransports: ['stdio', 'sse', 'websocket'],
                     isInstalled: true,
                     isVerified: false
                 };

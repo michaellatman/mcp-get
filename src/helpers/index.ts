@@ -92,5 +92,29 @@ export const packageHelpers: PackageHelpers = {
         required: true
       }
     }
+  },
+  '@benborla29/mcp-server-mysql': {
+    requiredEnvVars: {
+      MYSQL_HOST: {
+        description: 'MySQL Host address',
+        required: true,
+      },
+      MYSQL_PORT: {
+        description: 'MySQL port defaults to 3306',
+        required: false,
+      },
+      MYSQL_USER: {
+        description: 'MySQL username',
+        required: true,
+      },
+      MYSQL_PASS: {
+        description: 'MySQL password',
+        required: true,
+      },
+      MYSQL_DB: {
+        description: 'MySQL database to use',
+        required: false,
+      }
+    }
   }
 };

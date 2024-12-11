@@ -1,4 +1,4 @@
-import { ClientConfig, ServerConfig } from '../types/client-config';
+import { ClientConfig, ServerConfig } from '../types/client-config.js';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import * as os from 'os';

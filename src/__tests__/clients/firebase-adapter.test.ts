@@ -72,7 +72,7 @@ describe('FirebaseAdapter', () => {
 
       expect(fs.writeFileSync).toHaveBeenCalled();
       const writeCall = (fs.writeFileSync as jest.Mock).mock.calls[0];
-      expect(JSON.parse(writeCall[1])).toHaveProperty('mcp.servers');
+      expect(JSON.parse(writeCall[1] as string)).toHaveProperty('mcp.servers');
     });
   });
 });
