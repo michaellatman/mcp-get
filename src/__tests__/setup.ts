@@ -1,33 +1,54 @@
 import { jest, beforeEach } from '@jest/globals';
-import * as os from 'os';
-import * as path from 'path';
-import * as fs from 'fs';
+import type * as osType from 'os';
+import type * as fsType from 'fs';
+import type * as fsPromisesType from 'fs/promises';
+import type * as globType from 'glob';
+import type { PathLike } from 'fs';
+
+// Type the glob function
+type GlobFunction = (pattern: string, options?: any) => Promise<string[]>;
+
+// Mock glob module
+jest.mock('glob', () => ({
+  glob: jest.fn().mockImplementation(async () => []) as jest.MockedFunction<GlobFunction>,
+}));
 
 // Mock os.platform() to control testing environment
 jest.mock('os', () => {
-  const actual = jest.requireActual('os') as typeof os;
+  const actual = jest.requireActual<typeof osType>('os');
   return {
-    ...actual,
-    platform: jest.fn(),
-    homedir: jest.fn(),
+    platform: jest.fn().mockImplementation(() => 'darwin') as jest.MockedFunction<typeof actual.platform>,
+    homedir: jest.fn().mockImplementation(() => '/Users/testuser') as jest.MockedFunction<typeof actual.homedir>,
+    arch: actual.arch,
+    cpus: actual.cpus,
+    type: actual.type,
   };
 });
 
 // Mock fs operations
 jest.mock('fs', () => {
-  const actual = jest.requireActual('fs') as typeof fs;
+  const actual = jest.requireActual<typeof fsType>('fs');
   return {
-    ...actual,
-    existsSync: jest.fn(),
-    readFileSync: jest.fn(),
-    writeFileSync: jest.fn(),
-    mkdirSync: jest.fn(),
+    existsSync: jest.fn().mockImplementation(() => false) as jest.MockedFunction<typeof actual.existsSync>,
+    readFileSync: jest.fn().mockImplementation(() => '{}') as jest.MockedFunction<typeof actual.readFileSync>,
+    writeFileSync: jest.fn().mockImplementation(() => undefined) as jest.MockedFunction<typeof actual.writeFileSync>,
+    mkdirSync: jest.fn().mockImplementation(() => undefined) as jest.MockedFunction<typeof actual.mkdirSync>,
+    constants: actual.constants,
+    Stats: actual.Stats,
+  };
+});
+
+// Mock fs/promises operations
+jest.mock('fs/promises', () => {
+  const actual = jest.requireActual<typeof fsPromisesType>('fs/promises');
+  return {
+    mkdir: jest.fn().mockImplementation(async () => undefined) as jest.MockedFunction<typeof actual.mkdir>,
+    writeFile: jest.fn().mockImplementation(async () => undefined) as jest.MockedFunction<typeof actual.writeFile>,
+    readFile: jest.fn().mockImplementation(async () => '{}') as jest.MockedFunction<typeof actual.readFile>,
   };
 });
 
 // Reset all mocks before each test
 beforeEach(() => {
   jest.clearAllMocks();
-  (os.platform as jest.Mock).mockReturnValue('darwin'); // Default to macOS
-  (os.homedir as jest.Mock).mockReturnValue('/Users/testuser');
 });

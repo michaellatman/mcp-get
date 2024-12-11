@@ -21,8 +21,8 @@ export interface ServerConfig {
   args?: string[];
   /** Optional environment variables */
   env?: Record<string, string>;
-  /** Optional transport method */
-  transport?: 'stdio' | 'sse' | 'websocket';
+  /** Transport method for server communication */
+  transport: 'stdio' | 'sse' | 'websocket';
 }
 
 /**

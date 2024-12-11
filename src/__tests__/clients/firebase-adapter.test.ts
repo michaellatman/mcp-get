@@ -1,5 +1,6 @@
-import { FirebaseAdapter } from '../../clients/firebase-adapter';
-import { ServerConfig } from '../../types/client-config';
+import { jest, describe, it, expect, beforeEach } from '@jest/globals';
+import { FirebaseAdapter } from '../../clients/firebase-adapter.js';
+import { ServerConfig } from '../../types/client-config.js';
 import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';

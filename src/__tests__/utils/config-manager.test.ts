@@ -1,5 +1,6 @@
-import { ConfigManager } from '../../utils/config-manager';
-import { ClientType, ServerConfig } from '../../types/client-config';
+import { jest, describe, it, expect, beforeEach } from '@jest/globals';
+import { ConfigManager } from '../../utils/config-manager.js';
+import { ClientType, ServerConfig } from '../../types/client-config.js';
 import * as fs from 'fs';
 import * as os from 'os';
 
@@ -65,7 +66,6 @@ describe('ConfigManager', () => {
     it('should skip invalid clients', async () => {
       const clients: ClientType[] = ['invalid' as ClientType];
       await configManager.configureClients(config, clients);
-
 
       expect(fs.writeFileSync).not.toHaveBeenCalled();
     });

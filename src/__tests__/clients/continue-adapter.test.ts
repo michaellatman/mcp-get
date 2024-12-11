@@ -1,5 +1,6 @@
-import { ContinueAdapter } from '../../clients/continue-adapter';
-import { ServerConfig } from '../../types/client-config';
+import { jest, describe, it, expect, beforeEach } from '@jest/globals';
+import { ContinueAdapter } from '../../clients/continue-adapter.js';
+import { ServerConfig } from '../../types/client-config.js';
 import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
@@ -71,7 +72,7 @@ describe('ContinueAdapter', () => {
 
       expect(fs.writeFileSync).toHaveBeenCalled();
       const writeCall = (fs.writeFileSync as jest.Mock).mock.calls[0];
-      expect(JSON.parse(writeCall[1])).toHaveProperty('servers');
+      expect(JSON.parse(writeCall[1] as string)).toHaveProperty('servers');
     });
   });
 });
