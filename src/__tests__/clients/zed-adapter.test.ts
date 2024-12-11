@@ -116,8 +116,7 @@ describe('ZedAdapter', () => {
       const mockToml = `[context-servers]
 [context-servers.test-server]
 command = "node"
-args = ["server.js"]
-transport = "stdio"`;
+args = ["server.js"]`;
 
       (fs.readFile as jest.MockedFunction<typeof fs.readFile>)
         .mockResolvedValueOnce(mockToml);
@@ -129,7 +128,8 @@ transport = "stdio"`;
       const writtenConfig = TOML.parse(writeCall[1] as string) as unknown as TOMLConfig;
       expect(writtenConfig['context-servers']).toBeDefined();
       expect(writtenConfig['context-servers'][config.name]).toBeDefined();
-      expect(writtenConfig['context-servers'][config.name].transport).toBe('stdio');
+      expect(writtenConfig['context-servers'][config.name].command).toBe('node');
+      expect(writtenConfig['context-servers'][config.name].args).toEqual(['server.js']);
     });
 
     it('should write JSON settings with comments', async () => {

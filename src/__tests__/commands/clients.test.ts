@@ -1,6 +1,6 @@
 import { jest, describe, it, expect, beforeEach } from '@jest/globals';
 import { listClients } from '../../commands/clients.js';
-import { Preferences } from '../../utils/preferences.js';
+import { Preferences, ClientType } from '../../utils/preferences.js';
 
 jest.mock('../../utils/preferences.js');
 
@@ -10,8 +10,8 @@ describe('listClients', () => {
   });
 
   it('should display installed clients and config paths', async () => {
-    const mockClients = ['claude', 'zed'];
-    (Preferences.prototype.detectInstalledClients as jest.Mock).mockResolvedValue(mockClients);
+    const mockClients: ClientType[] = ['claude', 'zed'];
+    (Preferences.prototype.detectInstalledClients as jest.Mock<() => Promise<ClientType[]>>).mockImplementation(() => Promise.resolve(mockClients));
 
     const consoleSpy = jest.spyOn(console, 'log');
     await listClients();
@@ -21,7 +21,8 @@ describe('listClients', () => {
   });
 
   it('should handle no installed clients', async () => {
-    (Preferences.prototype.detectInstalledClients as jest.Mock).mockResolvedValue([]);
+    const emptyClients: ClientType[] = [];
+    (Preferences.prototype.detectInstalledClients as jest.Mock<() => Promise<ClientType[]>>).mockImplementation(() => Promise.resolve(emptyClients));
 
     const consoleSpy = jest.spyOn(console, 'log');
     await listClients();
