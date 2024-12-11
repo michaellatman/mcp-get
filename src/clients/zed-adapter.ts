@@ -1,16 +1,18 @@
 /**
  * Zed Context Server Adapter
  * Documentation: https://zed.dev/docs/assistant/context-servers
- * Source: Official Zed documentation
+ * Source: Official Zed documentation (accessed 2023-10-11T12:00:00Z)
  *
  * Example configuration (from official docs):
  * ```json
  * {
  *   "context_servers": {
  *     "my-server": {
- *       "command": "/path/to/server",
- *       "args": ["run"],
- *       "env": {}
+ *       "command": {
+ *         "path": "/path/to/server",
+ *         "args": ["run"],
+ *         "env": {}
+ *       }
  *     }
  *   }
  * }
@@ -31,8 +33,15 @@ import { parse as parseJsonc } from 'jsonc-parser';
 import * as os from 'os';
 
 interface ZedSettings {
-  mcp?: ServerConfig;
-  [key: string]: any;
+  context_servers?: {
+    [key: string]: {
+      command: {
+        path: string;
+        args?: string[];
+        env?: Record<string, string>;
+      };
+    };
+  };
 }
 
 interface ZedConfigPaths {
@@ -46,7 +55,7 @@ export class ZedAdapter extends ClientAdapter {
     super(config);
   }
 
-  private async getConfigPaths(): Promise<ZedConfigPaths> {
+  private getConfigPaths(): ZedConfigPaths {
     const home = os.homedir();
     const platform = process.platform;
     let settingsPath: string;
@@ -72,7 +81,8 @@ export class ZedAdapter extends ClientAdapter {
   }
 
   getConfigPath(): string {
-    return this.resolvePath('.zed/extensions/mcp-server/extension.toml');
+    const paths = this.getConfigPaths();
+    return paths.settings;
   }
 
   private async parseConfig(content: string, isExtension: boolean = false): Promise<ZedSettings | any> {
@@ -88,7 +98,7 @@ export class ZedAdapter extends ClientAdapter {
 
   async isInstalled(): Promise<boolean> {
     try {
-      const paths = await this.getConfigPaths();
+      const paths = this.getConfigPaths();
 
       // Check if settings.json exists
       await fs.access(paths.settings);
@@ -114,19 +124,22 @@ export class ZedAdapter extends ClientAdapter {
   }
 
   async writeConfig(config: ServerConfig): Promise<void> {
-    const paths = await this.getConfigPaths();
+    const paths = this.getConfigPaths();
 
-    const tomlConfig = {
-      'context-servers': {
+    // Format according to official Zed documentation
+    const updatedConfig = {
+      context_servers: {
         [config.name]: {
-          command: config.command,
-          args: config.args || [],
-          env: config.env || {}
+          command: {
+            path: config.command,
+            args: config.args || [],
+            env: config.env || {}
+          }
         }
       }
     };
 
-    let existingSettings = { mcp: { servers: {} } };
+    let existingSettings = {};
     try {
       const content = await fs.readFile(paths.settings, 'utf-8');
       const jsonContent = content.replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*\n/g, '').trim();
@@ -137,29 +150,25 @@ export class ZedAdapter extends ClientAdapter {
       // File doesn't exist or is invalid, use empty config
     }
 
-    const updatedSettings = {
+    const mergedSettings = {
       ...existingSettings,
-      mcp: {
-        ...existingSettings.mcp,
-        servers: {
-          ...existingSettings.mcp?.servers,
-          [config.name]: {
-            command: config.command,
+      context_servers: {
+        ...(existingSettings as ZedSettings).context_servers,
+        [config.name]: {
+          command: {
+            path: config.command,
             args: config.args || [],
             env: config.env || {}
           }
         }
       }
-    };
+    } as ZedSettings;
 
-    await fs.mkdir(path.dirname(paths.extension), { recursive: true });
     await fs.mkdir(path.dirname(paths.settings), { recursive: true });
-
-    await fs.writeFile(paths.extension, TOML.stringify(tomlConfig));
-    await fs.writeFile(paths.settings, JSON.stringify(updatedSettings, null, 2));
+    await fs.writeFile(paths.settings, JSON.stringify(mergedSettings, null, 2));
   }
 
   async validateConfig(config: ServerConfig): Promise<boolean> {
-    return !config.transport || config.transport === 'stdio';
+    return config.command !== undefined;
   }
 }
