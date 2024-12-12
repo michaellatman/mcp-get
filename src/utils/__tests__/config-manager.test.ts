@@ -1,4 +1,4 @@
-import { jest, describe, it, expect, beforeEach } from '@jest/globals';
+import { jest, describe, it, expect, beforeEach, afterEach } from '@jest/globals';
 import { ConfigManager } from '../config-manager';
 import { Package } from '../../types/package';
 import fs from 'fs';
@@ -11,9 +11,19 @@ jest.mock('path');
 describe('ConfigManager', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    jest.spyOn(fs, 'existsSync').mockReturnValue(true);
+
+    // Mock fs operations
+    jest.spyOn(fs, 'existsSync').mockImplementation(() => true);
     jest.spyOn(fs, 'readFileSync').mockReturnValue('{"mcpServers":{}}');
-    jest.spyOn(path, 'dirname').mockReturnValue('/mock/path');
+    jest.spyOn(fs, 'writeFileSync').mockImplementation(() => undefined);
+    jest.spyOn(fs, 'mkdirSync').mockImplementation(() => undefined);
+
+    // Mock path operations
+    jest.spyOn(path, 'dirname').mockReturnValue('/tmp');
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
   });
 
   describe('installPackage', () => {

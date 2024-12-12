@@ -23,17 +23,19 @@ export class ConfigManager {
     private static preferencesPath: string;
 
     static {
-        if (process.platform === 'win32') {
+        const isTest = process.env.NODE_ENV === 'test';
+        if (isTest) {
+            this.configPath = '/tmp/test-mcp-config.json';
+            this.preferencesPath = '/tmp/test-mcp-preferences.json';
+        } else if (process.platform === 'win32') {
             const appData = process.env.APPDATA || path.join(os.homedir(), 'AppData', 'Roaming');
             this.configPath = path.join(appData, 'Claude', 'claude_desktop_config.json');
             this.preferencesPath = path.join(appData, 'mcp-get', 'preferences.json');
         } else if (process.platform === 'darwin') {
-            // macOS
             const homeDir = os.homedir();
             this.configPath = path.join(homeDir, 'Library', 'Application Support', 'Claude', 'claude_desktop_config.json');
             this.preferencesPath = path.join(homeDir, '.mcp-get', 'preferences.json');
         } else {
-            // Linux
             const homeDir = os.homedir();
             const configDir = process.env.XDG_CONFIG_HOME || path.join(homeDir, '.config');
             this.configPath = path.join(configDir, 'Claude', 'claude_desktop_config.json');
@@ -112,7 +114,6 @@ export class ConfigManager {
             env: envVars
         };
 
-        // Add command and args based on runtime
         if (pkg.runtime === 'node') {
             serverConfig.command = 'npx';
             serverConfig.args = ['-y', pkg.name];
