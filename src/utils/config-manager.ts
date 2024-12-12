@@ -7,7 +7,7 @@ export interface MCPServer {
     runtime: 'node' | 'python' | 'custom';
     command?: string;
     args?: string[];
-    envVars?: Record<string, string>;
+    env?: Record<string, string>;
 }
 
 export interface MCPConfig {
@@ -116,7 +116,7 @@ export class ConfigManager {
 
         const serverConfig: MCPServer = {
             runtime: pkg.runtime,
-            envVars: envVars || {}
+            env: envVars || {}
         };
 
         // Add command and args based on runtime
