@@ -1,7 +1,10 @@
-import fs from 'fs';
+import type { PathLike } from 'fs';
 import path from 'path';
 import os from 'os';
 import { Package } from '../types/package.js';
+
+// Dynamic import of fs module to allow mocking in tests
+const fs = await import('fs');
 
 export interface MCPServer {
     runtime: 'node' | 'python' | 'custom';
@@ -52,10 +55,16 @@ export class ConfigManager {
             if (!fs.existsSync(this.configPath)) {
                 return { mcpServers: {} };
             }
-            const config = JSON.parse(fs.readFileSync(this.configPath, 'utf8'));
-            return {
-                mcpServers: config.mcpServers || {}
-            };
+            const rawConfig = fs.readFileSync(this.configPath, 'utf8');
+            try {
+                const config = JSON.parse(rawConfig);
+                return {
+                    mcpServers: config.mcpServers || {}
+                };
+            } catch (parseError) {
+                console.error('Error parsing config:', parseError);
+                return { mcpServers: {} };
+            }
         } catch (error) {
             console.error('Error reading config:', error);
             return { mcpServers: {} };
@@ -66,12 +75,22 @@ export class ConfigManager {
         try {
             const configDir = path.dirname(this.configPath);
             if (!fs.existsSync(configDir)) {
-                fs.mkdirSync(configDir, { recursive: true });
+                try {
+                    fs.mkdirSync(configDir, { recursive: true });
+                } catch (mkdirError) {
+                    console.error('Error creating config directory:', mkdirError);
+                    throw new Error('Error writing config');
+                }
             }
-            fs.writeFileSync(this.configPath, JSON.stringify(config, null, 2));
+            try {
+                fs.writeFileSync(this.configPath, JSON.stringify(config, null, 2));
+            } catch (writeError) {
+                console.error('Error writing config file:', writeError);
+                throw new Error('Error writing config');
+            }
         } catch (error) {
-            console.error('Error writing config:', error);
-            throw error;
+            console.error('Error in writeConfig:', error);
+            throw new Error('Error writing config');
         }
     }
 
