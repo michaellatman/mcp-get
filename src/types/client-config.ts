@@ -31,6 +31,8 @@ export interface ServerConfig {
 export interface ClientConfig {
   /** Type of MCP client */
   type: ClientType;
+  /** Name of the client */
+  name: string;
   /** Optional custom config path */
   configPath?: string;
 }
