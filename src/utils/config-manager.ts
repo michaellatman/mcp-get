@@ -104,11 +104,19 @@ export class ConfigManager {
     }
 
     static async installPackage(pkg: Package, envVars?: Record<string, string>): Promise<void> {
+        // Validate custom runtime requirements first
+        if (pkg.runtime === 'custom') {
+            if (!pkg.command || !pkg.args) {
+                throw new Error('Custom runtime requires both command and args fields');
+            }
+        }
+
         const config = this.readConfig();
         const serverName = pkg.name.replace(/\//g, '-');
 
-        const serverConfig: any = {
-            env: envVars || {}
+        const serverConfig: MCPServer = {
+            runtime: pkg.runtime,
+            envVars: envVars || {}
         };
 
         // Add command and args based on runtime
