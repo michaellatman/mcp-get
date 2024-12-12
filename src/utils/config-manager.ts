@@ -4,7 +4,7 @@ import os from 'os';
 import { Package } from '../types/package.js';
 
 export interface MCPServer {
-    runtime: 'node' | 'python';
+    runtime: 'node' | 'python' | 'custom';
     command?: string;
     args?: string[];
     env?: Record<string, string>;
@@ -119,6 +119,12 @@ export class ConfigManager {
         } else if (pkg.runtime === 'python') {
             serverConfig.command = 'uvx';
             serverConfig.args = [pkg.name];
+        } else if (pkg.runtime === 'custom') {
+            if (!pkg.command || !pkg.args) {
+                throw new Error('Custom runtime requires both command and args fields');
+            }
+            serverConfig.command = pkg.command;
+            serverConfig.args = pkg.args;
         }
 
         config.mcpServers[serverName] = serverConfig;
