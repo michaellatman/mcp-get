@@ -4,24 +4,16 @@ import { Package } from '../../types/package';
 import fs from 'fs';
 import path from 'path';
 
-// Mock fs and path modules
-jest.mock('fs', () => ({
-  existsSync: jest.fn(),
-  readFileSync: jest.fn(),
-  writeFileSync: jest.fn()
-}));
-
-jest.mock('path', () => ({
-  dirname: jest.fn(),
-  join: jest.fn()
-}));
+// Mock modules
+jest.mock('fs');
+jest.mock('path');
 
 describe('ConfigManager', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    jest.mocked(fs.existsSync).mockReturnValue(true);
-    jest.mocked(fs.readFileSync).mockReturnValue('{"mcpServers":{}}');
-    jest.mocked(path.dirname).mockReturnValue('/mock/path');
+    jest.spyOn(fs, 'existsSync').mockReturnValue(true);
+    jest.spyOn(fs, 'readFileSync').mockReturnValue('{"mcpServers":{}}');
+    jest.spyOn(path, 'dirname').mockReturnValue('/mock/path');
   });
 
   describe('installPackage', () => {
@@ -40,7 +32,7 @@ describe('ConfigManager', () => {
         TEST_KEY: 'test-value'
       };
 
-      const writeFileSpy = jest.mocked(fs.writeFileSync);
+      const writeFileSpy = jest.spyOn(fs, 'writeFileSync');
 
       await ConfigManager.installPackage(mockPackage, mockEnvVars);
 
@@ -62,7 +54,8 @@ describe('ConfigManager', () => {
         license: 'MIT'
       };
 
-      const writeFileSpy = jest.mocked(fs.writeFileSync);
+      const writeFileSpy = jest.spyOn(fs, 'writeFileSync');
+
       await ConfigManager.installPackage(mockPackage);
 
       expect(writeFileSpy).toHaveBeenCalled();
@@ -82,7 +75,8 @@ describe('ConfigManager', () => {
         license: 'MIT'
       };
 
-      const writeFileSpy = jest.mocked(fs.writeFileSync);
+      const writeFileSpy = jest.spyOn(fs, 'writeFileSync');
+
       await ConfigManager.installPackage(mockPackage);
 
       expect(writeFileSpy).toHaveBeenCalled();
@@ -104,7 +98,8 @@ describe('ConfigManager', () => {
         args: ['--arg1', '--arg2']
       };
 
-      const writeFileSpy = jest.mocked(fs.writeFileSync);
+      const writeFileSpy = jest.spyOn(fs, 'writeFileSync');
+
       await ConfigManager.installPackage(mockPackage);
 
       expect(writeFileSpy).toHaveBeenCalled();
