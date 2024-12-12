@@ -4,7 +4,7 @@ import os from 'os';
 import { Package } from '../types/package.js';
 
 export interface MCPServer {
-    runtime: 'node' | 'python';
+    runtime: 'node' | 'python' | 'custom';
     command?: string;
     args?: string[];
     envVars?: Record<string, string>;
@@ -103,32 +103,24 @@ export class ConfigManager {
         return serverName in (config.mcpServers || {});
     }
 
-    static async installPackage(pkg: Package, envVars?: Record<string, string>, customCommand?: Record<string, any>): Promise<void> {
+    static async installPackage(pkg: Package, envVars?: Record<string, string>): Promise<void> {
         const config = this.readConfig();
         const serverName = pkg.name.replace(/\//g, '-');
-        
-        const serverConfig: MCPServer = {
-            runtime: pkg.runtime,
-            envVars
+
+        const serverConfig: any = {
+            env: envVars || {}
         };
 
         // Add command and args based on runtime
         if (pkg.runtime === 'node') {
-            if (customCommand) {
-                serverConfig.command = customCommand.command;
-                serverConfig.args = customCommand.args || [];
-            } else {
-                serverConfig.command = 'npx';
-                serverConfig.args = ['-y', pkg.name];
-            }
+            serverConfig.command = 'npx';
+            serverConfig.args = ['-y', pkg.name];
         } else if (pkg.runtime === 'python') {
-            if (customCommand) {
-                serverConfig.command = customCommand.command;
-                serverConfig.args = customCommand.args || [];
-            } else {
-                serverConfig.command = 'uvx';
-                serverConfig.args = [pkg.name];
-            }
+            serverConfig.command = 'uvx';
+            serverConfig.args = [pkg.name];
+        } else if (pkg.runtime === 'custom') {
+            serverConfig.command = pkg.command;
+            serverConfig.args = pkg.args;
         }
 
         config.mcpServers[serverName] = serverConfig;
@@ -138,12 +130,12 @@ export class ConfigManager {
     static async uninstallPackage(packageName: string): Promise<void> {
         const config = this.readConfig();
         const serverName = packageName.replace(/\//g, '-');
-        
+
         if (!config.mcpServers || !config.mcpServers[serverName]) {
             console.log(`Package ${packageName} is not installed.`);
             return;
         }
-        
+
         delete config.mcpServers[serverName];
         this.writeConfig(config);
     }

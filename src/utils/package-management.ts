@@ -12,7 +12,7 @@ const execAsync = promisify(exec);
 
 async function checkAnalyticsConsent(): Promise<boolean> {
   const prefs = ConfigManager.readPreferences();
-  
+
   if (typeof prefs.allowAnalytics === 'boolean') {
     return prefs.allowAnalytics;
   }
@@ -53,7 +53,7 @@ async function promptForEnvVars(packageName: string): Promise<Record<string, str
   // Check if all required variables exist in environment
   const existingEnvVars: Record<string, string> = {};
   let hasAllRequired = true;
-  
+
   for (const [key, value] of Object.entries(helpers.requiredEnvVars)) {
     const existingValue = process.env[key];
     if (existingValue) {
@@ -79,7 +79,7 @@ async function promptForEnvVars(packageName: string): Promise<Record<string, str
   const { configureEnv } = await inquirer.prompt<{ configureEnv: boolean }>([{
     type: 'confirm',
     name: 'configureEnv',
-    message: hasAllRequired 
+    message: hasAllRequired
       ? 'Would you like to manually configure environment variables for this package?'
       : 'Some required environment variables are missing. Would you like to configure them now?',
     default: !hasAllRequired
@@ -96,10 +96,10 @@ async function promptForEnvVars(packageName: string): Promise<Record<string, str
   }
 
   const envVars: Record<string, string> = {};
-  
+
   for (const [key, value] of Object.entries(helpers.requiredEnvVars)) {
     const existingEnvVar = process.env[key];
-    
+
     if (existingEnvVar) {
       const { reuseExisting } = await inquirer.prompt<{ reuseExisting: boolean }>([{
         type: 'confirm',
@@ -178,7 +178,7 @@ async function promptForRestart(): Promise<boolean> {
       default: true
     }
   ]);
-  
+
   if (shouldRestart) {
     console.log('Restarting Claude desktop app...');
     try {
@@ -208,7 +208,7 @@ async function promptForRestart(): Promise<boolean> {
       console.error('Failed to restart Claude desktop app:', error);
     }
   }
-  
+
   return shouldRestart;
 }
 
@@ -218,26 +218,17 @@ export async function installPackage(pkg: Package): Promise<void> {
     if (pkg.runtime === 'python') {
       const hasUV = await checkUVInstalled();
       if (!hasUV) {
-        const installed = await promptForUVInstall(inquirer);
-        if (!installed) {
-          console.log('Proceeding with installation, but uvx commands may fail...');
-        }
+        throw new Error('UV is not installed. Please install UV first.');
       }
     }
 
     const envVars = await promptForEnvVars(pkg.name);
-    const customCommand = packageHelpers[pkg.name]?.customCommand;
-    
-    await ConfigManager.installPackage(pkg, envVars, customCommand);
+
+    await ConfigManager.installPackage(pkg, envVars);
     console.log('Updated Claude desktop configuration');
 
     // Check analytics consent and track if allowed
-    const analyticsAllowed = await checkAnalyticsConsent();
-    if (analyticsAllowed) {
-      await trackInstallation(pkg.name);
-    }
-
-    await promptForRestart();
+    await trackInstallation(pkg.name);
   } catch (error) {
     console.error('Failed to install package:', error);
     throw error;

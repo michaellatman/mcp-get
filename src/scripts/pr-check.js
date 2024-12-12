@@ -12,7 +12,7 @@ const octokit = new Octokit({
 });
 
 const REQUIRED_FIELDS = ['name', 'description', 'vendor', 'sourceUrl', 'homepage', 'license', 'runtime'];
-const VALID_RUNTIMES = ['node', 'python'];
+const VALID_RUNTIMES = ['node', 'python', 'custom'];
 
 async function validatePackages() {
   const packageListPath = path.join(__dirname, '../../packages/package-list.json');
@@ -109,7 +109,10 @@ export function validateRequiredFields(pkg) {
 export function validateRuntime(pkg) {
   console.log('Validating runtime...');
   if (!VALID_RUNTIMES.includes(pkg.runtime)) {
-    throw new Error(`Package ${pkg.name} has invalid runtime: ${pkg.runtime}. Must be one of: ${VALID_RUNTIMES.join(', ')}`);
+    throw new Error(`Invalid runtime: ${pkg.runtime}`);
+  }
+  if (pkg.runtime === 'custom' && (!pkg.command || !pkg.args)) {
+    throw new Error('Custom runtime requires both command and args fields');
   }
 }
 
