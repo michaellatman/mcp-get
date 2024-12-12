@@ -19,6 +19,7 @@
     "pr-check": "node src/scripts/pr-check.js",
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --config jest.config.mjs --watch",
     "test:coverage": "NODE_OPTIONS=--experimental-vm-modules jest --config jest.config.mjs --coverage",
+    "typecheck": "tsc --noEmit",
     "prepare": "npm run build"
   },
   "bin": {
