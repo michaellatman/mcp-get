@@ -80,6 +80,15 @@ export class ZedAdapter extends ClientAdapter {
     return { settings: settingsPath, extension: extensionPath };
   }
 
+  async readConfig(): Promise<Record<string, any> | null> {
+    try {
+      const content = await fs.readFile(this.getConfigPath(), 'utf-8');
+      return await this.parseConfig(content);
+    } catch (error) {
+      return null;
+    }
+  }
+
   getConfigPath(): string {
     const paths = this.getConfigPaths();
     return paths.settings;

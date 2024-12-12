@@ -30,6 +30,15 @@ export class FirebaseAdapter extends ClientAdapter {
     super(config);
   }
 
+  async readConfig(): Promise<Record<string, any> | null> {
+    try {
+      const content = await fs.readFile(this.getConfigPath(), 'utf-8');
+      return JSON.parse(content);
+    } catch (error) {
+      return null;
+    }
+  }
+
   getConfigPath(): string {
     return this.resolvePath('.firebase/mcp-config.json');
   }

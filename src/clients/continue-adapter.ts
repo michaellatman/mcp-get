@@ -36,6 +36,15 @@ export class ContinueAdapter extends ClientAdapter {
     return this.resolvePath('.continue/config.json');
   }
 
+  async readConfig(): Promise<Record<string, any> | null> {
+    try {
+      const content = await fs.readFile(this.getConfigPath(), 'utf-8');
+      return JSON.parse(content);
+    } catch (error) {
+      return null;
+    }
+  }
+
   async isInstalled(): Promise<boolean> {
     try {
       // Check for Continue VS Code extension

@@ -32,6 +32,15 @@ export class ClaudeAdapter extends ClientAdapter {
     super(config);
   }
 
+  async readConfig(): Promise<Record<string, any> | null> {
+    try {
+      const content = await fs.readFile(this.getConfigPath(), 'utf-8');
+      return JSON.parse(content);
+    } catch (error) {
+      return null;
+    }
+  }
+
   getConfigPath(): string {
     const platform = process.platform;
     if (platform === 'win32') {

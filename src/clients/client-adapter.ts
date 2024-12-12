@@ -1,4 +1,4 @@
-import { ClientType, ServerConfig } from '../types/client-config.js';
+import { ClientConfig, ClientType, ServerConfig } from '../types/client-config.js';
 
 /**
  * Base class for MCP client adapters
@@ -6,9 +6,11 @@ import { ClientType, ServerConfig } from '../types/client-config.js';
  */
 export abstract class ClientAdapter {
   protected clientType: ClientType;
+  protected config: ClientConfig;
 
-  constructor(clientType: ClientType) {
-    this.clientType = clientType;
+  constructor(config: ClientConfig) {
+    this.clientType = config.type;
+    this.config = config;
   }
 
   /**
@@ -26,6 +28,18 @@ export abstract class ClientAdapter {
    * Get the configuration path for this client
    */
   abstract getConfigPath(): string;
+
+  /**
+   * Read the current configuration for this client
+   * @returns The parsed configuration object or null if not found/invalid
+   */
+  abstract readConfig(): Promise<Record<string, any> | null>;
+
+  /**
+   * Validate the server configuration for this client
+   * @throws Error if configuration is invalid
+   */
+  abstract validateConfig(config: ServerConfig): void;
 
   /**
    * Configure the client with the given server configuration
