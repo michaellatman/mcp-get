@@ -4,12 +4,24 @@ import { Package } from '../../types/package';
 import fs from 'fs';
 import path from 'path';
 
-jest.mock('fs');
-jest.mock('path');
+// Mock fs and path modules
+jest.mock('fs', () => ({
+  existsSync: jest.fn(),
+  readFileSync: jest.fn(),
+  writeFileSync: jest.fn()
+}));
+
+jest.mock('path', () => ({
+  dirname: jest.fn(),
+  join: jest.fn()
+}));
 
 describe('ConfigManager', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    jest.mocked(fs.existsSync).mockReturnValue(true);
+    jest.mocked(fs.readFileSync).mockReturnValue('{"mcpServers":{}}');
+    jest.mocked(path.dirname).mockReturnValue('/mock/path');
   });
 
   describe('installPackage', () => {
@@ -28,7 +40,7 @@ describe('ConfigManager', () => {
         TEST_KEY: 'test-value'
       };
 
-      const writeFileSpy = jest.spyOn(fs, 'writeFileSync');
+      const writeFileSpy = jest.mocked(fs.writeFileSync);
 
       await ConfigManager.installPackage(mockPackage, mockEnvVars);
 
@@ -37,6 +49,84 @@ describe('ConfigManager', () => {
       expect(writtenConfig.mcpServers['test-package'].env).toBeDefined();
       expect(writtenConfig.mcpServers['test-package'].envVars).toBeUndefined();
       expect(writtenConfig.mcpServers['test-package'].env).toEqual(mockEnvVars);
+    });
+
+    it('should configure node runtime package correctly', async () => {
+      const mockPackage: Package = {
+        name: 'test-package',
+        description: 'Test package',
+        runtime: 'node',
+        vendor: 'test',
+        sourceUrl: 'https://test.com',
+        homepage: 'https://test.com',
+        license: 'MIT'
+      };
+
+      const writeFileSpy = jest.mocked(fs.writeFileSync);
+      await ConfigManager.installPackage(mockPackage);
+
+      expect(writeFileSpy).toHaveBeenCalled();
+      const writtenConfig = JSON.parse(writeFileSpy.mock.calls[0][1] as string);
+      expect(writtenConfig.mcpServers['test-package'].command).toBe('npx');
+      expect(writtenConfig.mcpServers['test-package'].args).toEqual(['-y', 'test-package']);
+    });
+
+    it('should configure python runtime package correctly', async () => {
+      const mockPackage: Package = {
+        name: 'test-package',
+        description: 'Test package',
+        runtime: 'python',
+        vendor: 'test',
+        sourceUrl: 'https://test.com',
+        homepage: 'https://test.com',
+        license: 'MIT'
+      };
+
+      const writeFileSpy = jest.mocked(fs.writeFileSync);
+      await ConfigManager.installPackage(mockPackage);
+
+      expect(writeFileSpy).toHaveBeenCalled();
+      const writtenConfig = JSON.parse(writeFileSpy.mock.calls[0][1] as string);
+      expect(writtenConfig.mcpServers['test-package'].command).toBe('uvx');
+      expect(writtenConfig.mcpServers['test-package'].args).toEqual(['test-package']);
+    });
+
+    it('should configure custom runtime package correctly', async () => {
+      const mockPackage: Package = {
+        name: 'test-package',
+        description: 'Test package',
+        runtime: 'custom',
+        vendor: 'test',
+        sourceUrl: 'https://test.com',
+        homepage: 'https://test.com',
+        license: 'MIT',
+        command: 'custom-cmd',
+        args: ['--arg1', '--arg2']
+      };
+
+      const writeFileSpy = jest.mocked(fs.writeFileSync);
+      await ConfigManager.installPackage(mockPackage);
+
+      expect(writeFileSpy).toHaveBeenCalled();
+      const writtenConfig = JSON.parse(writeFileSpy.mock.calls[0][1] as string);
+      expect(writtenConfig.mcpServers['test-package'].command).toBe('custom-cmd');
+      expect(writtenConfig.mcpServers['test-package'].args).toEqual(['--arg1', '--arg2']);
+    });
+
+    it('should throw error for custom runtime without command and args', async () => {
+      const mockPackage: Package = {
+        name: 'test-package',
+        description: 'Test package',
+        runtime: 'custom',
+        vendor: 'test',
+        sourceUrl: 'https://test.com',
+        homepage: 'https://test.com',
+        license: 'MIT'
+      };
+
+      await expect(ConfigManager.installPackage(mockPackage)).rejects.toThrow(
+        'Custom runtime requires both command and args fields'
+      );
     });
   });
 });
