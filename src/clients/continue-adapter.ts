@@ -25,7 +25,6 @@ import { ServerConfig, ClientConfig } from '../types/client-config.js';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import * as os from 'os';
-import { glob } from 'glob';
 
 export class ContinueAdapter extends ClientAdapter {
   constructor(config: ClientConfig) {
@@ -65,7 +64,9 @@ export class ContinueAdapter extends ClientAdapter {
 
   private async checkGlobPath(globPath: string): Promise<boolean> {
     try {
-      const matches = await glob(globPath);
+      const { promisify } = require('util');
+      const globAsync = promisify(require('glob'));
+      const matches = await globAsync(globPath);
       return matches.length > 0;
     } catch (error) {
       return false;

@@ -1,7 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
+import inquirer from 'inquirer';
 import { Package } from '../types/package.js';
+import { ClientType, ServerConfig } from '../types/client-config.js';
+import { ClaudeAdapter } from '../clients/claude-adapter.js';
+import { ZedAdapter } from '../clients/zed-adapter.js';
+import { ContinueAdapter } from '../clients/continue-adapter.js';
+import { FirebaseAdapter } from '../clients/firebase-adapter.js';
 
 export interface MCPServer {
     runtime: 'node' | 'python';
@@ -136,5 +142,75 @@ export class ConfigManager {
 
         delete config.mcpServers[serverName];
         this.writeConfig(config);
+    }
+
+    async getClientAdapter(clientType: ClientType) {
+        switch (clientType) {
+            case 'claude':
+                return new ClaudeAdapter({ type: clientType, name: 'Claude Desktop' });
+            case 'zed':
+                return new ZedAdapter({ type: clientType, name: 'Zed' });
+            case 'continue':
+                return new ContinueAdapter({ type: clientType, name: 'Continue' });
+            case 'firebase':
+                return new FirebaseAdapter({ type: clientType, name: 'Firebase' });
+            default:
+                throw new Error(`Unsupported client type: ${clientType}`);
+        }
+    }
+
+    async getInstalledClients(): Promise<ClientType[]> {
+        const installedClients: ClientType[] = [];
+        const clientTypes: ClientType[] = ['claude', 'zed', 'continue', 'firebase'];
+
+        for (const clientType of clientTypes) {
+            const adapter = await this.getClientAdapter(clientType);
+            if (await adapter.isInstalled()) {
+                installedClients.push(clientType);
+            }
+        }
+
+        return installedClients;
+    }
+
+    async selectClients(): Promise<ClientType[]> {
+        const installedClients = await this.getInstalledClients();
+
+        if (installedClients.length === 0) {
+            throw new Error('No MCP clients installed. Please install a supported client first.');
+        }
+
+        if (installedClients.length === 1) {
+            return installedClients;
+        }
+
+        const { selectedClients } = await inquirer.prompt<{ selectedClients: ClientType[] }>([{
+            type: 'checkbox',
+            name: 'selectedClients',
+            message: 'Select MCP clients to configure:',
+            choices: installedClients.map(client => ({
+                name: client.charAt(0).toUpperCase() + client.slice(1),
+                value: client,
+                checked: true
+            })),
+            validate: (answer: ClientType[]) => {
+                if (answer.length < 1) {
+                    return 'You must select at least one client.';
+                }
+                return true;
+            }
+        }]);
+
+        return selectedClients;
+    }
+
+    async configureClients(config: ServerConfig, clients: ClientType[]): Promise<void> {
+        for (const clientType of clients) {
+            const adapter = await this.getClientAdapter(clientType);
+            if (!(await adapter.validateConfig(config))) {
+                throw new Error(`Invalid configuration for client ${clientType}`);
+            }
+            await adapter.writeConfig(config);
+        }
     }
 } 

@@ -5,7 +5,7 @@ import { promisify } from 'util';
 import { packageHelpers } from '../helpers/index.js';
 import { checkUVInstalled, promptForUVInstall } from './runtime-utils.js';
 import { ConfigManager } from './config-manager.js';
-import { ClientType } from '../types/client-config.js';
+import { ClientType, ServerConfig } from '../types/client-config.js';
 import { Preferences } from './preferences.js';
 
 declare function fetch(url: string, init?: any): Promise<{ ok: boolean; statusText: string }>;
@@ -260,7 +260,17 @@ export async function installPackage(pkg: Package): Promise<void> {
       console.log(`Using ${selectedClient} as the only installed client.`);
     }
 
-    await ConfigManager.installPackage(pkg, [selectedClient]);
+    await ConfigManager.installPackage(pkg, envVars);
+    const serverConfig: ServerConfig = {
+      name: pkg.name,
+      runtime: pkg.runtime,
+      command: pkg.runtime === 'node' ? 'npx' : 'uvx',
+      args: pkg.runtime === 'node' ? ['-y', pkg.name] : [pkg.name],
+      transport: 'stdio',
+      env: envVars || {}
+    };
+
+    await configManager.configureClients(serverConfig, [selectedClient]);
     console.log(`Updated ${selectedClient} configuration for ${pkg.name}`);
 
     const analyticsAllowed = await checkAnalyticsConsent();
@@ -309,4 +319,4 @@ export async function uninstallPackage(packageName: string): Promise<void> {
     console.error('Failed to uninstall package:', error);
     throw error;
   }
-} 
+}       
