@@ -367,5 +367,23 @@
     "homepage": "https://rememberizer.ai/",
     "license": "MIT",
     "runtime": "python"
+  },
+  {
+    "name": "@enescinar/twitter-mcp",
+    "description": "This MCP server allows Clients to interact with Twitter, enabling posting tweets and searching Twitter.",
+    "vendor": "Enes Çınar",
+    "sourceUrl": "https://github.com/EnesCinr/twitter-mcp",
+    "homepage": "https://github.com/EnesCinr/twitter-mcp",
+    "license": "MIT",
+    "runtime": "node"
+  },
+  {
+    "name": "mcp-server-commands",
+    "description": "MCP server enabling LLMs to execute shell commands and run scripts through various interpreters with built-in safety controls.",
+    "vendor": "g0t4 (https://github.com/g0t4)",
+    "sourceUrl": "https://github.com/g0t4/mcp-server-commands",
+    "homepage": "https://github.com/g0t4/mcp-server-commands",
+    "license": "MIT",
+    "runtime": "node"
   }
 ]
