@@ -14,8 +14,12 @@ const config = {
       },
     ],
   },
-  testMatch: ['**/__tests__/**/*.test.ts'],
-  testPathIgnorePatterns: ['/node_modules/', '/loaders/'],
+  roots: ['<rootDir>/src', '<rootDir>/test'],
+  testMatch: [
+    '**/__tests__/**/*.ts',
+    '**/test/**/*.test.ts'
+  ],
+  testPathIgnorePatterns: ['/node_modules/', '/loaders/', 'setup.ts'],
 };
 
 export default config; 
