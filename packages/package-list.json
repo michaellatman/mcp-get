@@ -369,6 +369,15 @@
     "runtime": "node"
   },
   {
+    "name": "airtable-mcp-server",
+    "description": "Airtable database integration with schema inspection, read and write capabilities",
+    "vendor": "Adam Jones (https://github.com/domdomegg/)",
+    "sourceUrl": "https://github.com/domdomegg/airtable-mcp-server",
+    "homepage": "https://github.com/domdomegg/airtable-mcp-server",
+    "license": "MIT",
+    "runtime": "node"
+  },
+  {
     "name": "mcp-server-rememberizer",
     "description": "An MCP server for interacting with Rememberizer's document and knowledge management API. This server enables Large Language Models to search, retrieve, and manage documents and integrations through Rememberizer.",
     "vendor": "Rememberizer®",

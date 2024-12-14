@@ -161,5 +161,13 @@ export const packageHelpers: PackageHelpers = {
         argName: 'token'
       }
     }
+  },
+  'airtable-mcp-server': {
+    requiredEnvVars: {
+      AIRTABLE_API_KEY: {
+        description: 'API key for Airtable (can also be provided via command line)',
+        required: false
+      }
+    }
   }
 };
