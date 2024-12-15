@@ -179,6 +179,80 @@ describe('ConfigManager', () => {
       await expect(ConfigManager.installPackage(mockPackage))
         .rejects.toThrow('Custom runtime requires both command and args fields');
     });
+
+    it('should use customCommand for node runtime when provided', async () => {
+      const mockPackage: Package = {
+        name: 'test-package',
+        description: 'Test package',
+        runtime: 'node',
+        vendor: 'test',
+        sourceUrl: 'https://test.com',
+        homepage: 'https://test.com',
+        license: 'MIT'
+      };
+
+      const customCommand = {
+        command: 'custom-node-cmd',
+        args: ['--custom-arg']
+      };
+
+      await ConfigManager.installPackage(mockPackage, undefined, customCommand);
+
+      expect(mockWriteFileSync).toHaveBeenCalled();
+      const writtenConfig = JSON.parse(mockWriteFileSync.mock.calls[0][1] as string);
+      expect(writtenConfig.mcpServers['test-package'].command).toBe('custom-node-cmd');
+      expect(writtenConfig.mcpServers['test-package'].args).toEqual(['--custom-arg']);
+    });
+
+    it('should use customCommand for python runtime when provided', async () => {
+      const mockPackage: Package = {
+        name: 'test-package',
+        description: 'Test package',
+        runtime: 'python',
+        vendor: 'test',
+        sourceUrl: 'https://test.com',
+        homepage: 'https://test.com',
+        license: 'MIT'
+      };
+
+      const customCommand = {
+        command: 'custom-python-cmd',
+        args: ['--custom-py-arg']
+      };
+
+      await ConfigManager.installPackage(mockPackage, undefined, customCommand);
+
+      expect(mockWriteFileSync).toHaveBeenCalled();
+      const writtenConfig = JSON.parse(mockWriteFileSync.mock.calls[0][1] as string);
+      expect(writtenConfig.mcpServers['test-package'].command).toBe('custom-python-cmd');
+      expect(writtenConfig.mcpServers['test-package'].args).toEqual(['--custom-py-arg']);
+    });
+
+    it('should prioritize package command over customCommand for custom runtime type', async () => {
+      const mockPackage: Package = {
+        name: 'test-package',
+        description: 'Test package',
+        runtime: 'custom',
+        vendor: 'test',
+        sourceUrl: 'https://test.com',
+        homepage: 'https://test.com',
+        license: 'MIT',
+        command: 'specific-cmd',
+        args: ['--specific-arg']
+      };
+
+      const customCommand = {
+        command: 'custom-cmd',
+        args: ['--custom-arg']
+      };
+
+      await ConfigManager.installPackage(mockPackage, undefined, customCommand);
+
+      expect(mockWriteFileSync).toHaveBeenCalled();
+      const writtenConfig = JSON.parse(mockWriteFileSync.mock.calls[0][1] as string);
+      expect(writtenConfig.mcpServers['test-package'].command).toBe('specific-cmd');
+      expect(writtenConfig.mcpServers['test-package'].args).toEqual(['--specific-arg']);
+    });
   });
 
   describe('readConfig error handling', () => {
