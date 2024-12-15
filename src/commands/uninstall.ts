@@ -3,8 +3,7 @@ import inquirer from 'inquirer';
 import { resolvePackage } from '../utils/package-resolver.js';
 import { uninstallPackage } from '../utils/package-management.js';
 
-export async function uninstall(packageName?: string): Promise<void> {
-    console.error("!");
+export async function uninstall(packageName?: string, nonInteractive = false): Promise<void> {
   try {
     // If no package name provided, show error
     if (!packageName) {
@@ -14,7 +13,7 @@ export async function uninstall(packageName?: string): Promise<void> {
     }
 
     // Resolve the package
-    const pkg = resolvePackage(packageName);
+    const pkg = await resolvePackage(packageName);
     if (!pkg) {
       console.log(chalk.yellow(`Package ${packageName} not found.`));
       return;
@@ -22,6 +21,13 @@ export async function uninstall(packageName?: string): Promise<void> {
 
     if (!pkg.isInstalled) {
       console.log(chalk.yellow(`Package ${packageName} is not installed.`));
+      return;
+    }
+
+    // In non-interactive mode, proceed without confirmation
+    if (nonInteractive) {
+      await uninstallPackage(packageName);
+      console.log(chalk.green(`\nSuccessfully uninstalled ${packageName}`));
       return;
     }
 

@@ -5,15 +5,17 @@ import { promisify } from 'util';
 import { packageHelpers } from '../helpers/index.js';
 import { checkUVInstalled, promptForUVInstall } from './runtime-utils.js';
 import { ConfigManager } from './config-manager.js';
+import { ClientType, ServerConfig } from '../types/client-config.js';
+import { Preferences } from './preferences.js';
 
 declare function fetch(url: string, init?: any): Promise<{ ok: boolean; statusText: string }>;
 
 const execAsync = promisify(exec);
 
 async function checkAnalyticsConsent(): Promise<boolean> {
-  const prefs = ConfigManager.readPreferences();
-  
-  if (typeof prefs.allowAnalytics === 'boolean') {
+  const prefs = await ConfigManager.readPreferences();
+
+  if (typeof prefs?.allowAnalytics === 'boolean') {
     return prefs.allowAnalytics;
   }
 
@@ -24,7 +26,7 @@ async function checkAnalyticsConsent(): Promise<boolean> {
     default: true
   }]);
 
-  ConfigManager.writePreferences({ ...prefs, allowAnalytics });
+  await ConfigManager.writePreferences({ ...prefs, allowAnalytics });
   return allowAnalytics;
 }
 
@@ -50,10 +52,9 @@ async function promptForEnvVars(packageName: string): Promise<Record<string, str
     return undefined;
   }
 
-  // Check if all required variables exist in environment
   const existingEnvVars: Record<string, string> = {};
   let hasAllRequired = true;
-  
+
   for (const [key, value] of Object.entries(helpers.requiredEnvVars)) {
     const existingValue = process.env[key];
     if (existingValue) {
@@ -79,7 +80,7 @@ async function promptForEnvVars(packageName: string): Promise<Record<string, str
   const { configureEnv } = await inquirer.prompt<{ configureEnv: boolean }>([{
     type: 'confirm',
     name: 'configureEnv',
-    message: hasAllRequired 
+    message: hasAllRequired
       ? 'Would you like to manually configure environment variables for this package?'
       : 'Some required environment variables are missing. Would you like to configure them now?',
     default: !hasAllRequired
@@ -96,10 +97,10 @@ async function promptForEnvVars(packageName: string): Promise<Record<string, str
   }
 
   const envVars: Record<string, string> = {};
-  
+
   for (const [key, value] of Object.entries(helpers.requiredEnvVars)) {
     const existingEnvVar = process.env[key];
-    
+
     if (existingEnvVar) {
       const { reuseExisting } = await inquirer.prompt<{ reuseExisting: boolean }>([{
         type: 'confirm',
@@ -143,30 +144,35 @@ async function promptForEnvVars(packageName: string): Promise<Record<string, str
   return envVars;
 }
 
-async function isClaudeRunning(): Promise<boolean> {
+async function isClientRunning(clientType: ClientType): Promise<boolean> {
   try {
     const platform = process.platform;
-    if (platform === 'win32') {
-      const { stdout } = await execAsync('tasklist /FI "IMAGENAME eq Claude.exe" /NH');
-      return stdout.includes('Claude.exe');
-    } else if (platform === 'darwin') {
-      const { stdout } = await execAsync('pgrep -x "Claude"');
-      return !!stdout.trim();
-    } else if (platform === 'linux') {
-      const { stdout } = await execAsync('pgrep -f "claude"');
-      return !!stdout.trim();
+    switch (clientType) {
+      case 'claude':
+        if (platform === 'win32') {
+          const { stdout } = await execAsync('tasklist /FI "IMAGENAME eq Claude.exe" /NH');
+          return stdout.includes('Claude.exe');
+        } else if (platform === 'darwin') {
+          const { stdout } = await execAsync('pgrep -x "Claude"');
+          return !!stdout.trim();
+        } else if (platform === 'linux') {
+          const { stdout } = await execAsync('pgrep -f "claude"');
+          return !!stdout.trim();
+        }
+        break;
+      // Other clients don't require process checking
+      default:
+        return false;
     }
     return false;
   } catch (error) {
-    // If the command fails, assume Claude is not running
     return false;
   }
 }
 
-async function promptForRestart(): Promise<boolean> {
-  // Check if Claude is running first
-  const claudeRunning = await isClaudeRunning();
-  if (!claudeRunning) {
+async function promptForRestart(clientType: ClientType): Promise<boolean> {
+  const clientRunning = await isClientRunning(clientType);
+  if (!clientRunning) {
     return false;
   }
 
@@ -174,47 +180,60 @@ async function promptForRestart(): Promise<boolean> {
     {
       type: 'confirm',
       name: 'shouldRestart',
-      message: 'Would you like to restart the Claude desktop app to apply changes?',
+      message: `Would you like to restart the ${clientType} app to apply changes?`,
       default: true
     }
   ]);
-  
+
   if (shouldRestart) {
-    console.log('Restarting Claude desktop app...');
+    console.log(`Restarting ${clientType} app...`);
     try {
       const platform = process.platform;
-      if (platform === 'win32') {
-        await execAsync('taskkill /F /IM "Claude.exe" && start "" "Claude.exe"');
-      } else if (platform === 'darwin') {
-        await execAsync('killall "Claude" && open -a "Claude"');
-      } else if (platform === 'linux') {
-        await execAsync('pkill -f "claude" && claude');
+      if (clientType === 'claude') {
+        if (platform === 'win32') {
+          await execAsync('taskkill /F /IM "Claude.exe" && start "" "Claude.exe"');
+        } else if (platform === 'darwin') {
+          await execAsync('killall "Claude" && open -a "Claude"');
+        } else if (platform === 'linux') {
+          await execAsync('pkill -f "claude" && claude');
+        }
+
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        if (platform === 'win32') {
+          await execAsync('start "" "Claude.exe"');
+        } else if (platform === 'darwin') {
+          await execAsync('open -a "Claude"');
+        } else if (platform === 'linux') {
+          await execAsync('claude');
+        }
       }
+      // Other clients don't require restart
 
-      // Wait a moment for the app to close before reopening
-      await new Promise(resolve => setTimeout(resolve, 2000));
-
-      // Reopen the app
-      if (platform === 'win32') {
-        await execAsync('start "" "Claude.exe"');
-      } else if (platform === 'darwin') {
-        await execAsync('open -a "Claude"');
-      } else if (platform === 'linux') {
-        await execAsync('claude');
-      }
-
-      console.log('Claude desktop app has been restarted.');
+      console.log(`${clientType} app has been restarted.`);
     } catch (error) {
-      console.error('Failed to restart Claude desktop app:', error);
+      console.error(`Failed to restart ${clientType} app:`, error);
     }
   }
-  
+
   return shouldRestart;
+}
+
+async function promptForClientSelection(clients: ClientType[]): Promise<ClientType> {
+  const { selectedClient } = await inquirer.prompt<{ selectedClient: ClientType }>([{
+    type: 'list',
+    name: 'selectedClient',
+    message: 'Select which client to configure:',
+    choices: clients.map(client => ({
+      name: client.charAt(0).toUpperCase() + client.slice(1),
+      value: client
+    }))
+  }]);
+  return selectedClient;
 }
 
 export async function installPackage(pkg: Package): Promise<void> {
   try {
-    // Check for UV if it's a Python package
     if (pkg.runtime === 'python') {
       const hasUV = await checkUVInstalled();
       if (!hasUV) {
@@ -226,17 +245,40 @@ export async function installPackage(pkg: Package): Promise<void> {
     }
 
     const envVars = await promptForEnvVars(pkg.name);
-    
-    await ConfigManager.installPackage(pkg, envVars);
-    console.log('Updated Claude desktop configuration');
+    const configManager = new ConfigManager();
+    const installedClients = await configManager.getInstalledClients();
 
-    // Check analytics consent and track if allowed
+    if (installedClients.length === 0) {
+      throw new Error('No MCP clients installed. Please install a supported client first.');
+    }
+
+    let selectedClient: ClientType;
+    if (installedClients.length > 1) {
+      selectedClient = await promptForClientSelection(installedClients);
+    } else {
+      selectedClient = installedClients[0];
+      console.log(`Using ${selectedClient} as the only installed client.`);
+    }
+
+    await ConfigManager.installPackage(pkg, envVars);
+    const serverConfig: ServerConfig = {
+      name: pkg.name,
+      runtime: pkg.runtime,
+      command: pkg.runtime === 'node' ? 'npx' : 'uvx',
+      args: pkg.runtime === 'node' ? ['-y', pkg.name] : [pkg.name],
+      transport: 'stdio',
+      env: envVars || {}
+    };
+
+    await configManager.configureClients(serverConfig, [selectedClient]);
+    console.log(`Updated ${selectedClient} configuration for ${pkg.name}`);
+
     const analyticsAllowed = await checkAnalyticsConsent();
     if (analyticsAllowed) {
       await trackInstallation(pkg.name);
     }
 
-    await promptForRestart();
+    await promptForRestart(selectedClient);
   } catch (error) {
     console.error('Failed to install package:', error);
     throw error;
@@ -245,11 +287,36 @@ export async function installPackage(pkg: Package): Promise<void> {
 
 export async function uninstallPackage(packageName: string): Promise<void> {
   try {
-    await ConfigManager.uninstallPackage(packageName);
-    console.log(`\nUninstalled ${packageName}`);
-    await promptForRestart();
+    const configManager = new ConfigManager();
+    const installedClients = await configManager.getInstalledClients();
+
+    if (installedClients.length === 0) {
+      throw new Error('No MCP clients installed');
+    }
+
+    let selectedClient: ClientType;
+    if (installedClients.length > 1) {
+      selectedClient = await promptForClientSelection(installedClients);
+    } else {
+      selectedClient = installedClients[0];
+      console.log(`Using ${selectedClient} as the only installed client.`);
+    }
+
+    const pkg: Package = {
+      name: packageName,
+      description: '',
+      vendor: '',
+      sourceUrl: '',
+      homepage: '',
+      license: '',
+      runtime: 'node'
+    };
+
+    await ConfigManager.uninstallPackage(pkg, [selectedClient]);
+    console.log(`\nUninstalled ${packageName} from ${selectedClient}`);
+    await promptForRestart(selectedClient);
   } catch (error) {
     console.error('Failed to uninstall package:', error);
     throw error;
   }
-} 
+}       
