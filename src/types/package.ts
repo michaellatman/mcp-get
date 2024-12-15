@@ -24,7 +24,7 @@ export interface PackageHelper {
         }
     };
     configureEnv?: (config: any) => Promise<void>;
-    runtime?: 'node' | 'python';
+    runtime?: 'node' | 'python' | 'custom';
     customCommand?: {
         command: string;
         args?: string[];

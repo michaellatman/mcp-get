@@ -133,28 +133,28 @@ export class ConfigManager {
             env: envVars
         };
 
-        if (pkg.runtime === 'node') {
-            if (customCommand) {
-                serverConfig.command = customCommand.command;
-                serverConfig.args = customCommand.args || [];
-            } else {
-                serverConfig.command = 'npx';
-                serverConfig.args = ['-y', pkg.name];
-            }
-        } else if (pkg.runtime === 'python') {
-            if (customCommand) {
-                serverConfig.command = customCommand.command;
-                serverConfig.args = customCommand.args || [];
-            } else {
-                serverConfig.command = 'uvx';
-                serverConfig.args = [pkg.name];
-            }
-        } else if (pkg.runtime === 'custom') {
+        // Resolve command and args based on runtime and custom configurations
+        if (pkg.runtime === 'custom') {
             if (!pkg.command || !pkg.args) {
                 throw new Error('Custom runtime requires both command and args fields');
             }
             serverConfig.command = pkg.command;
             serverConfig.args = pkg.args;
+        } else {
+            // For node and python runtimes
+            if (customCommand) {
+                serverConfig.command = customCommand.command;
+                serverConfig.args = customCommand.args || [];
+            } else {
+                // Default commands for standard runtimes
+                const defaultCommands = {
+                    node: { command: 'npx', args: ['-y', pkg.name] },
+                    python: { command: 'uvx', args: [pkg.name] }
+                };
+                const defaultConfig = defaultCommands[pkg.runtime];
+                serverConfig.command = defaultConfig.command;
+                serverConfig.args = defaultConfig.args;
+            }
         }
 
         config.mcpServers[serverName] = serverConfig;
