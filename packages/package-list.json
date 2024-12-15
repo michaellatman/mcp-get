@@ -198,6 +198,15 @@
     "runtime": "python"
   },
   {
+    "name": "mcp-server-perplexity",
+    "description": "MCP Server for the Perplexity API",
+    "vendor": "tanigami",
+    "sourceUrl": "https://github.com/tanigami/mcp-server-perplexity",
+    "homepage": "https://github.com/tanigami/mcp-server-perplexity",
+    "license": "MIT",
+    "runtime": "python"
+  },
+  {
     "name": "mcp-server-git",
     "description": "A Model Context Protocol server providing tools to read, search, and manipulate Git repositories programmatically via LLMs",
     "vendor": "Anthropic, PBC (https://anthropic.com)",
@@ -322,5 +331,95 @@
     "homepage": "https://github.com/kiliczsh/mcp-mongo-server",
     "license": "MIT",
     "runtime": "node"
-   }
+  },
+  {
+    "name": "@llmindset/mcp-hfspace",
+    "description": "MCP Server for using HuggingFace Spaces. Seamlessly use the latest Open Source Image, Audio and Text Models from within Claude Deskop.",
+    "vendor": "llmindset.co.uk",
+    "sourceUrl": "https://github.com/evalstate/mcp-hfspace/",
+    "homepage": "https://llmindset.co.uk/resources/hfspace-connector/",
+    "license": "MIT",
+    "runtime": "node"
+  },
+  {
+    "name": "@llmindset/mcp-miro",
+    "description": "A Model Context Protocol server to connect to the MIRO Whiteboard Application",
+    "vendor": "llmindset.co.uk",
+    "sourceUrl": "https://github.com/evalstate/mcp-miro",
+    "homepage": "https://github.com/evalstate/mcp-miro#readme",
+    "license": "Apache-2.0",
+    "runtime": "node"
+  },
+  {
+    "name": "@strowk/mcp-k8s",
+    "description": "MCP server connecting to Kubernetes",
+    "vendor": "Timur Sultanaev (https://str4.io/about-me)",
+    "sourceUrl": "https://github.com/strowk/mcp-k8s-go",
+    "homepage": "https://github.com/strowk/mcp-k8s-go",
+    "license": "MIT",
+    "runtime": "node"
+  },
+  {
+    "name": "mcp-shell",
+    "description": "An MCP server for your shell",
+    "vendor": "High Dimensional Research (https://hdr.is)",
+    "sourceUrl": "https://github.com/hdresearch/mcp-shell",
+    "homepage": "https://github.com/hdresearch/mcp-shell",
+    "license": "MIT",
+    "runtime": "node"
+  },
+  {
+    "name": "@benborla29/mcp-server-mysql",
+    "description": "An MCP server for interacting with MySQL databases",
+    "vendor": "Ben Borla (https://benborla.dev)",
+    "sourceUrl": "https://github.com/benborla/mcp-server-mysql",
+    "homepage": "https://github.com/benborla/mcp-server-mysql",
+    "license": "MIT",
+    "runtime": "node"
+  },
+  {
+    "name": "airtable-mcp-server",
+    "description": "Airtable database integration with schema inspection, read and write capabilities",
+    "vendor": "Adam Jones (https://github.com/domdomegg/)",
+    "sourceUrl": "https://github.com/domdomegg/airtable-mcp-server",
+    "homepage": "https://github.com/domdomegg/airtable-mcp-server",
+    "license": "MIT",
+    "runtime": "node"
+  },
+  {
+    "name": "mcp-server-rememberizer",
+    "description": "An MCP server for interacting with Rememberizer's document and knowledge management API. This server enables Large Language Models to search, retrieve, and manage documents and integrations through Rememberizer.",
+    "vendor": "Rememberizer®",
+    "sourceUrl": "https://github.com/skydeckai/mcp-server-rememberizer",
+    "homepage": "https://rememberizer.ai/",
+    "license": "MIT",
+    "runtime": "python"
+  },
+  {
+    "name": "@enescinar/twitter-mcp",
+    "description": "This MCP server allows Clients to interact with Twitter, enabling posting tweets and searching Twitter.",
+    "vendor": "Enes Çınar",
+    "sourceUrl": "https://github.com/EnesCinr/twitter-mcp",
+    "homepage": "https://github.com/EnesCinr/twitter-mcp",
+    "license": "MIT",
+    "runtime": "node"
+  },
+  {
+    "name": "mcp-server-commands",
+    "description": "MCP server enabling LLMs to execute shell commands and run scripts through various interpreters with built-in safety controls.",
+    "vendor": "g0t4 (https://github.com/g0t4)",
+    "sourceUrl": "https://github.com/g0t4/mcp-server-commands",
+    "homepage": "https://github.com/g0t4/mcp-server-commands",
+    "license": "MIT",
+    "runtime": "node"
+  },
+  {
+    "name": "mcp-server-kubernetes",
+    "description": "MCP server for managing Kubernetes clusters, enabling LLMs to interact with and control Kubernetes resources.",
+    "vendor": "Flux159 (https://github.com/Flux159)",
+    "sourceUrl": "https://github.com/Flux159/mcp-server-kubernetes",
+    "homepage": "https://github.com/Flux159/mcp-server-kubernetes",
+    "license": "MIT",
+    "runtime": "node"
+  }
 ]

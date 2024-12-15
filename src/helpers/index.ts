@@ -92,5 +92,82 @@ export const packageHelpers: PackageHelpers = {
         required: true
       }
     }
+  },
+  'mcp-server-perplexity': {
+    requiredEnvVars: {
+      PERPLEXITY_API_KEY: {
+        description: 'API key for Perplexity API access',
+        required: true
+      }
+    }
+  },
+  '@benborla29/mcp-server-mysql': {
+    requiredEnvVars: {
+      MYSQL_HOST: {
+        description: 'MySQL Host address',
+        required: true,
+      },
+      MYSQL_PORT: {
+        description: 'MySQL port defaults to 3306',
+        required: false,
+      },
+      MYSQL_USER: {
+        description: 'MySQL username',
+        required: true,
+      },
+      MYSQL_PASS: {
+        description: 'MySQL password',
+        required: true,
+      },
+      MYSQL_DB: {
+        description: 'MySQL database to use',
+        required: false,
+      }
+    }
+  },
+  'mcp-server-rememberizer': {
+    requiredEnvVars: {
+      REMEMBERIZER_API_TOKEN: {
+        description: 'API token for Rememberizer',
+        required: true
+      }
+    }
+  },
+  'airtable-mcp-server': {
+    requiredEnvVars: {
+      AIRTABLE_API_KEY: {
+        description: 'API key for Airtable API',
+        required: true
+      }
+    }
+  },
+  '@enescinar/twitter-mcp': {
+    requiredEnvVars: {
+      API_KEY: {
+        description: 'API key for X API',
+        required: true
+      },
+      API_SECRET_KEY: {
+        description: 'API secret key for X API',
+        required: true
+      },
+      ACCESS_TOKEN: {
+        description: 'API access token for X API',
+        required: true
+      },
+      ACCESS_TOKEN_SECRET: {
+        description: 'API access token secret for X API',
+        required: true
+      }
+    }
+  },
+  '@llmindset/mcp-miro': {
+    requiredEnvVars: {
+      'MIRO-OAUTH-KEY': {
+        description: 'Authentication token for Miro API access (can also be provided via --token argument)',
+        required: true,
+        argName: 'token'
+      }
+    }
   }
 };

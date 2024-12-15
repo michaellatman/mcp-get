@@ -16,7 +16,6 @@ const config = {
   },
   testMatch: ['**/__tests__/**/*.test.ts'],
   testPathIgnorePatterns: ['/node_modules/', '/loaders/'],
-  setupFilesAfterEnv: ['<rootDir>/test/setup.ts'],
 };
 
 export default config; 

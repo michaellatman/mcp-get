@@ -7,7 +7,7 @@ export interface MCPServer {
     runtime: 'node' | 'python';
     command?: string;
     args?: string[];
-    envVars?: Record<string, string>;
+    env?: Record<string, string>;
 }
 
 export interface MCPConfig {
@@ -106,10 +106,10 @@ export class ConfigManager {
     static async installPackage(pkg: Package, envVars?: Record<string, string>): Promise<void> {
         const config = this.readConfig();
         const serverName = pkg.name.replace(/\//g, '-');
-        
+
         const serverConfig: MCPServer = {
             runtime: pkg.runtime,
-            envVars
+            env: envVars
         };
 
         // Add command and args based on runtime
@@ -128,12 +128,12 @@ export class ConfigManager {
     static async uninstallPackage(packageName: string): Promise<void> {
         const config = this.readConfig();
         const serverName = packageName.replace(/\//g, '-');
-        
+
         if (!config.mcpServers || !config.mcpServers[serverName]) {
             console.log(`Package ${packageName} is not installed.`);
             return;
         }
-        
+
         delete config.mcpServers[serverName];
         this.writeConfig(config);
     }
