@@ -132,5 +132,25 @@ export const packageHelpers: PackageHelpers = {
         required: true
       }
     }
+  },
+  '@enescinar/twitter-mcp': {
+    requiredEnvVars: {
+      API_KEY: {
+        description: 'API key for X API',
+        required: true
+      },
+      API_SECRET_KEY: {
+        description: 'API secret key for X API',
+        required: true
+      },
+      ACCESS_TOKEN: {
+        description: 'API access token for X API',
+        required: true
+      },
+      ACCESS_TOKEN_SECRET: {
+        description: 'API access token secret for X API',
+        required: true
+      }
+    }
   }
 };

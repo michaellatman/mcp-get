@@ -12,7 +12,7 @@ const octokit = new Octokit({
 });
 
 const REQUIRED_FIELDS = ['name', 'description', 'vendor', 'sourceUrl', 'homepage', 'license', 'runtime'];
-const VALID_RUNTIMES = ['node', 'python'];
+const VALID_RUNTIMES = ['node', 'python', 'custom'];
 
 async function validatePackages() {
   const packageListPath = path.join(__dirname, '../../packages/package-list.json');
@@ -65,23 +65,22 @@ function getNewPackages(packageList) {
   const diffOutput = execSync(`git diff origin/${baseBranch} -- packages/package-list.json`).toString();
   const newPackages = [];
 
-  const diffLines = diffOutput.split('\n');
-  let currentPackage = null;
+  // Extract complete JSON objects from diff
+  const addedBlocks = diffOutput.match(/^\+\s*{[\s\S]*?^\+\s*}/gm) || [];
 
-  for (const line of diffLines) {
-    if (line.startsWith('+') && !line.startsWith('+++')) {
-      const trimmedLine = line.substring(1).trim();
-      if (trimmedLine.startsWith('{')) {
-        currentPackage = {};
-      } else if (trimmedLine.startsWith('}')) {
-        if (currentPackage) {
-          newPackages.push(currentPackage);
-          currentPackage = null;
-        }
-      } else if (currentPackage) {
-        const [key, value] = trimmedLine.split(':').map(s => s.trim().replace(/,$/, '').replace(/"/g, ''));
-        currentPackage[key] = value;
-      }
+  for (const block of addedBlocks) {
+    try {
+      // Remove diff markers and normalize whitespace
+      const cleanJson = block
+        .split('\n')
+        .map(line => line.replace(/^\+\s*/, ''))
+        .join('\n');
+
+      // Parse complete JSON object
+      const pkg = JSON.parse(cleanJson);
+      newPackages.push(pkg);
+    } catch (error) {
+      console.warn(`Warning: Failed to parse package block: ${error.message}`);
     }
   }
 
@@ -110,6 +109,10 @@ export function validateRuntime(pkg) {
   console.log('Validating runtime...');
   if (!VALID_RUNTIMES.includes(pkg.runtime)) {
     throw new Error(`Package ${pkg.name} has invalid runtime: ${pkg.runtime}. Must be one of: ${VALID_RUNTIMES.join(', ')}`);
+  }
+
+  if (pkg.runtime === 'custom' && (!pkg.command || !pkg.args)) {
+    throw new Error(`Package ${pkg.name} with custom runtime must include both 'command' and 'args' fields`);
   }
 }
 

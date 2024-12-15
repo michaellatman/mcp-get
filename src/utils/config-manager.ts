@@ -1,13 +1,16 @@
-import fs from 'fs';
+import type { PathLike } from 'fs';
 import path from 'path';
 import os from 'os';
 import { Package } from '../types/package.js';
 
+// Dynamic import of fs module to allow mocking in tests
+const fs = await import('fs');
+
 export interface MCPServer {
-    runtime: 'node' | 'python';
+    runtime: 'node' | 'python' | 'custom';
     command?: string;
     args?: string[];
-    envVars?: Record<string, string>;
+    env?: Record<string, string>;
 }
 
 export interface MCPConfig {
@@ -23,17 +26,19 @@ export class ConfigManager {
     private static preferencesPath: string;
 
     static {
-        if (process.platform === 'win32') {
+        const isTest = process.env.NODE_ENV === 'test';
+        if (isTest) {
+            this.configPath = '/tmp/test-mcp-config.json';
+            this.preferencesPath = '/tmp/test-mcp-preferences.json';
+        } else if (process.platform === 'win32') {
             const appData = process.env.APPDATA || path.join(os.homedir(), 'AppData', 'Roaming');
             this.configPath = path.join(appData, 'Claude', 'claude_desktop_config.json');
             this.preferencesPath = path.join(appData, 'mcp-get', 'preferences.json');
         } else if (process.platform === 'darwin') {
-            // macOS
             const homeDir = os.homedir();
             this.configPath = path.join(homeDir, 'Library', 'Application Support', 'Claude', 'claude_desktop_config.json');
             this.preferencesPath = path.join(homeDir, '.mcp-get', 'preferences.json');
         } else {
-            // Linux
             const homeDir = os.homedir();
             const configDir = process.env.XDG_CONFIG_HOME || path.join(homeDir, '.config');
             this.configPath = path.join(configDir, 'Claude', 'claude_desktop_config.json');
@@ -50,10 +55,16 @@ export class ConfigManager {
             if (!fs.existsSync(this.configPath)) {
                 return { mcpServers: {} };
             }
-            const config = JSON.parse(fs.readFileSync(this.configPath, 'utf8'));
-            return {
-                mcpServers: config.mcpServers || {}
-            };
+            const rawConfig = fs.readFileSync(this.configPath, 'utf8');
+            try {
+                const config = JSON.parse(rawConfig);
+                return {
+                    mcpServers: config.mcpServers || {}
+                };
+            } catch (parseError) {
+                console.error('Error parsing config:', parseError);
+                return { mcpServers: {} };
+            }
         } catch (error) {
             console.error('Error reading config:', error);
             return { mcpServers: {} };
@@ -64,12 +75,22 @@ export class ConfigManager {
         try {
             const configDir = path.dirname(this.configPath);
             if (!fs.existsSync(configDir)) {
-                fs.mkdirSync(configDir, { recursive: true });
+                try {
+                    fs.mkdirSync(configDir, { recursive: true });
+                } catch (mkdirError) {
+                    console.error('Error creating config directory:', mkdirError);
+                    throw new Error('Error writing config');
+                }
             }
-            fs.writeFileSync(this.configPath, JSON.stringify(config, null, 2));
+            try {
+                fs.writeFileSync(this.configPath, JSON.stringify(config, null, 2));
+            } catch (writeError) {
+                console.error('Error writing config file:', writeError);
+                throw new Error('Error writing config');
+            }
         } catch (error) {
-            console.error('Error writing config:', error);
-            throw error;
+            console.error('Error in writeConfig:', error);
+            throw new Error('Error writing config');
         }
     }
 
@@ -106,13 +127,12 @@ export class ConfigManager {
     static async installPackage(pkg: Package, envVars?: Record<string, string>, customCommand?: Record<string, any>): Promise<void> {
         const config = this.readConfig();
         const serverName = pkg.name.replace(/\//g, '-');
-        
+
         const serverConfig: MCPServer = {
             runtime: pkg.runtime,
-            envVars
+            env: envVars
         };
 
-        // Add command and args based on runtime
         if (pkg.runtime === 'node') {
             if (customCommand) {
                 serverConfig.command = customCommand.command;
@@ -129,6 +149,12 @@ export class ConfigManager {
                 serverConfig.command = 'uvx';
                 serverConfig.args = [pkg.name];
             }
+        } else if (pkg.runtime === 'custom') {
+            if (!pkg.command || !pkg.args) {
+                throw new Error('Custom runtime requires both command and args fields');
+            }
+            serverConfig.command = pkg.command;
+            serverConfig.args = pkg.args;
         }
 
         config.mcpServers[serverName] = serverConfig;
@@ -138,12 +164,12 @@ export class ConfigManager {
     static async uninstallPackage(packageName: string): Promise<void> {
         const config = this.readConfig();
         const serverName = packageName.replace(/\//g, '-');
-        
+
         if (!config.mcpServers || !config.mcpServers[serverName]) {
             console.log(`Package ${packageName} is not installed.`);
             return;
         }
-        
+
         delete config.mcpServers[serverName];
         this.writeConfig(config);
     }

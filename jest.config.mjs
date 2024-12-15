@@ -7,16 +7,22 @@ const config = {
     '^(\\.{1,2}/.*)\\.js$': '$1',
   },
   transform: {
+    // Use ts-jest for TypeScript files
     '^.+\\.tsx?$': [
       'ts-jest',
       {
         useESM: true,
       },
     ],
+    // Use babel-jest for mock files
+    '^.+\\.(m?js|ts)x?$': ['babel-jest', { rootMode: 'upward' }],
   },
-  testMatch: ['**/__tests__/**/*.test.ts'],
-  testPathIgnorePatterns: ['/node_modules/', '/loaders/'],
-  setupFilesAfterEnv: ['<rootDir>/test/setup.ts'],
+  roots: ['<rootDir>/src', '<rootDir>/test'],
+  testMatch: [
+    '**/__tests__/**/*.ts',
+    '**/test/**/*.test.ts'
+  ],
+  testPathIgnorePatterns: ['/node_modules/', '/loaders/', 'setup.ts'],
 };
 
 export default config; 
