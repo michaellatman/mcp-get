@@ -1,11 +1,13 @@
 export interface Package {
     name: string;
     description: string;
-    runtime: 'node' | 'python';
+    runtime: 'node' | 'python' | 'custom';
     vendor: string;
     sourceUrl: string;
     homepage: string;
     license: string;
+    command?: string;  // Required when runtime is 'custom'
+    args?: string[];   // Required when runtime is 'custom'
 }
 
 export interface ResolvedPackage extends Package {
@@ -22,7 +24,11 @@ export interface PackageHelper {
         }
     };
     configureEnv?: (config: any) => Promise<void>;
-    runtime?: 'node' | 'python';
+    runtime?: 'node' | 'python' | 'custom';
+    customCommand?: {
+        command: string;
+        args?: string[];
+    }
 }
 
 export interface PackageHelpers {
