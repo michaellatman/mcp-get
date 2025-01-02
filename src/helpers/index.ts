@@ -185,5 +185,17 @@ export const packageHelpers: PackageHelpers = {
         required: true
       }
     }
+  },
+  'mcp-server-stability-ai': {
+    requiredEnvVars: {
+      STABILITY_AI_API_KEY: {
+        description: 'API key for Stability AI; get it from https://platform.stability.ai/account/keys.',
+        required: true
+      },
+      IMAGE_STORAGE_DIRECTORY: {
+        description: 'Absolute path to a directory on filesystem to store output images.',
+        required: true
+      }
+    }
   }
 };
