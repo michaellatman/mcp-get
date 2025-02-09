@@ -1,5 +1,14 @@
 [
   {
+    "name": "auto-coder",
+    "description": "MCP server for auto-coder.rag",
+    "vendor": "allwefantasy",
+    "sourceUrl": "https://github.com/allwefantasy/auto-coder",
+    "homepage": "https://github.com/allwefantasy/auto-coder",
+    "license": "MIT",
+    "runtime": "python"
+  },
+  {
     "name": "mcp-solver",
     "description": "MCP server for Constraint Solving and Optimization",
     "vendor": "Stefan Szeider",
