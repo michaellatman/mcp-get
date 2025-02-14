@@ -12,6 +12,7 @@ export interface MCPServer {
 
 export interface MCPConfig {
     mcpServers: Record<string, MCPServer>;
+    [key: string]: any;  // Allow other config options
 }
 
 export interface MCPPreferences {
@@ -52,6 +53,7 @@ export class ConfigManager {
             }
             const config = JSON.parse(fs.readFileSync(this.configPath, 'utf8'));
             return {
+                ...config,
                 mcpServers: config.mcpServers || {}
             };
         } catch (error) {
