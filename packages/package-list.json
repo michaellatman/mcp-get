@@ -466,5 +466,14 @@
     "homepage": "",
     "license": "ISC",
     "runtime": "node"
+  },
+  {
+  "name": "linear-mcp-server",
+  "description": "A Model Context Protocol server for the Linear API, allowing LLMs to interact with Linear issues and projects.",
+  "vendor": "Model Context Protocol",
+  "sourceUrl": "https://github.com/jerhadf/linear-mcp-server",
+  "homepage": "https://github.com/jerhadf/linear-mcp-server",
+  "license": "MIT",
+  "runtime": "node"
   }
 ]
