@@ -466,5 +466,14 @@
     "homepage": "",
     "license": "ISC",
     "runtime": "node"
+  },
+  {
+    "name": "kubernetes-mcp-server",
+    "description": "Powerful and flexible Kubernetes MCP server implementation with additional features for OpenShift. Besides the typical CRUD operations on any Kubernetes resource, this implementation adds specialized features for Pods and other resources.",
+    "vendor": "Marc Nuri (https://www.marcnuri.com)",
+    "sourceUrl": "https://github.com/manusa/kubernetes-mcp-server",
+    "homepage": "https://github.com/manusa/kubernetes-mcp-server",
+    "license": "Apache-2.0",
+    "runtime": "node"
   }
 ]
