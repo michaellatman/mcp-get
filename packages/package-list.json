@@ -472,7 +472,6 @@
     "description": "",
     "vendor": "Anthropic, PBC (https://anthropic.com)",
     "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/redis",
-    "homepage": "https://github.com/modelcontextprotocol/servers/blob/main/src/redis",
     "homepage": "",
     "license": "ISC",
     "runtime": "node"
@@ -484,6 +483,15 @@
     "sourceUrl": "https://github.com/manusa/kubernetes-mcp-server",
     "homepage": "https://github.com/manusa/kubernetes-mcp-server",
     "license": "Apache-2.0",
+    "runtime": "node"
+  },
+  {
+    "name": "redis",
+    "description": "",
+    "vendor": "",
+    "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/redis",
+    "homepage": "",
+    "license": "ISC",
     "runtime": "node"
   }
 ]
