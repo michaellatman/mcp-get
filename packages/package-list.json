@@ -487,12 +487,12 @@
     "runtime": "node"
   },
   {
-  "name": "@bharathvaj/whois-mcp",
-  "description": "MCP server for whois lookups",
-  "vendor": "Bharathvaj Ganesan (https://bharathvaj.com)",
-  "sourceUrl": "https://github.com/bharathvaj-ganesan/whois-mcp",
-  "homepage": "https://github.com/bharathvaj-ganesan/whois-mcp",
-  "license": "MIT",
-  "runtime": "node"
-}
+    "name": "@bharathvaj/whois-mcp",
+    "description": "MCP server for whois lookups",
+    "vendor": "Bharathvaj Ganesan (https://bharathvaj.com)",
+    "sourceUrl": "https://github.com/bharathvaj-ganesan/whois-mcp",
+    "homepage": "https://github.com/bharathvaj-ganesan/whois-mcp",
+    "license": "MIT",
+    "runtime": "node"
+  }
 ]
