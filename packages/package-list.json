@@ -503,5 +503,14 @@
     "homepage": "https://www.hyperbrowser.ai/",
     "runtime": "node",
     "license": "MIT"
+  },
+  {
+    "name": "mcp-dnsdumpster",
+    "description": "An MCP server for DNSDumpster - A tool for enumerating DNS records from a target domain",
+    "vendor": "DNSDumpster (https://dnsdumpster.com/)",
+    "sourceUrl": "https://github.com/MaxWeeden/mcp-dnsdumpster",
+    "homepage": "https://github.com/MaxWeeden/mcp-dnsdumpster",
+    "runtime": "python",
+    "license": "MIT"
   }
 ]

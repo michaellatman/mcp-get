@@ -216,6 +216,14 @@ export const packageHelpers: PackageHelpers = {
         description: 'API KEY for Hyperbrowser',
         required: true
       },
+    },
+  },
+  'mcp-dnsdumpster': {
+    requiredEnvVars: {
+      DNSDUMPSTER_API_KEY: {
+        description: 'API KEY for DNSDumpster',
+        required: true
+      }
     }
   }
 };
