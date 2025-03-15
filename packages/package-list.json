@@ -472,7 +472,6 @@
     "description": "",
     "vendor": "Anthropic, PBC (https://anthropic.com)",
     "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/redis",
-    "homepage": "https://github.com/modelcontextprotocol/servers/blob/main/src/redis",
     "homepage": "",
     "license": "ISC",
     "runtime": "node"
@@ -503,5 +502,14 @@
     "homepage": "https://www.hyperbrowser.ai/",
     "runtime": "node",
     "license": "MIT"
+  },
+  {
+    "name": "redis",
+    "description": "",
+    "vendor": "",
+    "sourceUrl": "https://github.com/modelcontextprotocol/servers/blob/main/src/redis",
+    "homepage": "",
+    "license": "ISC",
+    "runtime": "node"
   }
 ]
