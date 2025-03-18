@@ -503,5 +503,14 @@
     "homepage": "https://www.hyperbrowser.ai/",
     "runtime": "node",
     "license": "MIT"
+  },
+  {
+  "name": "wordware-mcp",
+  "description": "An MCP server for Wordware - Wordware is an IDE that enables anyone to build complex AI Agents and applications",
+  "vendor": "Wordware (https://wordware.ai/)",
+  "sourceUrl": "https://github.com/yuhuangou/wordware-mcp/tree/main",
+  "homepage": "https://www.wordware.ai",
+  "license": "MIT",
+  "runtime": "node"
   }
 ]
