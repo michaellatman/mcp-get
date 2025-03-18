@@ -217,5 +217,17 @@ export const packageHelpers: PackageHelpers = {
         required: true
       },
     }
+  },
+  'wordware-mcp': {
+    requiredEnvVars: {
+      WORDWARE_API_KEY: {
+        description: 'API KEY for Wordware',
+        required: true
+      },
+      APP_IDS: {
+        description: 'App Ids for Wordware Apps',
+        required: true
+      }
+    }
   }
 };
