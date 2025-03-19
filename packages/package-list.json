@@ -503,5 +503,14 @@
     "homepage": "https://www.hyperbrowser.ai/",
     "runtime": "node",
     "license": "MIT"
+  },
+  {
+    "name": "mcp-unity",
+    "description": "An MCP server for Unity3d Game Engine - Unity3d is a game engine for building the most successful games and apps",
+    "vendor": "CoderGamester (https://github.com/CoderGamester/)",
+    "sourceUrl": "https://github.com/CoderGamester/mcp-unity",
+    "homepage": "https://github.com/CoderGamester/mcp-unity",
+    "runtime": "node",
+    "license": "MIT"
   }
 ]
