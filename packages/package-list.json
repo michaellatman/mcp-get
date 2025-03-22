@@ -503,5 +503,14 @@
     "homepage": "https://www.hyperbrowser.ai/",
     "runtime": "node",
     "license": "MIT"
+  },
+  {
+    "name": "anilist-mcp",
+    "description": "A Model Context Protocol (MCP) server that interfaces with the AniList API, allowing LLM clients to access and interact with anime, manga, character, staff, and user data from AniList.",
+    "vendor": "yuna0x0",
+    "sourceUrl": "https://github.com/yuna0x0/anilist-mcp",
+    "homepage": "https://github.com/yuna0x0/anilist-mcp",
+    "license": "MIT",
+    "runtime": "node"
   }
 ]

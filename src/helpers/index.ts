@@ -217,5 +217,13 @@ export const packageHelpers: PackageHelpers = {
         required: true
       },
     }
+  },
+  'anilist-mcp': {
+    requiredEnvVars: {
+      ANILIST_TOKEN: {
+        description: 'Optional API token for AniList',
+        required: false
+      }
+    }
   }
 };
