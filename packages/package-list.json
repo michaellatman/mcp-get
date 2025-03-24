@@ -387,6 +387,15 @@
     "runtime": "node"
   },
   {
+    "name": "@bharathvaj/whois-mcp",
+    "description": "MCP server for whois lookups",
+    "vendor": "Bharathvaj Ganesan (https://bharathvaj.com)",
+    "sourceUrl": "https://github.com/bharathvaj-ganesan/whois-mcp",
+    "homepage": "https://github.com/bharathvaj-ganesan/whois-mcp",
+    "license": "MIT",
+    "runtime": "node"
+  },
+  {
     "name": "airtable-mcp-server",
     "description": "Airtable database integration with schema inspection, read and write capabilities",
     "vendor": "Adam Jones (https://github.com/domdomegg/)",
