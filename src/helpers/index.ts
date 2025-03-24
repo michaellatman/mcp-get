@@ -197,5 +197,25 @@ export const packageHelpers: PackageHelpers = {
         required: true
       }
     }
+  },
+  '@niledatabase/nile-mcp-server': {
+    requiredEnvVars: {
+      NILE_API_KEY: {
+        description: 'API KEY for Nile',
+        required: true
+      },
+      NILE_WORKSPACE_SLUG: {
+        description: 'Nile workspace name',
+        required: true
+      }
+    }
+  },
+  'hyperbrowser-mcp': {
+    requiredEnvVars: {
+      HYPERBROWSER_API_KEY: {
+        description: 'API KEY for Hyperbrowser',
+        required: true
+      },
+    }
   }
 };

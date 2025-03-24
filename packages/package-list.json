@@ -387,6 +387,15 @@
     "runtime": "node"
   },
   {
+    "name": "@bharathvaj/whois-mcp",
+    "description": "MCP server for whois lookups",
+    "vendor": "Bharathvaj Ganesan (https://bharathvaj.com)",
+    "sourceUrl": "https://github.com/bharathvaj-ganesan/whois-mcp",
+    "homepage": "https://github.com/bharathvaj-ganesan/whois-mcp",
+    "license": "MIT",
+    "runtime": "node"
+  },
+  {
     "name": "airtable-mcp-server",
     "description": "Airtable database integration with schema inspection, read and write capabilities",
     "vendor": "Adam Jones (https://github.com/domdomegg/)",
@@ -487,12 +496,21 @@
     "runtime": "node"
   },
   {
-    "name": "@bharathvaj/whois-mcp",
-    "description": "MCP server for whois lookups",
-    "vendor": "Bharathvaj Ganesan (https://bharathvaj.com)",
-    "sourceUrl": "https://github.com/bharathvaj-ganesan/whois-mcp",
-    "homepage": "https://github.com/bharathvaj-ganesan/whois-mcp",
-    "license": "MIT",
-    "runtime": "node"
+    "name": "@niledatabase/nile-mcp-server",
+    "description": "MCP server for Nile Database - Manage and query databases, tenants, users, auth using LLMs",
+    "vendor": "Nile (https://www.thenile.dev/)",
+    "sourceUrl": "https://github.com/niledatabase/nile-mcp-server/tree/main",
+    "homepage": "https://github.com/niledatabase/nile-mcp-server/tree/main",
+    "runtime": "node",
+    "license": "MIT"
+  },
+  {
+    "name": "hyperbrowser-mcp",
+    "description": "An MCP server for Hyperbrowser - Hyperbrowser is the next-generation platform empowering AI agents and enabling effortless, scalable browser automation",
+    "vendor": "Hyperbrowser (https://www.hyperbrowser.ai/)",
+    "sourceUrl": "https://github.com/hyperbrowserai/mcp/tree/main",
+    "homepage": "https://www.hyperbrowser.ai/",
+    "runtime": "node",
+    "license": "MIT"
   }
 ]
