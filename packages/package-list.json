@@ -324,6 +324,15 @@
     "runtime": "node"
   },
   {
+    "name": "@chargebee/mcp",
+    "description": "MCP Server that connects AI agents to Chargebee platform.",
+    "vendor": "Chargebee (https://chargebee.com)",
+    "sourceUrl": "https://github.com/chargebee/agentkit/tree/main/modelcontextprotocol",
+    "homepage": "https://chargebee.com",
+    "runtime": "node",
+    "license": "MIT"
+  },
+  {
     "name": "docker-mcp",
     "description": "A powerful Model Context Protocol (MCP) server for Docker operations, enabling seamless container and compose stack management through Claude AI",
     "vendor": "QuantGeekDev & md-archive",
