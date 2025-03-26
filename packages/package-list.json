@@ -503,5 +503,14 @@
     "homepage": "https://www.hyperbrowser.ai/",
     "runtime": "node",
     "license": "MIT"
+  },
+  {
+    "name": "hyper-mcp",
+    "description": "MCP server with an extensible plugin system, powered by WebAssembly & OCI registry",
+    "vendor": "Tuan Anh (https://tuananh.net)",
+    "sourceUrl": "https://github.com/tuananh/hyper-mcp",
+    "homepage": "https://github.com/tuananh/hyper-mcp",
+    "license": "Apache-2.0",
+    "runtime": "native"
   }
 ]
