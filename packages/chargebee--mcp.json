@@ -1,0 +1,10 @@
+{
+  "name": "@chargebee/mcp",
+  "description": "MCP Server that connects AI agents to Chargebee platform.",
+  "vendor": "Chargebee (https://chargebee.com)",
+  "sourceUrl": "https://github.com/chargebee/agentkit/tree/main/modelcontextprotocol",
+  "homepage": "https://chargebee.com",
+  "runtime": "node",
+  "license": "MIT",
+  "environmentVariables": {}
+}
