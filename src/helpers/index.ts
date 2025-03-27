@@ -225,5 +225,8 @@ export const packageHelpers: PackageHelpers = {
         required: true
       },
     }
+  },
+  '@chargebee/mcp': {
+    requiredEnvVars: {}
   }
 };
