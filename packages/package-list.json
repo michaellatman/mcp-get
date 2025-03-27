@@ -503,5 +503,14 @@
     "homepage": "https://www.hyperbrowser.ai/",
     "runtime": "node",
     "license": "MIT"
+  },
+    {
+    "name": "canvas-mcp",
+    "description": "Collection of MCP tools for Canvas LMS. Allows you to query your courses, find resources, and find upcoming assignments in the AI app of your choice",
+    "vendor": "Aryan Keluskar",
+    "sourceUrl": "https://github.com/aryankeluskar/canvas-mcp/",
+    "homepage": "https://github.com/aryankeluskar/canvas-mcp/",
+    "license": "MIT",
+    "runtime": "python"
   }
 ]
