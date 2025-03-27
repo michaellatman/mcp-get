@@ -1,0 +1,10 @@
+{
+  "name": "chargebee-mcp-server",
+  "description": "MCP server for Chargebee subscription and billing management",
+  "vendor": "Bharathvaj (https://github.com/cb-bharathvaj)",
+  "sourceUrl": "https://github.com/cb-bharathvaj/chargebee-mcp-server",
+  "homepage": "https://github.com/cb-bharathvaj/chargebee-mcp-server",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {}
+}
