@@ -1,0 +1,15 @@
+{
+  "name": "mcp-unity",
+  "description": "An MCP server for Unity3d Game Engine - Unity3d is a game engine for building the most successful games and apps. Enabling seamless integration of Claude with Unity3d",
+  "vendor": "CoderGamester (https://github.com/CoderGamester/)",
+  "sourceUrl": "https://github.com/CoderGamester/mcp-unity",
+  "homepage": "https://github.com/CoderGamester/mcp-unity",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables":  {
+    "UNITY_PORT": {
+      "description": "Websocket port to connect Unity3d with the MCP server. (Default = 8090)",
+      "required": false
+    }
+  }
+}
