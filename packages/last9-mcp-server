@@ -1,0 +1,23 @@
+{
+  "name": "last9-mcp-server",
+  "description": "Seamlessly bring real-time production context—logs, metrics, and traces—into your local environment to auto-fix code faster.",
+  "vendor": "Last9",
+  "sourceUrl": "https://github.com/last9/last9-mcp-server",
+  "homepage": "https://last9.io/docs/mcp/",
+  "license": "MIT",
+  "runtime": "go",
+  "environmentVariables": {
+    "LAST9_AUTH_TOKEN": {
+      "description": "Authentication token for Last9 MCP server",
+      "required": true
+    },
+    "LAST9_BASE_URL": {
+      "description": "Last9 API URL",
+      "required": true
+    },
+    "LAST9_REFRESH_TOKEN": {
+      "description": "Refresh Token with Write permissions. Needed for accessing control plane APIs",
+      "required": true
+    }
+  }
+}
