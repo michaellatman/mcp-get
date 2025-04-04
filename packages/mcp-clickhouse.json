@@ -1,0 +1,9 @@
+{
+  "name": "mcp-clickhouse",
+  "description": "MCP server for ClickHouse database integration with schema inspection and query capabilities",
+  "runtime": "python",
+  "vendor": "ClickHouse",
+  "sourceUrl": "https://github.com/ClickHouse/mcp-clickhouse",
+  "homepage": "https://github.com/ClickHouse/mcp-clickhouse",
+  "license": "Apache-2.0"
+}
