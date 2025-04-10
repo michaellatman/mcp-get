@@ -1,0 +1,15 @@
+{
+  "name": "armor-crypto-mcp",
+  "description": "MCP server for full access to the blockchain functionality of Armor Wallet.",
+  "vendor": "Armor Wallet",
+  "sourceUrl": "https://github.com/armorwallet/armor-crypto-mcp.git",
+  "homepage": "https://github.com/armorwallet/armor-crypto-mcp.git",
+  "license": "GNU GPL-3.0",
+  "runtime": "python",
+  "environmentVariables": {
+    "ARMOR_API_KEY": {
+      "description": "API for Armor Wallet",
+      "required": true
+    }
+  }
+}
