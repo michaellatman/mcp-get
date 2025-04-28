@@ -1,0 +1,11 @@
+{
+  "name": "Bazi MCP",
+  "description": "A brief description of your MCP server",
+  "vendor": "Cantian AI",
+  "sourceUrl": "https://github.com/cantian-ai/bazi-mcp",
+  "homepage": "https://cantian.ai",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {}
+  }
+}
