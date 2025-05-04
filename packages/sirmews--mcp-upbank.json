@@ -1,0 +1,15 @@
+{
+  "name": "@sirmews/mcp-upbank",
+  "description": "An MCP Server for interacting with the Up Bank API",
+  "vendor": "Navishkar Rao (https://github.com/sirmews",
+  "sourceUrl": "https://github.com/sirmews/mcp-upbank",
+  "homepage": "https://github.com/sirmews/mcp-upbank",
+  "license": "Unlicense",
+  "runtime": "node",
+  "environmentVariables": {
+    "AWS_PROFILE": {
+      "description": "Your Up Bank Personal Access Token",
+      "required": true
+    },
+  }
+}
