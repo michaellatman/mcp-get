@@ -1,0 +1,10 @@
+{
+  "name": "@chriswhiterocks/sushimcp",
+  "description": "SushiMCP assists developers with delivering context and up to date docs to their AI IDE's.",
+  "vendor": "Chris White <chris@chriswhite.rocks> (https://chriswhite.rocks)",
+  "sourceUrl": "https://github.com/maverickg59/sushimcp",
+  "homepage": "https://sushimcp.com",
+  "license": "AGPLv3",
+  "runtime": "node",
+  "environmentVariables": {}
+}
