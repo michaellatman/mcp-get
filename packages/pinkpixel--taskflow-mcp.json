@@ -1,0 +1,10 @@
+{
+  "name": "taskflow-mcp",
+  "description": "Task manager Model Context Protocol (MCP) server for planning and executing tasks.",
+  "vendor": "Pink Pixel",
+  "sourceUrl": "https://github.com/pinkpixel-dev/taskflow-mcp",
+  "homepage": "https://github.com/pinkpixel-dev/taskflow-mcp",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {}
+}
