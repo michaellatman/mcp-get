@@ -1,5 +1,5 @@
 {
-  "name": "taskflow-mcp",
+  "name": "@pinkpixel/taskflow-mcp",
   "description": "Task manager Model Context Protocol (MCP) server for planning and executing tasks.",
   "vendor": "Pink Pixel",
   "sourceUrl": "https://github.com/pinkpixel-dev/taskflow-mcp",
