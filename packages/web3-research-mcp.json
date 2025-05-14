@@ -1,0 +1,10 @@
+{
+  "name": "web3-research-mcp",
+  "description": "Deep Research for crypto - free & fully local 🧠",
+  "vendor": "Aaron Elijah Mars",
+  "sourceUrl": "https://github.com/aaronjmars/web3-research-mcp",
+  "homepage": "https://smithery.ai/server/@aaronjmars/web3-research-mcp",
+  "license": "Apache-2.0",
+  "runtime": "node",
+  "environmentVariables": {}
+}
