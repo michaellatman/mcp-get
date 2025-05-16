@@ -15,4 +15,5 @@
       "description": "Nomad URL address",
       "required": false
     }
+  }
 }

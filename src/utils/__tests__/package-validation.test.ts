@@ -222,10 +222,7 @@ describe('Package Validation', () => {
       const filePath = path.join(PACKAGES_DIR, file);
       const fileContent = fs.readFileSync(filePath, 'utf-8');
       
-      if (file === 'kocierik--mcp-nomad.json') {
-        continue;
-      }
-      
+
       try {
         const pkg = JSON.parse(fileContent);
         expect(pkg).toHaveProperty('name');
