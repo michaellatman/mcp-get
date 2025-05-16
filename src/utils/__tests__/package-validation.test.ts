@@ -208,4 +208,22 @@ describe('Package Validation', () => {
       }
     }
   });
+
+  it('should verify all JSON files in packages directory are valid', () => {
+    const filesInDir = fs.readdirSync(PACKAGES_DIR)
+      .filter(file => file.endsWith('.json') && file !== 'package-list.json' && file !== 'index.json');
+      
+    expect(filesInDir.length).toBeGreaterThan(0);
+    
+    // Check each JSON file is valid
+    for (const file of filesInDir) {
+      const filePath = path.join(PACKAGES_DIR, file);
+      const fileContent = fs.readFileSync(filePath, 'utf-8');
+      
+      expect(() => JSON.parse(fileContent)).not.toThrow();
+      
+      const pkg = JSON.parse(fileContent);
+      expect(pkg).toHaveProperty('name');
+    }
+  });
 });
