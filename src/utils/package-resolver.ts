@@ -11,6 +11,10 @@ export function resolvePackages(): ResolvedPackage[] {
         // Load packages from registry
         const packages: Package[] = loadAllPackages();
         
+        if (packages.length === 0) {
+            console.warn('No packages loaded from registry. This might be due to invalid package files.');
+        }
+        
         // Get installed packages from config
         const config = ConfigManager.readConfig();
         const installedServers = config.mcpServers || {};
@@ -123,4 +127,4 @@ export function resolvePackage(packageName: string): ResolvedPackage | null {
         console.error('Error resolving package:', error);
         return null;
     }
-} 
+}  

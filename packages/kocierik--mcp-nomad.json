@@ -10,9 +10,9 @@
     "NOMAD_TOKEN": {
       "description": "Nomad token if ACL are enabled",
       "required": false
-    }
+    },
     "NOMAD_ADDR": {
       "description": "Nomad URL address",
       "required": false
-    },
+    }
 }
