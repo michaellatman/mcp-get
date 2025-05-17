@@ -43,8 +43,6 @@ This tool helps you install and manage MCP servers that connect Claude to variou
 - Go (version 1.16 or higher) for Go-based MCP servers
 - Claude Desktop app (for local MCP server usage)
 
-> **Note**: This tool has not been thoroughly tested on Windows systems yet. While it may work, you might encounter some issues. Contributions to improve Windows compatibility are welcome!
-
 ## Usage Examples
 
 ### Install a Package
