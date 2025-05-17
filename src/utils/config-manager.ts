@@ -4,10 +4,11 @@ import os from 'os';
 import { Package } from '../types/package.js';
 
 export interface MCPServer {
-    runtime: 'node' | 'python' | 'go';
+    runtime: 'node' | 'python' | 'go' | 'http';
     command?: string;
     args?: string[];
     env?: Record<string, string>;
+    url?: string;
     version?: string; // Add version field to track installed version
 }
 
@@ -116,8 +117,10 @@ export class ConfigManager {
             version: pkg.version // Store version information
         };
 
-        // Add command and args based on runtime and version
-        if (pkg.runtime === 'node') {
+        // Add command, args or url based on runtime and version
+        if (pkg.runtime === 'http') {
+            serverConfig.url = pkg.url || pkg.name;
+        } else if (pkg.runtime === 'node') {
             serverConfig.command = 'npx';
             serverConfig.args = ['-y', pkg.version ? `${pkg.name}@${pkg.version}` : pkg.name];
         } else if (pkg.runtime === 'python') {

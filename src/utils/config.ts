@@ -13,10 +13,11 @@ const __dirname = dirname(__filename);
 const execAsync = promisify(exec);
 
 export interface MCPServerConfig {
-  command: string;
-  args: string[];
+  command?: string;
+  args?: string[];
   env?: Record<string, string>;
-  runtime?: 'node' | 'python' | 'go';
+  url?: string;
+  runtime?: 'node' | 'python' | 'go' | 'http';
 }
 
 export interface ClaudeConfig {
@@ -24,7 +25,7 @@ export interface ClaudeConfig {
   [key: string]: any;
 }
 
-function getPackageRuntime(packageName: string): 'node' | 'python' | 'go' {
+function getPackageRuntime(packageName: string): 'node' | 'python' | 'go' | 'http' {
   const pkg = loadPackage(packageName);
   return pkg?.runtime || 'node';
 }
@@ -57,7 +58,7 @@ export function writeConfig(config: ClaudeConfig): void {
   fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
 }
 
-export async function installMCPServer(packageName: string, envVars?: Record<string, string>, runtime?: 'node' | 'python' | 'go'): Promise<void> {
+export async function installMCPServer(packageName: string, envVars?: Record<string, string>, runtime?: 'node' | 'python' | 'go' | 'http'): Promise<void> {
   const config = readConfig();
   const serverName = packageName.replace(/\//g, '-');
   
@@ -68,24 +69,36 @@ export async function installMCPServer(packageName: string, envVars?: Record<str
   }
 
   let command = 'npx';
-  if (effectiveRuntime === 'python') {
-    try {
-      const { stdout } = await execAsync('which uvx');
-      command = stdout.trim();
-    } catch (error) {
-      command = 'uvx'; // Fallback to just 'uvx' if which fails
+  let args: string[] | undefined;
+  let url: string | undefined;
+
+  if (effectiveRuntime === 'http') {
+    command = undefined as any;
+    args = undefined;
+    url = packageName;
+  } else {
+    if (effectiveRuntime === 'python') {
+      try {
+        const { stdout } = await execAsync('which uvx');
+        command = stdout.trim();
+      } catch (error) {
+        command = 'uvx';
+      }
+      args = [packageName];
+    } else if (effectiveRuntime === 'go') {
+      command = 'go';
+      args = ['run', packageName];
+    } else {
+      args = ['-y', packageName];
     }
-  } else if (effectiveRuntime === 'go') {
-    command = 'go';
   }
-  
+
   const serverConfig: MCPServerConfig = {
     runtime: effectiveRuntime,
     env: envVars,
     command,
-    args: effectiveRuntime === 'python' ? [packageName] : 
-          effectiveRuntime === 'go' ? ['run', packageName] : 
-          ['-y', packageName]
+    args,
+    url
   };
   
   config.mcpServers[serverName] = serverConfig;

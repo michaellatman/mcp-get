@@ -1,11 +1,13 @@
 export interface Package {
     name: string;
     description: string;
-    runtime: 'node' | 'python' | 'go';
+    runtime: 'node' | 'python' | 'go' | 'http';
     vendor: string;
     sourceUrl: string;
     homepage: string;
     license: string;
+    /** Optional URL for HTTP based servers */
+    url?: string;
     version?: string; // Optional version field to specify package version
     environmentVariables?: {
         [key: string]: {
@@ -30,7 +32,7 @@ export interface PackageHelper {
         }
     };
     configureEnv?: (config: any) => Promise<void>;
-    runtime?: 'node' | 'python' | 'go';
+    runtime?: 'node' | 'python' | 'go' | 'http';
 }
 
 export interface PackageHelpers {
