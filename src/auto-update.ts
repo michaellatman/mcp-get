@@ -1,13 +1,17 @@
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import { readFileSync } from 'fs';
-import { join } from 'path';
+import { resolve, dirname } from 'path';
+import { fileURLToPath } from 'url';
 import chalk from 'chalk';
 
 const execAsync = promisify(exec);
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 async function getCurrentVersion(): Promise<string> {
-  const packageJsonPath = new URL('../package.json', import.meta.url).pathname;
+  const packageJsonPath = resolve(__dirname, '../package.json');
   const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'));
   return packageJson.version;
 }
