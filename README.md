@@ -8,6 +8,15 @@ With mcp-get, you can:
 - Manage environment variables and configurations
 - Update and uninstall servers as needed
 
+## Quick Start
+
+Try mcp-get immediately:
+
+```bash
+npx @michaellatman/mcp-get@latest list
+npx @michaellatman/mcp-get@latest install @modelcontextprotocol/server-brave-search
+```
+
 All packages added to the registry are automatically displayed on [mcp-get.com](https://mcp-get.com), making them discoverable to other users.
 
 ## About Model Context Protocol
