@@ -1,0 +1,15 @@
+{
+    "name": "@flamedeck/flamechart-mcp",
+    "description": "MCP server for debugging and analyzing a wide range of performance profiles (go, javascript, python, etc) using flamegraphs. Use with local traces or with FlameDeck's hosted trace storage.",
+    "vendor": "Flamedeck Team",
+    "sourceUrl": "https://github.com/flamedeck-org/flamedeck/tree/main/packages/flamechart-mcp",
+    "homepage": "https://github.com/flamedeck-org/flamedeck/tree/main/packages/flamechart-mcp#readme",
+    "license": "ISC",
+    "runtime": "node",
+    "environmentVariables": {
+        "FLAMEDECK_API_KEY": {
+            "description": "API key for analyzing remote Flamedeck traces. Only required for remote Flamedeck URL traces - works completely offline for local trace files without this key.",
+            "required": false
+        }
+    }
+}
