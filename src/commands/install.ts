@@ -4,8 +4,8 @@ import inquirer from 'inquirer';
 import chalk from 'chalk';
 import { resolvePackages } from '../utils/package-resolver.js';
 
-async function promptForRuntime(): Promise<'node' | 'python' | 'go'> {
-  const { runtime } = await inquirer.prompt<{ runtime: 'node' | 'python' | 'go' }>([
+async function promptForRuntime(): Promise<'node' | 'python' | 'go' | 'http'> {
+  const { runtime } = await inquirer.prompt<{ runtime: 'node' | 'python' | 'go' | 'http' }>([
     {
       type: 'list',
       name: 'runtime',
@@ -13,14 +13,15 @@ async function promptForRuntime(): Promise<'node' | 'python' | 'go'> {
       choices: [
         { name: 'Node.js', value: 'node' },
         { name: 'Python', value: 'python' },
-        { name: 'Go', value: 'go' }
+        { name: 'Go', value: 'go' },
+        { name: 'HTTP URL', value: 'http' }
       ]
     }
   ]);
   return runtime;
 }
 
-function createUnknownPackage(packageName: string, runtime: 'node' | 'python' | 'go', version?: string): Package {
+function createUnknownPackage(packageName: string, runtime: 'node' | 'python' | 'go' | 'http', version?: string): Package {
   return {
     name: packageName,
     description: 'Unverified package',
@@ -29,6 +30,7 @@ function createUnknownPackage(packageName: string, runtime: 'node' | 'python' | 
     sourceUrl: '',
     homepage: '',
     license: '',
+    url: runtime === 'http' ? packageName : undefined,
     version
   };
 }
@@ -41,9 +43,17 @@ export async function install(packageName: string, version?: string): Promise<vo
   const packages = resolvePackages();
   const pkg = packages.find(p => p.name === packageName);
 
+  const isUrl = /^https?:\/\//.test(packageName);
+
   if (!pkg) {
+    if (isUrl) {
+      const httpPkg = createUnknownPackage(packageName, 'http', version);
+      await installPkg(httpPkg);
+      return;
+    }
+
     console.warn(chalk.yellow(`Package ${packageName} not found in the curated list.`));
-    
+
     const { proceedWithInstall } = await inquirer.prompt<{ proceedWithInstall: boolean }>([
       {
         type: 'confirm',
@@ -55,10 +65,10 @@ export async function install(packageName: string, version?: string): Promise<vo
 
     if (proceedWithInstall) {
       console.log(chalk.cyan(`Proceeding with installation of ${packageName}${version ? ` version ${version}` : ''}...`));
-      
+
       // Prompt for runtime for unverified packages
       const runtime = await promptForRuntime();
-      
+
       // Create a basic package object for unverified packages
       const unknownPkg = createUnknownPackage(packageName, runtime, version);
       await installPkg(unknownPkg);
