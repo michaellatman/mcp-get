@@ -1,0 +1,39 @@
+{
+  "name": "web-scrapper-stdio",
+  "description": "A Python-based MCP server for headless web scraping via Playwright, outputting Markdown, text, or HTML.",
+  "vendor": "JustAzul (https://github.com/JustAzul)",
+  "sourceUrl": "https://github.com/JustAzul/web-scrapper-stdio",
+  "homepage": "https://github.com/JustAzul/web-scrapper-stdio",
+  "license": "MIT",
+  "runtime": "python",
+  "environmentVariables": {
+    "DEFAULT_TIMEOUT_SECONDS": {
+      "description": "Timeout for page loads and navigation (seconds)",
+      "required": false
+    },
+    "DEFAULT_MIN_CONTENT_LENGTH": {
+      "description": "Minimum content length for extracted text (characters)",
+      "required": false
+    },
+    "DEFAULT_MIN_CONTENT_LENGTH_SEARCH_APP": {
+      "description": "Minimum content length for search.app domains (characters)",
+      "required": false
+    },
+    "DEFAULT_MIN_SECONDS_BETWEEN_REQUESTS": {
+      "description": "Minimum delay between requests to the same domain (seconds)",
+      "required": false
+    },
+    "DEFAULT_TEST_REQUEST_TIMEOUT": {
+      "description": "Timeout for test requests (seconds)",
+      "required": false
+    },
+    "DEFAULT_TEST_NO_DELAY_THRESHOLD": {
+      "description": "Threshold for skipping artificial delays in tests (seconds)",
+      "required": false
+    },
+    "DEBUG_LOGS_ENABLED": {
+      "description": "Enable debug-level logs (true/false)",
+      "required": false
+    }
+  }
+}
