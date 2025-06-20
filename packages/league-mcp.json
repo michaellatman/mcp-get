@@ -1,0 +1,15 @@
+{
+  "name": "league-mcp",
+  "description": "A Model Context Protocol server that provides LLMs comprehensive access to League of Legends game data through the Riot Games API. Enables retrieval of player statistics, match history, champion information, tournament data, and more.",
+  "vendor": "kostadindev",
+  "sourceUrl": "https://github.com/kostadindev/League-of-Legends-MCP",
+  "homepage": "https://github.com/kostadindev/League-of-Legends-MCP",
+  "license": "MIT",
+  "runtime": "python",
+  "environmentVariables": {
+    "RIOT_API_KEY": {
+      "description": "Your Riot Games API key required to access the League of Legends API. Get one for free at developer.riotgames.com",
+      "required": true
+    }
+  }
+}
