@@ -1,5 +1,5 @@
 {
-  "name": "github.com/harness/mcp-server",
+  "name": "harness-mcp-server",
   "description": "MCP Server for Harness Data",
   "vendor": "Harness.io, (https://harness.io)",
   "sourceUrl": "https://github.com/harness/mcp-server",
