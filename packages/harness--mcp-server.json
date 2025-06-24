@@ -1,0 +1,15 @@
+{
+  "name": "harness-mcp-server",
+  "description": "MCP Server for Harness Data",
+  "vendor": "Harness.io, (https://harness.io)",
+  "sourceUrl": "https://github.com/harness/mcp-server",
+  "homepage": "https://www.harness.io/",
+  "license": "MIT",
+  "runtime": "go",
+  "environmentVariables": {
+    "HARNESS_API_KEY": {
+      "description": "API Key from Harness Platform",
+      "required": true
+    }
+  }
+}
