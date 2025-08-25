@@ -1,0 +1,10 @@
+{
+  "name": "composio-rube",
+  "description": "Rube is a Model-Context-Protocol (MCP) server built on the Composio integration platform. It connects AI chat tools to more than 500 business and productivity applications - things like Gmail, Slack, Notion, GitHub, Linear, Airtable, and many others.",
+  "vendor": "Composio (https://github.com/composiohq/)",
+  "sourceUrl": "https://github.com/composiohq/rube",
+  "homepage": "https://rube.composio.dev",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {}
+}
