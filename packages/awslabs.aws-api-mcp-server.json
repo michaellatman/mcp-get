@@ -1,0 +1,71 @@
+{
+    "name": "awslabs.aws-api-mcp-server",
+    "description": "The AWS API MCP Server enables AI assistants to interact with AWS services and resources through AWS CLI commands.",
+    "vendor": "AWS (https://aws.amazon.com)",
+    "sourceUrl": "https://github.com/awslabs/mcp/tree/main/src/aws-api-mcp-server",
+    "homepage": "https://github.com/awslabs/mcp/tree/main/src/aws-api-mcp-server",
+    "license": "Apache 2.0",
+    "runtime": "python",
+    "environmentVariables": {
+        "AWS_REGION": {
+            "description": "Sets the default AWS region for all CLI commands, unless a specific region is provided in the request. This provides a consistent default while allowing flexibility to run commands in different regions as needed.",
+            "required": false
+        },
+        "AWS_API_MCP_WORKING_DIR": {
+            "description": "Working directory path for the MCP server operations. Must be an absolute path when provided. Used to resolve relative paths in commands like aws s3 cp. Does not provide any sandboxing or security restrictions. If not provided, defaults to a platform-specific directory.",
+            "required": false
+        },
+        "AWS_API_MCP_PROFILE_NAME": {
+            "description": "AWS Profile for credentials to use for command executions. If not provided, the MCP server will follow the boto3's default credentials chain to look for credentials. We strongly recommend you to configure your credentials this way.",
+            "required": false
+        },
+        "READ_OPERATIONS_ONLY": {
+            "description": "When set to \"true\", restricts execution to read-only operations only. IAM permissions remain the primary security control. For a complete list of allowed operations under this flag, refer to the Service Authorization Reference. Only operations where the Access level column is not Write will be allowed when this is set to \"true\".",
+            "required": false
+        },
+        "REQUIRE_MUTATION_CONSENT": {
+            "description": "When set to \"true\", the MCP server will ask explicit consent before executing any operations that are NOT read-only. This safety mechanism uses elicitation so it requires a client that supports elicitation.",
+            "required": false
+        },
+        "AWS_ACCESS_KEY_ID": {
+            "description": "Use environment variables to configure AWS credentials.",
+            "required": false
+        },
+        "AWS_SECRET_ACCESS_KEY": {
+            "description": "Use environment variables to configure AWS credentials.",
+            "required": false
+        },
+        "AWS_SESSION_TOKEN": {
+            "description": "Use environment variables to configure AWS credentials.",
+            "required": false
+        },
+        "AWS_API_MCP_TELEMETRY": {
+            "description": "Allow sending additional telemetry data to AWS related to the server configuration. This includes Whether the call_aws() tool is used with READ_OPERATIONS_ONLY set to true or false. Note: Regardless of this setting, AWS obtains information about which operations were invoked and the server version as part of normal AWS service interactions; no additional telemetry calls are made by the server for this purpose.",
+            "required": false
+        },
+        "EMBEDDING_MODEL_DIR": {
+            "description": "Allow sending additional telemetry data to AWS related to the server configuration. This includes Whether the call_aws() tool is used with READ_OPERATIONS_ONLY set to true or false. Note: Regardless of this setting, AWS obtains information about which operations were invoked and the server version as part of normal AWS service interactions; no additional telemetry calls are made by the server for this purpose.",
+            "required": false
+        },
+        "EXPERIMENTAL_AGENT_SCRIPTS": {
+            "description": "When set to \"true\", enables experimental agent scripts functionality. This provides access to structured, step-by-step workflows for complex AWS tasks through the get_execution_plan tool. Agent scripts are reusable workflows that automate complex processes and provide detailed guidance for accomplishing specific tasks. This feature is experimental and may change in future releases.",
+            "required": false
+        },
+        "AWS_API_MCP_AGENT_SCRIPTS_DIR": {
+            "description": "Directory path containing custom user scripts for the agent scripts functionality. When specified, the server will load additional .script.md files from this directory alongside the built-in scripts. The directory must exist and be readable. Scripts must follow the same format as built-in scripts with frontmatter metadata including a description field. This allows users to extend the agent scripts functionality with their own custom workflows.",
+            "required": false
+        },
+        "AWS_API_MCP_TRANSPORT": {
+            "description": "Transport protocol for the MCP server. Valid options are \"stdio\" (default) for local communication or \"streamable-http\" for HTTP-based communication. When using \"streamable-http\", the server will listen on the host and port specified by AWS_API_MCP_HOST and AWS_API_MCP_PORT.",
+            "required": false
+        },
+        "AWS_API_MCP_HOST": {
+            "description": "Host address for the MCP server when using \"streamable-http\" transport. Only used when AWS_API_MCP_TRANSPORT is set to \"streamable-http\".",
+            "required": false
+        },
+        "AWS_API_MCP_PORT": {
+            "description": "Port number for the MCP server when using \"streamable-http\" transport. Only used when AWS_API_MCP_TRANSPORT is set to \"streamable-http\".",
+            "required": false
+        }
+    }
+}
