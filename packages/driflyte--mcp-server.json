@@ -1,0 +1,11 @@
+{
+  "name": "@driflyte/mcp-server",
+  "description": "Driflyte MCP server which lets AI assistants query topic-specific knowledge from web and GitHub.",
+  "runtime": "node",
+  "vendor": "Driflyte",
+  "sourceUrl": "https://github.com/serkan-ozal/driflyte-mcp-server",
+  "homepage": "https://github.com/serkan-ozal/driflyte-mcp-server",
+  "license": "MIT",
+  "environmentVariables": {
+  }
+}
