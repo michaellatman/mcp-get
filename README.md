@@ -4,17 +4,19 @@
 
 We want to extend our heartfelt thanks to everyone who contributed to mcp-get, submitted packages, reported issues, and helped build this community. Your contributions and support have been invaluable in advancing the Model Context Protocol ecosystem.
 
-## 🎯 Where to Go Now
+## 🎯 Recommendation
 
-**Please use [Smithery](https://smithery.ai)** for discovering, installing, and managing MCP servers.
+**We recommend [Smithery](https://smithery.ai)** for discovering, installing, and managing MCP servers.
 
-Smithery is the official registry and package manager for MCP servers, providing:
+Smithery provides:
 - A comprehensive, curated registry of MCP servers
 - Simple installation and management
 - Better discovery and documentation
 - Active maintenance and support
 
 Visit **[smithery.ai](https://smithery.ai)** to get started.
+
+**Note:** This tool will continue to work, but will no longer receive updates or new features.
 
 ---
 
