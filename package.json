@@ -1,7 +1,8 @@
 {
   "name": "@michaellatman/mcp-get",
   "version": "1.0.115",
-  "description": "A NPX command to install and list packages",
+  "description": "[DEPRECATED] Please use Smithery (https://smithery.ai) - A NPX command to install and list packages",
+  "deprecated": "This package is no longer maintained. Please use Smithery at https://smithery.ai for MCP server management.",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc && chmod +x dist/index.js",
