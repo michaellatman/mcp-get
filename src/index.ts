@@ -5,12 +5,18 @@ import { install } from './commands/install.js';
 import { uninstall } from './commands/uninstall.js';
 import { listInstalledPackages } from './commands/installed.js';
 import { updatePackage } from './auto-update.js';
+import chalk from 'chalk';
 
 const command = process.argv[2];
 const packageName = process.argv[3];
 const version = process.argv[4]; // Add support for version parameter
 
 async function main() {
+  // Show deprecation notice
+  console.log(chalk.yellow('⚠️  NOTICE: mcp-get is deprecated and no longer actively maintained.'));
+  console.log(chalk.cyan('We recommend using Smithery for MCP server management: https://smithery.ai'));
+  console.log(chalk.gray('This tool will continue to work but will not receive updates.\n'));
+
   switch (command) {
     case 'list':
       await list();
