@@ -1,0 +1,97 @@
+{
+  "name": "enhanced-fetch-mcp",
+  "description": "Powerful web scraping, content extraction, and browser automation for Claude Code. 19 MCP tools including HTTP fetch, HTML to Markdown conversion, Playwright browser control, screenshot/PDF generation, and Docker sandboxes. Perfect replacement for Claude Code's built-in WebFetch with enhanced capabilities.",
+  "vendor": "Enhanced Fetch MCP Team",
+  "sourceUrl": "https://github.com/Danielmelody/enhanced-fetch-mcp",
+  "homepage": "https://github.com/Danielmelody/enhanced-fetch-mcp#readme",
+  "license": "MIT",
+  "runtime": "node",
+  "command": "enhanced-fetch-mcp",
+  "installCommand": "npm install -g enhanced-fetch-mcp",
+  "version": "1.0.0",
+  "keywords": [
+    "web-scraping",
+    "browser-automation",
+    "playwright",
+    "content-extraction",
+    "fetch",
+    "markdown",
+    "html-parser",
+    "screenshot",
+    "pdf-generation",
+    "docker",
+    "sandbox",
+    "mcp",
+    "model-context-protocol",
+    "claude-code",
+    "chromium",
+    "firefox",
+    "webkit"
+  ],
+  "tools": [
+    {
+      "name": "fetch_and_extract",
+      "description": "Fetch URL and extract content with one call (most commonly used)"
+    },
+    {
+      "name": "fetch_url",
+      "description": "Fetch web pages with HTTP requests"
+    },
+    {
+      "name": "extract_content",
+      "description": "Extract structured content from HTML"
+    },
+    {
+      "name": "create_browser_context",
+      "description": "Create isolated browser context with Playwright"
+    },
+    {
+      "name": "browser_navigate",
+      "description": "Navigate to URL in browser"
+    },
+    {
+      "name": "browser_get_content",
+      "description": "Get rendered HTML after JavaScript execution"
+    },
+    {
+      "name": "browser_screenshot",
+      "description": "Capture page screenshots"
+    },
+    {
+      "name": "browser_pdf",
+      "description": "Generate PDF from web pages"
+    },
+    {
+      "name": "browser_execute_js",
+      "description": "Execute JavaScript in browser context"
+    }
+  ],
+  "env": {
+    "NODE_ENV": {
+      "description": "Node environment (production/development)",
+      "required": false,
+      "default": "production"
+    },
+    "LOG_LEVEL": {
+      "description": "Logging level (debug/info/warn/error)",
+      "required": false,
+      "default": "info"
+    }
+  },
+  "requirements": {
+    "node": ">=18.0.0",
+    "docker": "optional (required for sandbox features)"
+  },
+  "features": [
+    "HTTP client with custom headers and timeouts",
+    "HTML to Markdown conversion",
+    "Metadata extraction (Open Graph, Twitter Card)",
+    "Browser automation with Playwright (Chromium/Firefox/WebKit)",
+    "Full-page and region screenshots (PNG/JPEG)",
+    "PDF generation (A4/Letter/Legal formats)",
+    "JavaScript execution in browser context",
+    "Docker sandbox execution environments",
+    "Automatic resource cleanup",
+    "19 MCP tools total"
+  ]
+}
