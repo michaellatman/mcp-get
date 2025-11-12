@@ -1,0 +1,10 @@
+{
+  "name": "perfetto-mcp",
+  "description": "Perfetto MCP transforms natural-language prompts into focused Perfetto analyses.",
+  "vendor": "antarikshc",
+  "sourceUrl": "https://github.com/antarikshc/perfetto-mcp",
+  "homepage": "https://github.com/antarikshc/perfetto-mcp",
+  "license": "Apache-2.0",
+  "runtime": "python",
+  "environmentVariables": {}
+}
