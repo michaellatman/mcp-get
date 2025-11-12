@@ -57,6 +57,17 @@ describe('ConfigManager', () => {
     license: 'MIT'
   };
 
+  const httpPackage: Package = {
+    name: 'https://example.com/server',
+    description: 'Test http package',
+    runtime: 'http',
+    vendor: 'test-vendor',
+    sourceUrl: 'https://example.com',
+    homepage: 'https://example.com',
+    license: 'MIT',
+    url: 'https://example.com/server'
+  };
+
   beforeEach(() => {
     jest.clearAllMocks();
     
@@ -226,6 +237,18 @@ describe('ConfigManager', () => {
       expect(writtenConfig.mcpServers['test-python-pkg'].runtime).toBe('python');
       expect(writtenConfig.mcpServers['test-python-pkg'].command).toBe('uvx');
       expect(writtenConfig.mcpServers['test-python-pkg'].args).toEqual(['test-python-pkg']);
+    });
+
+    it('should add HTTP package to config', async () => {
+      await ConfigManager.installPackage(httpPackage);
+
+      const writeSpy = jest.spyOn(fs, 'writeFileSync');
+      const writtenConfig = JSON.parse(writeSpy.mock.calls[0][1] as string);
+
+      const key = 'https://example.com/server'.replace(/\//g, '-');
+      expect(writtenConfig.mcpServers[key]).toBeDefined();
+      expect(writtenConfig.mcpServers[key].runtime).toBe('http');
+      expect(writtenConfig.mcpServers[key].url).toBe('https://example.com/server');
     });
     
     it('should include environment variables if provided', async () => {
