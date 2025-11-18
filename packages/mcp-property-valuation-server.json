@@ -1,0 +1,15 @@
+{
+  "name": "mcp-property-valuation-server",
+  "description": "MCP服务器，提供房产小区评级和评估功能",
+  "vendor": "CIH <creisxcx1@fang.com>",
+  "sourceUrl": "https://github.com/creis-ai/mcp-property-valuation-server",
+  "homepage": "https://github.com/creis-ai/mcp-property-valuation-server",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {
+    "MCP-INDUSTRY-APPID": {
+      "description": "MCP行业应用ID",
+      "required": true
+    }
+  }
+}
