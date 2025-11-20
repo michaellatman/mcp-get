@@ -227,3 +227,5 @@ If you don't want to manage package deployment and distribution:
 Both options require following the [MCP protocol specifications](https://modelcontextprotocol.io). Choose the option that best fits your needs:
 - Option 1 if you want full control over your package distribution
 - Option 2 if you want to avoid managing package deployment and distribution
+
+**[Probe.dev](https://docs.probe.dev/guides/mcp-integration)** - Comprehensive media analysis and validation powered by Probe.dev. Hosted MCP server with FFprobe, MediaInfo, and Probe Report capabilities.
