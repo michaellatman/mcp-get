@@ -1,0 +1,9 @@
+{
+  "name": "@purplesquirrel/guardrails-mcp-server",
+  "description": "AI guardrails and security validation MCP server - content filtering, prompt injection detection",
+  "vendor": "Purple Squirrel Media",
+  "sourceUrl": "https://github.com/PurpleSquirrelMedia/guardrails-mcp-server",
+  "homepage": "https://purplesquirrelmedia.github.io/.github/",
+  "license": "MIT",
+  "runtime": "node"
+}

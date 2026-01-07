@@ -1,0 +1,16 @@
+{
+  "name": "@purplesquirrel/ibmcloud-mcp-server",
+  "description": "IBM Cloud MCP server with 80+ CLI tools for Kubernetes, Cloud Functions, databases, VPCs, and more",
+  "vendor": "Purple Squirrel Media",
+  "sourceUrl": "https://github.com/PurpleSquirrelMedia/ibmcloud-mcp-server",
+  "homepage": "https://purplesquirrelmedia.github.io/.github/",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": [
+    {
+      "name": "IBMCLOUD_API_KEY",
+      "description": "IBM Cloud API key",
+      "required": true
+    }
+  ]
+}

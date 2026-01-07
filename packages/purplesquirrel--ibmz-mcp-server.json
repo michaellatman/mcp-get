@@ -1,0 +1,9 @@
+{
+  "name": "@purplesquirrel/ibmz-mcp-server",
+  "description": "IBM Z mainframe and Key Protect HSM integration MCP server",
+  "vendor": "Purple Squirrel Media",
+  "sourceUrl": "https://github.com/PurpleSquirrelMedia/ibmz-mcp-server",
+  "homepage": "https://purplesquirrelmedia.github.io/.github/",
+  "license": "MIT",
+  "runtime": "node"
+}

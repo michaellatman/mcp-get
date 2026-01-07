@@ -1,0 +1,21 @@
+{
+  "name": "@purplesquirrel/watsonx-mcp-server",
+  "description": "IBM watsonx.ai foundation models MCP server for Claude AI",
+  "vendor": "Purple Squirrel Media",
+  "sourceUrl": "https://github.com/PurpleSquirrelMedia/watsonx-mcp-server",
+  "homepage": "https://purplesquirrelmedia.github.io/.github/",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": [
+    {
+      "name": "WATSONX_API_KEY",
+      "description": "IBM watsonx API key",
+      "required": true
+    },
+    {
+      "name": "WATSONX_PROJECT_ID",
+      "description": "IBM watsonx project ID",
+      "required": true
+    }
+  ]
+}

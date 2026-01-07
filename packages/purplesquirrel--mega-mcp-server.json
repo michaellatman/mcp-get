@@ -1,0 +1,21 @@
+{
+  "name": "@purplesquirrel/mega-mcp-server",
+  "description": "MEGA.nz end-to-end encrypted cloud storage MCP server",
+  "vendor": "Purple Squirrel Media",
+  "sourceUrl": "https://github.com/PurpleSquirrelMedia/mega-mcp-server",
+  "homepage": "https://purplesquirrelmedia.github.io/.github/",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": [
+    {
+      "name": "MEGA_EMAIL",
+      "description": "MEGA account email",
+      "required": true
+    },
+    {
+      "name": "MEGA_PASSWORD",
+      "description": "MEGA account password",
+      "required": true
+    }
+  ]
+}
