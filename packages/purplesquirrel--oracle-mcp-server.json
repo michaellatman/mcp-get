@@ -1,0 +1,9 @@
+{
+  "name": "@purplesquirrel/oracle-mcp-server",
+  "description": "Oracle Cloud Infrastructure MCP server for compute, databases, networking, storage, and IAM",
+  "vendor": "Purple Squirrel Media",
+  "sourceUrl": "https://github.com/PurpleSquirrelMedia/oracle-mcp-server",
+  "homepage": "https://purplesquirrelmedia.github.io/.github/",
+  "license": "MIT",
+  "runtime": "node"
+}

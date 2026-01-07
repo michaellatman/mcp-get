@@ -1,0 +1,21 @@
+{
+  "name": "@purplesquirrel/volcengine-mcp",
+  "description": "ByteDance Volcano Engine (Doubao AI) MCP server",
+  "vendor": "Purple Squirrel Media",
+  "sourceUrl": "https://github.com/PurpleSquirrelMedia/volcengine-mcp",
+  "homepage": "https://purplesquirrelmedia.github.io/.github/",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": [
+    {
+      "name": "VOLC_ACCESS_KEY",
+      "description": "Volcano Engine access key",
+      "required": true
+    },
+    {
+      "name": "VOLC_SECRET_KEY",
+      "description": "Volcano Engine secret key",
+      "required": true
+    }
+  ]
+}
