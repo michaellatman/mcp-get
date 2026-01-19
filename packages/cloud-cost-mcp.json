@@ -1,0 +1,9 @@
+{
+  "name": "cloud-cost-mcp",
+  "description": "Multi-cloud pricing comparison MCP server for AWS, Azure, GCP, and OCI with 2,700+ instance types. Real-time pricing from public APIs, workload calculators, and migration savings estimator.",
+  "vendor": "Jason Wilbur",
+  "sourceUrl": "https://github.com/jasonwilbur/cloud-cost-mcp",
+  "homepage": "https://github.com/jasonwilbur/cloud-cost-mcp",
+  "license": "Apache-2.0",
+  "runtime": "node"
+}
