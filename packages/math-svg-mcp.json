@@ -1,0 +1,10 @@
+{
+  "name": "math-svg-mcp",
+  "description": "Convert LaTeX math expressions to crisp, scalable SVG images using MathJax",
+  "vendor": "Wilfred Springer (https://github.com/wspringer/)",
+  "sourceUrl": "https://github.com/wspringer/math-svg-mcp",
+  "homepage": "https://github.com/wspringer/math-svg-mcp",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {}
+}
