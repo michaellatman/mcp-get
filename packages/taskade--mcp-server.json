@@ -1,0 +1,9 @@
+{
+  "name": "@taskade/mcp-server",
+  "description": "Connect Taskade to any AI assistant via MCP — 50+ tools for workspaces, projects, tasks, AI agents, knowledge bases, templates, and media.",
+  "vendor": "Taskade",
+  "sourceUrl": "https://github.com/taskade/mcp",
+  "homepage": "https://www.taskade.com",
+  "license": "MIT",
+  "runtime": "node"
+}
