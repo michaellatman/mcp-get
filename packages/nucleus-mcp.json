@@ -1,0 +1,10 @@
+{
+    "name": "nucleus-mcp",
+    "description": "Unified context & cross-platform memory for AI agents. Bridges Cursor, Claude, and Windsurf into a single brain.",
+    "vendor": "Nucleus (https://github.com/eidetic-works/nucleus-mcp)",
+    "sourceUrl": "https://github.com/eidetic-works/nucleus-mcp",
+    "homepage": "https://github.com/eidetic-works/nucleus-mcp",
+    "runtime": "python",
+    "license": "MIT",
+    "environmentVariables": {}
+}
