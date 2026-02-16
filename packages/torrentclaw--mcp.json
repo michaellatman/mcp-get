@@ -1,0 +1,15 @@
+{
+  "name": "@torrentclaw/mcp",
+  "description": "MCP server for TorrentClaw — search and discover movies and TV shows with torrent downloads, magnet links, streaming availability, and cast/crew metadata",
+  "vendor": "TorrentClaw (https://torrentclaw.com)",
+  "sourceUrl": "https://github.com/torrentclaw/torrentclaw-mcp",
+  "homepage": "https://github.com/torrentclaw/torrentclaw-mcp#readme",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {
+    "TORRENTCLAW_API_KEY": {
+      "description": "Optional API key for higher rate limits",
+      "required": false
+    }
+  }
+}
