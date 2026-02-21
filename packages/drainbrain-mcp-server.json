@@ -1,0 +1,15 @@
+{
+  "name": "drainbrain-mcp-server",
+  "description": "Solana token rug-pull detection via ML ensemble (XGBoost + GRU temporal analysis). Scan tokens for risk score, honeypot detection, and rug lifecycle stage.",
+  "vendor": "MeltingPixels",
+  "sourceUrl": "https://github.com/meltingpixelsai/rugslayer/tree/main/packages/drainbrain-mcp-server",
+  "homepage": "https://rugslayer.com/drainbrain",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {
+    "DRAINBRAIN_API_KEY": {
+      "description": "DrainBrain API key for authenticated access. Get one free at rugslayer.com/drainbrain",
+      "required": true
+    }
+  }
+}
