@@ -1,0 +1,9 @@
+{
+  "name": "flutter-skill",
+  "description": "AI-powered E2E testing for 10 platforms (Flutter, React Native, iOS, Android, Web, Electron, Tauri, KMP, .NET MAUI). 253 MCP tools with zero configuration. Uses CDP Accessibility Tree for 95% token savings.",
+  "vendor": "ai-dashboad (https://github.com/ai-dashboad/)",
+  "sourceUrl": "https://github.com/ai-dashboad/flutter-skill",
+  "homepage": "https://github.com/ai-dashboad/flutter-skill",
+  "license": "MIT",
+  "runtime": "node"
+}
