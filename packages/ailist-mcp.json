@@ -1,0 +1,15 @@
+{
+  "name": "ailist-mcp",
+  "description": "Tell your Ai agent \"list my project on AiList\" — it reads your repo, fills in the details, and submits. Search and discover 1,200+ Ai projects, MCP servers, CLI tools, libraries, and APIs.",
+  "vendor": "HiFriendbot (https://github.com/hifriendbot)",
+  "sourceUrl": "https://github.com/hifriendbot/ailist-mcp",
+  "homepage": "https://hifriendbot.com/ai-list/",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {
+    "AILIST_API_KEY": {
+      "description": "API key for submitting projects. Free at hifriendbot.com/ai-list/submit/. Not needed for searching.",
+      "required": false
+    }
+  }
+}
