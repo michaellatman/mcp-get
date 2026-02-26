@@ -1,0 +1,19 @@
+{
+  "name": "lightcms",
+  "description": "AI-native CMS with 41 MCP tools for managing websites through natural language.",
+  "vendor": "Jon Radoff",
+  "sourceUrl": "https://github.com/jonradoff/lightcms",
+  "homepage": "https://github.com/jonradoff/lightcms",
+  "license": "MIT",
+  "runtime": "go",
+  "environmentVariables": {
+    "LIGHTCMS_URL": {
+      "description": "URL of the LightCMS server",
+      "required": true
+    },
+    "LIGHTCMS_API_KEY": {
+      "description": "API key for authenticating with LightCMS",
+      "required": true
+    }
+  }
+}
