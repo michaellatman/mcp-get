@@ -1,0 +1,19 @@
+{
+  "name": "idea-reality-mcp",
+  "description": "Pre-build reality check for AI coding agents. Scans GitHub, HN, npm, PyPI & Product Hunt before you build — returns a 0-100 reality signal.",
+  "vendor": "Mnemox AI (https://github.com/mnemox-ai)",
+  "sourceUrl": "https://github.com/mnemox-ai/idea-reality-mcp",
+  "homepage": "https://mnemox.ai/check",
+  "license": "MIT",
+  "runtime": "python",
+  "environmentVariables": {
+    "GITHUB_TOKEN": {
+      "description": "GitHub personal access token for higher API rate limits (optional)",
+      "required": false
+    },
+    "PRODUCTHUNT_TOKEN": {
+      "description": "Product Hunt API token for deep mode Product Hunt search (optional)",
+      "required": false
+    }
+  }
+}
