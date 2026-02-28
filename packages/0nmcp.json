@@ -1,0 +1,9 @@
+{
+  "name": "0nmcp",
+  "description": "Universal AI API Orchestrator — 564 tools, 26 services, 13 categories. Vault encryption, Business Deed transfer, Application Engine, Workflow Runtime.",
+  "vendor": "0nORK",
+  "sourceUrl": "https://github.com/0nork/0nMCP",
+  "homepage": "https://0nmcp.com",
+  "license": "MIT",
+  "runtime": "node"
+}
