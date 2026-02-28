@@ -1,0 +1,10 @@
+{
+  "name": "sparkforge",
+  "description": "20-tool utility API platform for AI agents: image gen, TTS, BTC signals, crypto prices, web scraping, code review, QR codes, and more. x402 USDC payments.",
+  "vendor": "SparkForge (henry-ships)",
+  "sourceUrl": "https://github.com/henry-ships/sparkforge",
+  "homepage": "https://sparkforge.sh",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {}
+}
