@@ -1,0 +1,9 @@
+{
+  "name": "mcp-eu-ai-act",
+  "description": "EU AI Act compliance scanner - Detect regulatory violations in AI codebases with risk classification and remediation guidance",
+  "vendor": "ArkForge (https://github.com/ark-forge/)",
+  "sourceUrl": "https://github.com/ark-forge/mcp-eu-ai-act",
+  "homepage": "https://arkforge.fr/mcp-eu-ai-act.html",
+  "license": "MIT",
+  "runtime": "node"
+}
