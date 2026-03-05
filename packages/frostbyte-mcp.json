@@ -1,0 +1,9 @@
+{
+    "name": "frostbyte-mcp",
+    "description": "MCP server providing 40+ developer tools: IP geolocation, DNS lookup, crypto prices, website screenshots, code execution, DeFi trading, wallet management, and more.",
+    "vendor": "Frostbyte",
+    "sourceUrl": "https://github.com/OzorOwn/frostbyte-mcp",
+    "homepage": "https://github.com/OzorOwn/frostbyte-mcp",
+    "license": "MIT",
+    "runtime": "node"
+}
