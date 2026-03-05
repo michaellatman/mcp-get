@@ -1,0 +1,23 @@
+{
+  "name": "agentwallet-mcp",
+  "description": "Permissionless wallet infrastructure for AI agents. Create wallets, sign and broadcast transactions on any EVM chain and Solana, pay and accept x402 payments, DeFi interactions. No KYC. 29 MCP tools.",
+  "vendor": "HiFriendbot",
+  "sourceUrl": "https://github.com/hifriendbot/agentwallet-mcp.git",
+  "homepage": "https://hifriendbot.com/wallet",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {
+    "AGENTWALLET_USER": {
+      "description": "Your AgentWallet username",
+      "required": true
+    },
+    "AGENTWALLET_PASS": {
+      "description": "Your AgentWallet API key",
+      "required": true
+    },
+    "AGENTWALLET_WALLET_ID": {
+      "description": "Default wallet ID for x402 auto-pay (optional)",
+      "required": false
+    }
+  }
+}
