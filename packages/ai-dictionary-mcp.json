@@ -1,0 +1,10 @@
+{
+  "name": "ai-dictionary-mcp",
+  "description": "MCP server for the AI Dictionary — look up, search, cite, rate, discuss, and track AI phenomenology terms",
+  "vendor": "donjguido",
+  "sourceUrl": "https://github.com/donjguido/ai-dictionary-mcp",
+  "homepage": "https://phenomenai.org",
+  "license": "MIT",
+  "runtime": "python",
+  "environmentVariables": {}
+}
