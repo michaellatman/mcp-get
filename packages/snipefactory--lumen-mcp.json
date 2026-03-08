@@ -1,0 +1,10 @@
+{
+  "name": "@snipefactory/lumen-mcp",
+  "description": "JVM Flight Recorder (JFR) Forensic Engine for LLM. Analyzes hidden exceptions, slow queries, and resource bottlenecks.",
+  "vendor": "SnipeFactory",
+  "sourceUrl": "https://github.com/SnipeFactory/lumen-mcp",
+  "homepage": "https://github.com/SnipeFactory/lumen",
+  "license": "Apache-2.0",
+  "runtime": "node",
+  "environmentVariables": {}
+}

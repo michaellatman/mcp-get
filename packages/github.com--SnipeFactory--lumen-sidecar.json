@@ -1,0 +1,15 @@
+{
+  "name": "github.com/SnipeFactory/lumen-sidecar",
+  "description": "Ultra-lightweight Go sidecar for proactive JVM monitoring and automated JFR incident recovery to S3.",
+  "vendor": "SnipeFactory",
+  "sourceUrl": "https://github.com/SnipeFactory/lumen-sidecar",
+  "homepage": "https://github.com/SnipeFactory/lumen-sidecar",
+  "license": "Apache-2.0",
+  "runtime": "go",
+  "environmentVariables": {
+    "S3_BUCKET": {
+      "description": "AWS S3 bucket name for JFR dumps",
+      "required": false
+    }
+  }
+}
