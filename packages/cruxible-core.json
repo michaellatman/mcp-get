@@ -1,0 +1,10 @@
+{
+  "name": "cruxible-core",
+  "description": "Deterministic decision engine with DAG-based receipts. Build entity graphs, query with MCP, get auditable proof.",
+  "vendor": "Alchemyze LLC DBA Cruxible",
+  "sourceUrl": "https://github.com/cruxible-ai/cruxible-core",
+  "homepage": "https://github.com/cruxible-ai/cruxible-core",
+  "license": "MIT",
+  "runtime": "python",
+  "environmentVariables": {}
+}
