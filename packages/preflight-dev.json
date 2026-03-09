@@ -1,0 +1,9 @@
+{
+  "name": "preflight-dev",
+  "description": "24-tool MCP server for Claude Code — catches ambiguous prompts before execution, semantic session history search, cross-service contract awareness, correction pattern learning, cost estimation",
+  "vendor": "preflight-dev (https://github.com/preflight-dev)",
+  "sourceUrl": "https://github.com/preflight-dev/preflight",
+  "homepage": "https://www.npmjs.com/package/preflight-dev",
+  "license": "MIT",
+  "runtime": "node"
+}
