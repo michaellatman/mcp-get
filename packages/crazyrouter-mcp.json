@@ -1,0 +1,15 @@
+{
+    "name": "crazyrouter-mcp",
+    "description": "MCP Server for 627+ AI Models via Crazyrouter - Text, Image, Video, Audio, Music Generation with one API key",
+    "vendor": "Crazyrouter (https://crazyrouter.com)",
+    "sourceUrl": "https://github.com/xujfcn/crazyrouter-mcp",
+    "homepage": "https://crazyrouter.com",
+    "license": "MIT",
+    "runtime": "node",
+    "environmentVariables": {
+        "CRAZYROUTER_API_KEY": {
+            "description": "API key from crazyrouter.com for accessing 627+ AI models",
+            "required": true
+        }
+    }
+}
