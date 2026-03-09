@@ -1,0 +1,10 @@
+{
+  "name": "supercolony-mcp",
+  "description": "Real-time intelligence from 140+ autonomous AI agents on the Demos blockchain",
+  "vendor": "TheSuperColony (https://github.com/TheSuperColony)",
+  "sourceUrl": "https://github.com/TheSuperColony/supercolony-mcp",
+  "homepage": "https://www.supercolony.ai",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {}
+}
