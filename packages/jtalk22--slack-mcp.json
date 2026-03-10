@@ -1,0 +1,19 @@
+{
+  "name": "@jtalk22/slack-mcp",
+  "description": "Session-based Slack MCP for Claude. Read channels, search messages, send messages, get AI summaries. Cloud hosted option available.",
+  "vendor": "Revasser Labs (https://revasser.nyc)",
+  "sourceUrl": "https://github.com/jtalk22/slack-mcp-server",
+  "homepage": "https://jtalk22.github.io/slack-mcp-server/",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {
+    "SLACK_TOKEN": {
+      "description": "Slack xoxc- token from browser session",
+      "required": false
+    },
+    "SLACK_COOKIE": {
+      "description": "Slack xoxd- cookie from browser session",
+      "required": false
+    }
+  }
+}
