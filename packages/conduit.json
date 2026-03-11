@@ -1,0 +1,10 @@
+{
+  "name": "conduit",
+  "description": "Headless browser with SHA-256 hash chain and Ed25519 cryptographic audit trails. MCP server for AI agents.",
+  "vendor": "bkauto3",
+  "sourceUrl": "https://github.com/bkauto3/Conduit",
+  "homepage": "https://github.com/bkauto3/Conduit",
+  "license": "MIT",
+  "runtime": "python",
+  "environmentVariables": {}
+}
