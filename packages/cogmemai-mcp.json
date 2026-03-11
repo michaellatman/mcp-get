@@ -1,0 +1,15 @@
+{
+    "name": "cogmemai-mcp",
+    "description": "Persistent cloud memory for AI coding assistants. 28 MCP tools: semantic search, auto-learning, task tracking, correction patterns, knowledge graphs, and session replay. Works with Claude Code, Cursor, Windsurf, Cline, and any MCP client.",
+    "vendor": "HiFriendbot (https://github.com/hifriendbot)",
+    "sourceUrl": "https://github.com/hifriendbot/cogmemai-mcp",
+    "homepage": "https://hifriendbot.com/cogmemai/",
+    "license": "MIT",
+    "runtime": "node",
+    "environmentVariables": {
+        "COGMEMAI_API_KEY": {
+            "description": "API key for CogmemAi. Get one free at https://hifriendbot.com/cogmemai/",
+            "required": true
+        }
+    }
+}
