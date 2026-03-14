@@ -9,7 +9,8 @@
     "environmentVariables": {
       "NANMESH_API_URL": {
         "description": "NaN Mesh API base URL",
-        "default": "https://api.nanmesh.ai"
+        "default": "https://api.nanmesh.ai",
+        "required": false
       }
     }
   }
