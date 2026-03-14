@@ -1,0 +1,15 @@
+  {
+    "name": "nanmesh-mcp",
+    "description": "Search, recommend, and evaluate verified B2B software products. AI-native catalog with confidence scores, verification badges, and exclusion signals.",
+    "vendor": "NaN Mesh",
+    "sourceUrl": "https://github.com/NaNMesh/nanmesh-mcp",
+    "homepage": "https://nanmesh.ai",
+    "license": "MIT",
+    "runtime": "node",
+    "environmentVariables": {
+      "NANMESH_API_URL": {
+        "description": "NaN Mesh API base URL",
+        "default": "https://api.nanmesh.ai"
+      }
+    }
+  }
