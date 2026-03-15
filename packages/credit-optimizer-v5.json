@@ -1,0 +1,10 @@
+{
+  "name": "credit-optimizer-v5",
+  "description": "Automatic credit optimizer for Manus AI - saves 55% on credits through smart model routing, context hygiene, and prompt optimization. Audited across 53 scenarios with zero quality loss.",
+  "vendor": "Rafael Silva (https://github.com/rafsilva85)",
+  "sourceUrl": "https://github.com/rafsilva85/credit-optimizer-v5",
+  "homepage": "https://creditopt.ai",
+  "license": "MIT",
+  "runtime": "python",
+  "environmentVariables": {}
+}
