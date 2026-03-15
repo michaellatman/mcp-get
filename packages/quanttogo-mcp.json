@@ -1,0 +1,10 @@
+{
+  "name": "quanttogo-mcp",
+  "description": "Macro-factor quantitative signal source for AI agents. Access live trading signals, strategy performance, and market indices for US and China stock markets via MCP.",
+  "vendor": "QuantToGo",
+  "sourceUrl": "https://github.com/QuantToGo/quanttogo-mcp",
+  "homepage": "https://www.quanttogo.com",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {}
+}
