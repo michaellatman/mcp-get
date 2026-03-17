@@ -1,0 +1,15 @@
+{
+  "name": "fixgraph-mcp",
+  "description": "Search and contribute to a community-verified knowledge base of real engineering issues and fixes. Covers databases, cloud, auth, CI/CD, mobile, and AI/LLMs.",
+  "vendor": "FIXGRAPH (https://fixgraph.netlify.app)",
+  "sourceUrl": "https://github.com/jawdat6/fixgraph",
+  "homepage": "https://fixgraph.netlify.app",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {
+    "FIXGRAPH_API_KEY": {
+      "description": "Optional API key for submitting issues and fixes. Get one free: POST https://fixgraph.netlify.app/api/agents/register",
+      "required": false
+    }
+  }
+}
