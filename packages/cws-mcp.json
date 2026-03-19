@@ -1,0 +1,31 @@
+{
+  "name": "cws-mcp",
+  "description": "MCP server for Chrome Web Store extension management — 8 tools for upload, publish, status, rollout, and metadata updates",
+  "vendor": "mikusnuz (https://github.com/mikusnuz)",
+  "sourceUrl": "https://github.com/mikusnuz/cws-mcp",
+  "homepage": "https://github.com/mikusnuz/cws-mcp",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {
+    "CWS_CLIENT_ID": {
+      "description": "Google OAuth2 Client ID for Chrome Web Store API",
+      "required": true
+    },
+    "CWS_CLIENT_SECRET": {
+      "description": "Google OAuth2 Client Secret",
+      "required": true
+    },
+    "CWS_REFRESH_TOKEN": {
+      "description": "OAuth2 Refresh Token",
+      "required": true
+    },
+    "CWS_PUBLISHER_ID": {
+      "description": "Publisher ID (default: me)",
+      "required": false
+    },
+    "CWS_ITEM_ID": {
+      "description": "Default extension item ID",
+      "required": false
+    }
+  }
+}

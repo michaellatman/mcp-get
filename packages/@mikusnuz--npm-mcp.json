@@ -1,0 +1,19 @@
+{
+  "name": "@mikusnuz/npm-mcp",
+  "description": "MCP server for npm package management — 36 tools for publish, version, search, audit, install, and more from your AI assistant",
+  "vendor": "mikusnuz (https://github.com/mikusnuz)",
+  "sourceUrl": "https://github.com/mikusnuz/npm-mcp",
+  "homepage": "https://github.com/mikusnuz/npm-mcp",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {
+    "NPM_TOKEN": {
+      "description": "npm authentication token",
+      "required": false
+    },
+    "NPM_PATH": {
+      "description": "Path to npm binary (if not in PATH)",
+      "required": false
+    }
+  }
+}

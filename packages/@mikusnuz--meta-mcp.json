@@ -1,0 +1,35 @@
+{
+  "name": "@mikusnuz/meta-mcp",
+  "description": "MCP server for Instagram Graph API, Threads API & Meta platform — 57 tools for publishing, comments, insights, hashtags, DMs, and more",
+  "vendor": "mikusnuz (https://github.com/mikusnuz)",
+  "sourceUrl": "https://github.com/mikusnuz/meta-mcp",
+  "homepage": "https://github.com/mikusnuz/meta-mcp",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {
+    "INSTAGRAM_ACCESS_TOKEN": {
+      "description": "Instagram Graph API access token",
+      "required": false
+    },
+    "INSTAGRAM_USER_ID": {
+      "description": "Instagram Business/Creator account ID",
+      "required": false
+    },
+    "THREADS_ACCESS_TOKEN": {
+      "description": "Threads API access token",
+      "required": false
+    },
+    "THREADS_USER_ID": {
+      "description": "Threads user ID",
+      "required": false
+    },
+    "META_APP_ID": {
+      "description": "Meta App ID",
+      "required": false
+    },
+    "META_APP_SECRET": {
+      "description": "Meta App Secret",
+      "required": false
+    }
+  }
+}

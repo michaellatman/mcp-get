@@ -1,0 +1,27 @@
+{
+  "name": "app-publish-mcp",
+  "description": "Unified MCP server for App Store Connect & Google Play Console — 91 tools for iOS/Android app management, TestFlight, builds, submissions, pricing, and more",
+  "vendor": "mikusnuz (https://github.com/mikusnuz)",
+  "sourceUrl": "https://github.com/mikusnuz/app-publish-mcp",
+  "homepage": "https://github.com/mikusnuz/app-publish-mcp",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {
+    "APPLE_KEY_ID": {
+      "description": "Apple App Store Connect API Key ID",
+      "required": false
+    },
+    "APPLE_ISSUER_ID": {
+      "description": "Apple App Store Connect Issuer ID",
+      "required": false
+    },
+    "APPLE_P8_PATH": {
+      "description": "Path to Apple AuthKey .p8 file",
+      "required": false
+    },
+    "GOOGLE_SERVICE_ACCOUNT_PATH": {
+      "description": "Path to Google Play service account JSON key file",
+      "required": false
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "dynadot-mcp",
+  "description": "MCP server for the Dynadot domain registrar API — 60 tools for domains, DNS, contacts, transfers, marketplace, and more",
+  "vendor": "mikusnuz (https://github.com/mikusnuz)",
+  "sourceUrl": "https://github.com/mikusnuz/dynadot-mcp",
+  "homepage": "https://github.com/mikusnuz/dynadot-mcp",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {
+    "DYNADOT_API_KEY": {
+      "description": "Dynadot API key",
+      "required": true
+    },
+    "DYNADOT_SANDBOX": {
+      "description": "Set to 'true' to use sandbox API",
+      "required": false
+    }
+  }
+}
