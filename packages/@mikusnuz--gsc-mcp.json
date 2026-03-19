@@ -1,0 +1,27 @@
+{
+  "name": "@mikusnuz/gsc-mcp",
+  "description": "MCP server for Google Search Console & Indexing API — 13 tools for search analytics, sitemaps, URL inspection, and indexing",
+  "vendor": "mikusnuz (https://github.com/mikusnuz)",
+  "sourceUrl": "https://github.com/mikusnuz/gsc-mcp",
+  "homepage": "https://github.com/mikusnuz/gsc-mcp",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {
+    "GSC_CLIENT_ID": {
+      "description": "Google OAuth2 Client ID",
+      "required": false
+    },
+    "GSC_CLIENT_SECRET": {
+      "description": "Google OAuth2 Client Secret",
+      "required": false
+    },
+    "GSC_REFRESH_TOKEN": {
+      "description": "Google OAuth2 Refresh Token",
+      "required": false
+    },
+    "GSC_SERVICE_ACCOUNT_KEY_PATH": {
+      "description": "Path to Google service account JSON key file (alternative to OAuth2)",
+      "required": false
+    }
+  }
+}

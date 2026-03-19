@@ -1,0 +1,27 @@
+{
+  "name": "@mikusnuz/umami-mcp",
+  "description": "Full-coverage MCP server for Umami Analytics API v2 — 66 tools for websites, stats, sessions, events, reports, users, teams, and realtime monitoring",
+  "vendor": "mikusnuz (https://github.com/mikusnuz)",
+  "sourceUrl": "https://github.com/mikusnuz/umami-mcp",
+  "homepage": "https://github.com/mikusnuz/umami-mcp",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {
+    "UMAMI_URL": {
+      "description": "Your Umami instance URL",
+      "required": true
+    },
+    "UMAMI_USERNAME": {
+      "description": "Login username (for self-hosted)",
+      "required": false
+    },
+    "UMAMI_PASSWORD": {
+      "description": "Login password (for self-hosted)",
+      "required": false
+    },
+    "UMAMI_API_KEY": {
+      "description": "API key (for Umami Cloud)",
+      "required": false
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "@mikusnuz/meta-ads-mcp",
+  "description": "MCP server for Meta Marketing API v25.0 — 123 tools for Facebook & Instagram ad campaigns, audiences, creatives, insights, catalogs, and more",
+  "vendor": "mikusnuz (https://github.com/mikusnuz)",
+  "sourceUrl": "https://github.com/mikusnuz/meta-ads-mcp",
+  "homepage": "https://github.com/mikusnuz/meta-ads-mcp",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {
+    "META_ADS_ACCESS_TOKEN": {
+      "description": "Meta Marketing API access token",
+      "required": true
+    },
+    "META_AD_ACCOUNT_ID": {
+      "description": "Ad account ID (numeric, without act_ prefix)",
+      "required": true
+    },
+    "META_APP_ID": {
+      "description": "Meta App ID (for token exchange/debug)",
+      "required": false
+    },
+    "META_APP_SECRET": {
+      "description": "Meta App Secret (for token exchange/debug)",
+      "required": false
+    },
+    "META_BUSINESS_ID": {
+      "description": "Business Manager ID (for business tools)",
+      "required": false
+    },
+    "META_PIXEL_ID": {
+      "description": "Pixel ID (for conversion tools)",
+      "required": false
+    }
+  }
+}
