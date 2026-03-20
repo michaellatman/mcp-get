@@ -1,0 +1,9 @@
+{
+  "name": "@memoryx/codegraph-mcp",
+  "description": "Semantic code graph with 31 MCP tools: callers, callees, impact analysis, complexity, unused code, AI context. 15 languages via tree-sitter.",
+  "vendor": "CodeGraph (https://github.com/codegraph-ai)",
+  "sourceUrl": "https://github.com/codegraph-ai/codegraph-vscode",
+  "homepage": "https://github.com/codegraph-ai/codegraph-vscode",
+  "license": "Apache-2.0",
+  "runtime": "node"
+}
