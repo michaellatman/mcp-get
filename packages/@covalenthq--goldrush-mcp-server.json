@@ -1,7 +1,7 @@
 {
   "name": "@covalenthq/goldrush-mcp-server",
-  "description": "Blockchain data across 100+ chains — wallet balances, token prices, transactions, DEX pairs, and more. REST API, real-time WebSocket with OHLCV price feeds, CLI, and x402 pay-per-request.",
-  "vendor": "Covalent (https://github.com/covalenthq/)",
+  "description": "Exposes GoldRush APIs as MCP resources and tools, enabling LLMs to interact with blockchain data across 100+ chains.",
+  "vendor": "Covalent (https://goldrush.dev)",
   "sourceUrl": "https://goldrush.dev/docs/goldrush-mcp-server",
   "homepage": "https://goldrush.dev",
   "license": "MIT",
