@@ -1,0 +1,15 @@
+{
+  "name": "@sheetsdata/mcp",
+  "description": "Electronic component datasheets for AI agents — specs, pinouts, package data on demand. No PDFs required.",
+  "vendor": "Octoco Ltd (https://github.com/octoco-ltd/)",
+  "sourceUrl": "https://github.com/octoco-ltd/sheetsdata-mcp",
+  "homepage": "https://sheetsdata.com",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {
+    "SHEETSDATA_API_KEY": {
+      "description": "API key from https://sheetsdata.com/dashboard/keys",
+      "required": true
+    }
+  }
+}
