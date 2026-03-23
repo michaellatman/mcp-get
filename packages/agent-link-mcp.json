@@ -1,0 +1,9 @@
+{
+  "name": "agent-link-mcp",
+  "description": "Bidirectional AI agent collaboration — spawn and communicate with any agent CLI (Claude, Codex, Gemini, Aider)",
+  "vendor": "mikusnuz",
+  "sourceUrl": "https://github.com/mikusnuz/agent-link-mcp",
+  "homepage": "https://github.com/mikusnuz/agent-link-mcp",
+  "license": "MIT",
+  "runtime": "node"
+}
