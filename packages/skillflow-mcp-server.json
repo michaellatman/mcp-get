@@ -1,0 +1,10 @@
+{
+  "name": "skillflow-mcp-server",
+  "description": "AI skills marketplace MCP server - search, discover, and install AI agent skills from SkillFlow.builders",
+  "vendor": "SkillFlow (https://skillflow.builders)",
+  "sourceUrl": "https://github.com/rafsilva85/skillflow-mcp-server",
+  "homepage": "https://skillflow.builders",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {}
+}
