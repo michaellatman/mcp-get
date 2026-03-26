@@ -1,0 +1,31 @@
+{
+  "name": "mcp-openapi-runner",
+  "description": "Turn any OpenAPI 3.x spec into MCP tools for Claude — zero config, instant API access",
+  "vendor": "saurav61091 (https://github.com/saurav61091/)",
+  "sourceUrl": "https://github.com/saurav61091/mcp-openapi",
+  "homepage": "https://www.npmjs.com/package/mcp-openapi-runner",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {
+    "OPENAPI_BEARER_TOKEN": {
+      "description": "Bearer token for API authentication",
+      "required": false
+    },
+    "OPENAPI_API_KEY": {
+      "description": "API key value for authentication",
+      "required": false
+    },
+    "OPENAPI_API_KEY_HEADER": {
+      "description": "Header name for API key (default: X-Api-Key)",
+      "required": false
+    },
+    "OPENAPI_BASIC_USER": {
+      "description": "HTTP Basic auth username",
+      "required": false
+    },
+    "OPENAPI_BASIC_PASS": {
+      "description": "HTTP Basic auth password",
+      "required": false
+    }
+  }
+}
