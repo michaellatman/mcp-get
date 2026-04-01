@@ -1,0 +1,15 @@
+{
+  "name": "sectorhq-mcp",
+  "description": "Real-time AI company intelligence — track which AI companies are actually shipping vs just announcing. Get leaderboards, company profiles, hype/reality gaps, top movers, and comparisons. Powered by SectorHQ's live tracking of 571+ companies.",
+  "vendor": "SectorHQ (https://www.sectorhq.co)",
+  "sourceUrl": "https://github.com/AlecDobbie/sectorhq-mcp",
+  "homepage": "https://www.sectorhq.co",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {
+    "SECTORHQ_API_KEY": {
+      "description": "SectorHQ API key (optional for basic use)",
+      "required": false
+    }
+  }
+}
