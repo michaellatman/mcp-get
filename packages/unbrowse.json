@@ -1,0 +1,10 @@
+{
+  "name": "unbrowse",
+  "description": "API-native agent browser. Discovers internal website APIs from traffic and replaces browser automation with direct API calls. 3.6x faster than Playwright across 94 benchmarked domains.",
+  "vendor": "Unbrowse AI",
+  "sourceUrl": "https://github.com/unbrowse-ai/unbrowse",
+  "homepage": "https://unbrowse.ai",
+  "license": "AGPL-3.0",
+  "runtime": "node",
+  "environmentVariables": {}
+}
