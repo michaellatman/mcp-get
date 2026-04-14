@@ -1,0 +1,19 @@
+{
+  "name": "open-greenhouse-mcp",
+  "description": "Production-ready MCP server for Greenhouse with 175 tools for recruiting teams — manage candidates, applications, jobs, interviews, and hiring pipelines",
+  "vendor": "Ben Monopoli (https://github.com/benmonopoli)",
+  "sourceUrl": "https://github.com/benmonopoli/open-greenhouse-mcp",
+  "homepage": "https://pypi.org/project/open-greenhouse-mcp/",
+  "license": "MIT",
+  "runtime": "python",
+  "environmentVariables": {
+    "GREENHOUSE_API_KEY": {
+      "description": "Greenhouse Harvest API key",
+      "required": true
+    },
+    "GREENHOUSE_TOOL_PROFILE": {
+      "description": "Tool profile: full, recruiter, or read-only",
+      "required": false
+    }
+  }
+}
