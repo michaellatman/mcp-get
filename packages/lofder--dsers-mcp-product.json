@@ -1,0 +1,17 @@
+{
+  "name": "@lofder/dsers-mcp-product",
+  "description": "Automate AliExpress/Alibaba dropshipping product import to Shopify & Wix via DSers. 13 tools for bulk import, supplier replacement, variant editing, pricing rules, and multi-store push.",
+  "vendor": "lofder",
+  "sourceUrl": "https://github.com/lofder/dsers-mcp-product",
+  "homepage": "https://github.com/lofder/dsers-mcp-product",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {
+    "DSERS_SESSION_ID": {
+      "description": "DSers session cookie value"
+    },
+    "DSERS_STATE": {
+      "description": "DSers state token (obtained with session ID)"
+    }
+  }
+}
