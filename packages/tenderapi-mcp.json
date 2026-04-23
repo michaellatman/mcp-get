@@ -1,0 +1,15 @@
+{
+  "name": "tenderapi-mcp",
+  "description": "MCP server for TenderAPI — French (BOAMP) and EU (TED) public procurement data (tenders, awards, winner intelligence).",
+  "vendor": "TenderAPI (https://tenderapi.fr)",
+  "sourceUrl": "https://github.com/IDNSIDNS/tenderapi-mcp",
+  "homepage": "https://tenderapi.fr",
+  "license": "MIT",
+  "runtime": "python",
+  "environmentVariables": {
+    "TENDERAPI_KEY": {
+      "description": "TenderAPI key (obtain free at https://tenderapi.fr/). Sent as X-API-Key header on every REST call.",
+      "required": true
+    }
+  }
+}
