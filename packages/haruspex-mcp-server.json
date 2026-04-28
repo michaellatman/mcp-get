@@ -1,0 +1,9 @@
+{
+  "name": "@haruspex-guru-sdk/mcp-server",
+  "description": "Haruspex stock intelligence scores (0-100) across 16 dimensions for any ticker. Tools: get_stock_score, get_batch_scores, get_stock_score_history, search_stocks, get_stock_news.",
+  "vendor": "Haruspex",
+  "sourceUrl": "https://github.com/Haruspex-guru/haruspex-sdk/tree/main/packages/mcp",
+  "homepage": "https://haruspex.guru",
+  "license": "MIT",
+  "runtime": "node"
+}
