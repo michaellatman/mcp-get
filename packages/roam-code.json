@@ -1,0 +1,15 @@
+{
+  "name": "roam-code",
+  "description": "Local codebase intelligence MCP server: 116 tools for graph-aware retrieval, patch verification, OpenVEX taint, in-toto Code Graph Attestation. 27 languages, zero API keys.",
+  "vendor": "Cranot (https://github.com/Cranot/)",
+  "sourceUrl": "https://github.com/Cranot/roam-code",
+  "homepage": "https://cranot.github.io/roam-code/",
+  "license": "MIT",
+  "runtime": "python",
+  "environmentVariables": {
+    "ROAM_MCP_PRESET": {
+      "description": "Tool preset: core (default, 33), compliance (14, EU AI Act audit), full (116), or review/refactor/debug/architecture",
+      "required": false
+    }
+  }
+}
