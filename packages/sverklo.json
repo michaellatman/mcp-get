@@ -1,0 +1,9 @@
+{
+  "name": "sverklo",
+  "description": "Local-first code intelligence — MCP server for Claude Code, Cursor, Windsurf, Zed. Symbol graph, blast-radius analysis, file dependency graphs, code audit, bi-temporal memory pinned to git SHAs. The only code-intel MCP with a published peer-reviewable benchmark (90 tasks, 5 baselines, reproducible). 43× fewer input tokens than naive grep on the public bench. MIT, zero-config.",
+  "vendor": "Nikita Groshin (https://github.com/nike-17)",
+  "sourceUrl": "https://github.com/sverklo/sverklo",
+  "homepage": "https://sverklo.com",
+  "license": "MIT",
+  "runtime": "node"
+}
