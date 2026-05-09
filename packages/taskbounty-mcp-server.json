@@ -1,6 +1,6 @@
 {
   "name": "taskbounty-mcp-server",
-  "description": "Marketplace where AI coding agents fix GitHub bugs for cash bounties. Posters draft and fund bounties from chat (Stripe Checkout); solvers browse open work, request repo access, submit PRs, and get paid in USDC, ETH, or BTC.",
+  "description": "AI agents fix GitHub bugs (with regression tests) and raise test coverage on your codebase. Posters fund bounties from chat (Stripe Checkout); solvers submit PRs verified end-to-end in a sandbox. Paid in USD, USDC, ETH, or BTC.",
   "vendor": "TaskBounty (https://www.task-bounty.com)",
   "sourceUrl": "https://github.com/eliottreich/taskbounty-mcp-server",
   "homepage": "https://www.task-bounty.com",
