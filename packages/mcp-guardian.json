@@ -1,0 +1,27 @@
+{
+  "name": "@mcp-guardian/server",
+  "description": "Security, cost, and health governance proxy for MCP infrastructure with YAML policy engine, OAuth 2.1/OIDC + RBAC, web dashboard, payload normalization, semantic shell analysis, mTLS, circuit breakers, and formal STRIDE threat model",
+  "vendor": "Rudraneel Das (https://github.com/rudraneel93)",
+  "sourceUrl": "https://github.com/rudraneel93/mcp-guardian",
+  "homepage": "https://github.com/rudraneel93/mcp-guardian",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {
+    "NVD_API_KEY": {
+      "description": "NIST NVD API key for CVE lookups (optional, 20 req/min vs 5 without)",
+      "required": false
+    },
+    "DASHBOARD_ENABLED": {
+      "description": "Enable the web dashboard server",
+      "required": false
+    },
+    "DASHBOARD_AUTH_ENABLED": {
+      "description": "Enable dashboard authentication",
+      "required": false
+    },
+    "METRICS_ENABLED": {
+      "description": "Enable Prometheus metrics endpoint",
+      "required": false
+    }
+  }
+}
