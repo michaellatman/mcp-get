@@ -1,0 +1,9 @@
+{
+  "name": "meok-omnibus-tracker-mcp",
+  "description": "EU AI Act Omnibus Amendment timeline tracker with revised deadlines for Annex I/III high-risk systems",
+  "vendor": "MEOK AI Labs",
+  "sourceUrl": "https://github.com/CSOAI-ORG/meok-omnibus-tracker-mcp",
+  "homepage": "https://pypi.org/project/meok-omnibus-tracker-mcp/",
+  "license": "MIT",
+  "runtime": "python"
+}

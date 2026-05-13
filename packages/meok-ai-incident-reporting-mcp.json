@@ -1,0 +1,9 @@
+{
+  "name": "meok-ai-incident-reporting-mcp",
+  "description": "EU AI Act Article 62 serious incident reporting for high-risk AI systems with severity classification",
+  "vendor": "MEOK AI Labs",
+  "sourceUrl": "https://github.com/CSOAI-ORG/meok-ai-incident-reporting-mcp",
+  "homepage": "https://pypi.org/project/meok-ai-incident-reporting-mcp/",
+  "license": "MIT",
+  "runtime": "python"
+}

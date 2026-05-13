@@ -1,0 +1,9 @@
+{
+  "name": "meok-cra-compliance-mcp",
+  "description": "EU Cyber Resilience Act compliance checker covering cybersecurity requirements, SBOM, and CE marking",
+  "vendor": "MEOK AI Labs",
+  "sourceUrl": "https://github.com/CSOAI-ORG/meok-cra-compliance-mcp",
+  "homepage": "https://pypi.org/project/meok-cra-compliance-mcp/",
+  "license": "MIT",
+  "runtime": "python"
+}

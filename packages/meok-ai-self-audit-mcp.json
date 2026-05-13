@@ -1,0 +1,9 @@
+{
+  "name": "meok-ai-self-audit-mcp",
+  "description": "GPAI self-assessment audit tool for EU AI Act Article 52 transparency and Annex XI/XII documentation",
+  "vendor": "MEOK AI Labs",
+  "sourceUrl": "https://github.com/CSOAI-ORG/meok-ai-self-audit-mcp",
+  "homepage": "https://pypi.org/project/meok-ai-self-audit-mcp/",
+  "license": "MIT",
+  "runtime": "python"
+}

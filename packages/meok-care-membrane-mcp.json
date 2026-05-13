@@ -1,0 +1,9 @@
+{
+  "name": "meok-care-membrane-mcp",
+  "description": "Ethical AI safety membrane implementing care-based assessment for wellbeing, autonomy, and harm prevention",
+  "vendor": "MEOK AI Labs",
+  "sourceUrl": "https://github.com/CSOAI-ORG/meok-care-membrane-mcp",
+  "homepage": "https://pypi.org/project/meok-care-membrane-mcp/",
+  "license": "MIT",
+  "runtime": "python"
+}

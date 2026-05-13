@@ -1,0 +1,9 @@
+{
+  "name": "meok-cra-annex-iv-classifier-mcp",
+  "description": "EU Cyber Resilience Act Annex IV product classifier for CRA product classes and conformity assessment",
+  "vendor": "MEOK AI Labs",
+  "sourceUrl": "https://github.com/CSOAI-ORG/meok-cra-annex-iv-classifier-mcp",
+  "homepage": "https://pypi.org/project/meok-cra-annex-iv-classifier-mcp/",
+  "license": "MIT",
+  "runtime": "python"
+}

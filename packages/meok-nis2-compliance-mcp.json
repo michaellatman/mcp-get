@@ -1,0 +1,9 @@
+{
+  "name": "meok-nis2-compliance-mcp",
+  "description": "NIS2 Directive compliance for essential and important entities with cybersecurity risk management",
+  "vendor": "MEOK AI Labs",
+  "sourceUrl": "https://github.com/CSOAI-ORG/meok-nis2-compliance-mcp",
+  "homepage": "https://pypi.org/project/meok-nis2-compliance-mcp/",
+  "license": "MIT",
+  "runtime": "python"
+}

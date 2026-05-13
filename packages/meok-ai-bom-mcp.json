@@ -1,0 +1,9 @@
+{
+  "name": "meok-ai-bom-mcp",
+  "description": "EU AI Act Article 53 AI Bill of Materials generator with dependency tracking and compliance scoring",
+  "vendor": "MEOK AI Labs",
+  "sourceUrl": "https://github.com/CSOAI-ORG/meok-ai-bom-mcp",
+  "homepage": "https://pypi.org/project/meok-ai-bom-mcp/",
+  "license": "MIT",
+  "runtime": "python"
+}

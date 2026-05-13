@@ -1,0 +1,9 @@
+{
+  "name": "meok-watermark-attest-mcp",
+  "description": "AI content watermarking and attestation per EU AI Act Article 50 with C2PA provenance metadata",
+  "vendor": "MEOK AI Labs",
+  "sourceUrl": "https://github.com/CSOAI-ORG/meok-watermark-attest-mcp",
+  "homepage": "https://pypi.org/project/meok-watermark-attest-mcp/",
+  "license": "MIT",
+  "runtime": "python"
+}

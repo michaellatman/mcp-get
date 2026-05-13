@@ -1,0 +1,9 @@
+{
+  "name": "meok-uk-ai-bill-compliance-mcp",
+  "description": "UK AI Bill compliance checker for regulatory sandbox, AI Authority obligations, and UK risk classification",
+  "vendor": "MEOK AI Labs",
+  "sourceUrl": "https://github.com/CSOAI-ORG/meok-uk-ai-bill-compliance-mcp",
+  "homepage": "https://pypi.org/project/meok-uk-ai-bill-compliance-mcp/",
+  "license": "MIT",
+  "runtime": "python"
+}

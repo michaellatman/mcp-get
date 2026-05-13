@@ -1,0 +1,9 @@
+{
+  "name": "meok-bias-detection-mcp",
+  "description": "AI bias and fairness analysis per EU AI Act Article 10 with demographic bias detection and fairness scorecards",
+  "vendor": "MEOK AI Labs",
+  "sourceUrl": "https://github.com/CSOAI-ORG/meok-bias-detection-mcp",
+  "homepage": "https://pypi.org/project/meok-bias-detection-mcp/",
+  "license": "MIT",
+  "runtime": "python"
+}

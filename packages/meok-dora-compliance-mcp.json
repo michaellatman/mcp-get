@@ -1,0 +1,9 @@
+{
+  "name": "meok-dora-compliance-mcp",
+  "description": "DORA compliance for financial entities covering ICT risk management, incident reporting, and third-party risk",
+  "vendor": "MEOK AI Labs",
+  "sourceUrl": "https://github.com/CSOAI-ORG/meok-dora-compliance-mcp",
+  "homepage": "https://pypi.org/project/meok-dora-compliance-mcp/",
+  "license": "MIT",
+  "runtime": "python"
+}

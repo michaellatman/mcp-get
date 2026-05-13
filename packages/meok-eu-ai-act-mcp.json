@@ -1,0 +1,9 @@
+{
+  "name": "meok-eu-ai-act-mcp",
+  "description": "Comprehensive EU AI Act compliance toolkit for risk classification, GPAI obligations, and conformity assessment",
+  "vendor": "MEOK AI Labs",
+  "sourceUrl": "https://github.com/CSOAI-ORG/meok-eu-ai-act-mcp",
+  "homepage": "https://pypi.org/project/meok-eu-ai-act-mcp/",
+  "license": "MIT",
+  "runtime": "python"
+}

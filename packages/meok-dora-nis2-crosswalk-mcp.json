@@ -1,0 +1,9 @@
+{
+  "name": "meok-dora-nis2-crosswalk-mcp",
+  "description": "Cross-regulation mapping between DORA and NIS2 with unified compliance strategies for dual-regulated entities",
+  "vendor": "MEOK AI Labs",
+  "sourceUrl": "https://github.com/CSOAI-ORG/meok-dora-nis2-crosswalk-mcp",
+  "homepage": "https://pypi.org/project/meok-dora-nis2-crosswalk-mcp/",
+  "license": "MIT",
+  "runtime": "python"
+}
