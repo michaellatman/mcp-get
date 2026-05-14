@@ -1,0 +1,15 @@
+{
+  "name": "misarblog-mcp",
+  "description": "Publish and manage blog posts, articles, and series on Misar.Blog from your AI agent. 20 tools for publishing, analytics, newsletter, and AI-assisted content generation.",
+  "vendor": "Gulshan Yadav (https://github.com/mrgulshanyadav)",
+  "sourceUrl": "https://github.com/mrgulshanyadav/misarblog-mcp",
+  "homepage": "https://www.misar.blog",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {
+    "MISARBLOG_API_KEY": {
+      "description": "API key for Misar.Blog (get from https://www.misar.blog/settings/api)",
+      "required": true
+    }
+  }
+}
