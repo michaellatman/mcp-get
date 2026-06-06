@@ -1,0 +1,10 @@
+{
+  "name": "twzrd-agent-intel",
+  "description": "Trust + receipt layer for x402 agents on Solana. Free preflight tools score any Solana wallet; paid get_trust_receipt returns signed twzrd.receipt.v5 via HTTP 402 + USDC.",
+  "vendor": "TWZRD (https://twzrd.xyz)",
+  "sourceUrl": "https://intel.twzrd.xyz",
+  "homepage": "https://intel.twzrd.xyz",
+  "license": "MIT",
+  "runtime": "python",
+  "environmentVariables": {}
+}
