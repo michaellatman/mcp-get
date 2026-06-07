@@ -1,0 +1,10 @@
+{
+  "name": "jabbawocky--proposalcraft",
+  "description": "MCP server for Claude Desktop that drafts client proposals in your voice using your past winning proposals as style examples. Zero API key required, runs entirely locally.",
+  "vendor": "jabbawocky (https://github.com/jabbawocky)",
+  "sourceUrl": "https://github.com/jabbawocky/proposalcraft",
+  "homepage": "https://jabbawocky.github.io/proposalcraft/",
+  "license": "MIT",
+  "runtime": "node",
+  "environmentVariables": {}
+}
