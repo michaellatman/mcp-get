@@ -1,0 +1,15 @@
+{
+  "name": "scrivener-mcp",
+  "description": "Connect Scrivener projects to Claude and other AI assistants. 60+ tools for document management, writing analysis, content enhancement, semantic search, and character/plot tracking.",
+  "vendor": "WritersLogic, Inc. (https://github.com/writerslogic)",
+  "sourceUrl": "https://github.com/writerslogic/scrivener-mcp",
+  "homepage": "https://github.com/writerslogic/scrivener-mcp",
+  "license": "AGPL-3.0",
+  "runtime": "node",
+  "environmentVariables": {
+    "OPENAI_API_KEY": {
+      "description": "Optional. Enables AI-powered analysis and enhancement features.",
+      "required": false
+    }
+  }
+}
