@@ -1,11 +1,10 @@
 {
-  "name": "buywhere-mcp-server",
+  "name": "@buywhere/mcp-server",
   "description": "Cross-border product catalog for AI agents. Search & compare 11M+ products across SEA & US markets. Multi-currency pricing, inventory, and deal discovery for AI agent commerce.",
   "vendor": "BuyWhere (https://buywhere.ai)",
-  "sourceUrl": "https://github.com/BuyWhere/buywhere",
+  "sourceUrl": "https://github.com/BuyWhere/buywhere-mcp",
   "homepage": "https://buywhere.ai",
   "license": "MIT",
   "runtime": "node",
-  "npm": "@buywhere/mcp-server",
   "environmentVariables": {}
 }
